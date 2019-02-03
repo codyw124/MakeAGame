@@ -6,11 +6,3 @@ public:
     Renderable();
     ~Renderable();
 };
-
-Renderable::Renderable()
-{
-}
-
-Renderable::~Renderable()
-{
-}

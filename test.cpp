@@ -1,60 +1,23 @@
 #include "test.h"
 
-MyClass::MyClass()
+MyClass::MyClass(int argc, char* args[], const int& screenWidth, const int& screenHeight)
 {
-    _screenWidth = 800;
-    _screenHeight = 600;
-    _fps = 60;
-}
-MyClass::MyClass(MyClass && other)
-{
-    _screenWidth = other._screenWidth;
-    _screenHeight = other._screenHeight;
-    _fps = other._fps;
+    initGL(screenWidth, screenHeight);
 
-    other._fps = 0;
-    other._fps = 0;
-    other._fps = 0;
+    initGLUT(argc, args, screenWidth, screenHeight);
+}
 
-}
-MyClass::MyClass(const MyClass & other)
-{
-    deepCopy(other);
-}
-MyClass& MyClass::operator=(MyClass && other)
-{
-     _screenWidth = other._screenWidth;
-    _screenHeight = other._screenHeight;
-    _fps = other._fps;
-
-    other._fps = 0;
-    other._fps = 0;
-    other._fps = 0;
-
-    return *this;
-}
-MyClass& MyClass::operator=(const MyClass & other)
-{
-    deepCopy(other);
-    return *this;
-}
 MyClass::~MyClass()
 {
     
 }
-void MyClass::deepCopy(const MyClass & other)
-{
-    _screenWidth = other._screenWidth;
-    _screenHeight = other._screenHeight;
-    _fps = other._fps;
-}
 
-bool MyClass::initGL()
+void MyClass::initGL(const int& width, const int & height)
 {
     //Initialize Projection Matrix
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
-    glOrtho( 0.0, _screenWidth, _screenHeight, 0.0, 1.0, -1.0 );
+    glOrtho( 0.0, width, height, 0.0, 1.0, -1.0 );
 
     //Initialize Modelview Matrix
     glMatrixMode( GL_MODELVIEW );
@@ -67,9 +30,24 @@ bool MyClass::initGL()
     GLenum error = glGetError();
     if( error != GL_NO_ERROR )
     {
-        printf( "Error initializing OpenGL! %s\n", gluErrorString( error ) );
-        return false;
+        throw FailedToLoadGlException("GL didnt load properly");
     }
+}
 
-    return true;
+void MyClass::initGLUT(int argc, char* args[], const int& width, const int & height)
+{
+    //initialize glut
+	glutInit(&argc,args);
+
+	//initialize the context version
+	glutInitContextVersion(2,1);
+
+	//initialize the display mode -- a double buffered window
+	glutInitDisplayMode(GLUT_DOUBLE);
+
+    //iniialize the window sizes
+    glutInitWindowSize( width, height);
+
+    //make the window and give it a name
+    glutCreateWindow("OpenGL");
 }

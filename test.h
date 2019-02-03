@@ -5,23 +5,16 @@
 #include <GL/glu.h>
 #include <stdio.h>
 
+#include "FailedToLoadGlException.h"
+
 class MyClass
 {
 public:
-    MyClass();
-    MyClass(MyClass && other);
-    MyClass(const MyClass & other);
-    MyClass &operator=(MyClass &&  other);
-    MyClass &operator=(const MyClass & other);
+    MyClass(int argc, char* args[], const int& screenWidth, const int& screenHeight);
     ~MyClass();
 
 private:
-    void deepCopy(const MyClass & other);
-    bool initGL();
-
-    size_t _screenWidth;
-    size_t _screenHeight;
-    size_t _fps;
-    bool _glInitialized;
+    void initGL(const int& width, const int & height);
+    void initGLUT(int argc, char* args[], const int& width, const int & height);
     
 };
