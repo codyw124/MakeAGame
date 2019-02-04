@@ -51,6 +51,9 @@ void MyClass::initGLUT(int argc, char* args[], const int& width, const int & hei
     //make the window and give it a name
     glutCreateWindow("OpenGL");
 
+    //set the render function to the one that we passed in
     glutDisplayFunc(*func);
+
+    //set the fps
 
 }
