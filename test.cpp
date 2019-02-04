@@ -1,10 +1,10 @@
 #include "test.h"
 
-MyClass::MyClass(int argc, char* args[], const int& screenWidth, const int& screenHeight)
+MyClass::MyClass(int argc, char* args[], const int& screenWidth, const int& screenHeight, const int& fps, void (*func)(void))
 {
     initGL(screenWidth, screenHeight);
 
-    initGLUT(argc, args, screenWidth, screenHeight);
+    initGLUT(argc, args, screenWidth, screenHeight, fps, *func);
 }
 
 MyClass::~MyClass()
@@ -34,7 +34,7 @@ void MyClass::initGL(const int& width, const int & height)
     }
 }
 
-void MyClass::initGLUT(int argc, char* args[], const int& width, const int & height)
+void MyClass::initGLUT(int argc, char* args[], const int& width, const int & height, const int & fps, void (*func)(void))
 {
     //initialize glut
 	glutInit(&argc,args);
@@ -50,4 +50,7 @@ void MyClass::initGLUT(int argc, char* args[], const int& width, const int & hei
 
     //make the window and give it a name
     glutCreateWindow("OpenGL");
+
+    glutDisplayFunc(*func);
+
 }
