@@ -1,34 +1,57 @@
-#include <iostream>
-#include "test.h"
+/*This source code copyrighted by Lazy Foo' Productions (2004-2013)
+and may not be redistributed without written permission.*/
+//Version: 001
 
-using namespace std;
+#include "LUtil.h"
 
-void render();
-void update();
+void runMainLoop( int val );
+/*
+Pre Condition:
+ -Initialized freeGLUT
+Post Condition:
+ -Calls the main loop functions and sets itself to be called back in 1000 / SCREEN_FPS milliseconds
+Side Effects:
+ -Sets glutTimerFunc
+*/
 
 int main( int argc, char* args[] )
 {
+	//Initialize FreeGLUT
+	glutInit( &argc, args );
 
-	MyClass test = MyClass(argc, args, 500,500, 60, render);
+	//Create OpenGL 2.1 context
+	glutInitContextVersion( 2, 1 );
+
+	//Create Double Buffered Window
+	glutInitDisplayMode( GLUT_DOUBLE );
+	glutInitWindowSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+	glutCreateWindow( "OpenGL" );
+
+	//Do post window/context creation initialization
+	if( !initGL() )
+	{
+		printf( "Unable to initialize graphics library!\n" );
+		return 1;
+	}
+
+	//Set rendering function
+	glutDisplayFunc( render );
+
+	//Set main loop
+	glutTimerFunc( 1000 / SCREEN_FPS, runMainLoop, 0 );
+
+	//Start GLUT main loop
+	glutMainLoop();
 
 	return 0;
 }
 
-void render()
+void runMainLoop( int val )
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+    //Frame logic
+    update();
+    render();
 
-	glBegin(GL_QUADS);
-	glVertex2f(-0.5f,-0.5f);
-	glVertex2f(0.5f,-0.5f);
-	glVertex2f(0.5f,0.5f);
-	glVertex2f(-0.5f,0.5f);
-	glEnd();
-
-	glutSwapBuffers();
-}
-
-void update()
-{
-
+    //Run frame one more time
+    glutTimerFunc( 1000 / SCREEN_FPS, runMainLoop, val );
 }
