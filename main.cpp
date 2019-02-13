@@ -1,34 +1,39 @@
-#include <iostream>
-#include "test.h"
+#include "LUtil.h"
 
-using namespace std;
-
-void render();
-void update();
+void runMainLoop( int val );
 
 int main( int argc, char* args[] )
 {
+    glutInit( &argc, args );
+    glutInitContextVersion( 2, 1 );
+    glutInitDisplayMode( GLUT_DOUBLE );
+    glutInitWindowSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+    glutCreateWindow( "1" );
+    
+    if( !initGL() )
+    {
+        printf( "Unable to initialize GL!\n" );
+        return 1;
+    }
+    
+    glutKeyboardFunc( handleKeys );
+    
+    glutDisplayFunc( render );
+    
+    glutTimerFunc( 1000 / SCREEN_FPS, runMainLoop, 0 );
+    
+    glutMainLoop();
 
-	MyClass test = MyClass(argc, args, 500,500, 60, render);
-
-	return 0;
+    return 0;
 }
 
-void render()
+void runMainLoop( int val )
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+    update();
+    render();
 
-	glBegin(GL_QUADS);
-	glVertex2f(-0.5f,-0.5f);
-	glVertex2f(0.5f,-0.5f);
-	glVertex2f(0.5f,0.5f);
-	glVertex2f(-0.5f,0.5f);
-	glEnd();
-
-	glutSwapBuffers();
-}
-
-void update()
-{
-
+    // if(!closeWindow)
+    // {
+        glutTimerFunc( 1000 / SCREEN_FPS, runMainLoop, val );
+    // }
 }

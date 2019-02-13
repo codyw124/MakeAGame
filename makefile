@@ -1,4 +1,3 @@
-
 #OBJS specifies which files to compile as part of the project
 OBJS = *.cpp
 
@@ -13,10 +12,10 @@ COMPILER_FLAGS = -w
 LINKER_FLAGS = -lGL -lGLU -lglut
 
 #OBJ_NAME specifies the name of our exectuable
-OBJ_NAME = render
+OBJ_NAME = 1
 
 #This is the target that compiles our executable
 all : $(OBJS)
 	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
 
-clean: rm *.o *.gch render
+#clean : rm 1 *.gch *.

@@ -1,22 +1,19 @@
-#ifndef LUTIL_H
-#define LUTIL_H
+//cody ware
+//open gl 1
+//2/12/2019
 
-#include "LOpenGL.h"
+#include <GL/freeglut.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 #include <stdio.h>
 
-//Screen Constants
-const int SCREEN_WIDTH = 1000;
-const int SCREEN_HEIGHT = 1000;
+//Screen constants
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
 const int SCREEN_FPS = 60;
-
-const int COLOR_MODE_MULTI = 1;
+// bool closeWindow = false;
 
 bool initGL();
-
 void update();
-
 void render();
-
 void handleKeys( unsigned char key, int x, int y );
-
-#endif
