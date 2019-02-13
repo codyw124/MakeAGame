@@ -1,12 +1,9 @@
 #include "LUtil.h"
 
-GLfloat gProjectionScale = 1.f;
-
 bool initGL()
 {
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
-    glOrtho( 0.0, SCREEN_WIDTH, SCREEN_HEIGHT, 0.0, 1.0, -1.0 );
 
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
@@ -30,7 +27,6 @@ void update()
 
 void render()
 {
-    //Clear color buffer
     glClear( GL_COLOR_BUFFER_BIT );
 
     //Reset modelview matrix
@@ -50,34 +46,9 @@ void render()
     glEnd();
     
 
-    //Update screen
     glutSwapBuffers();
 }
 
 void handleKeys( unsigned char key, int x, int y )
 {
-    if( key == 'e' )
-    {
-        //Cycle through projection scales
-        if( gProjectionScale == 1.f )
-        {
-            //Zoom out
-            gProjectionScale = 2.f;
-        }
-        else if( gProjectionScale == 2.f )
-        {
-            //Zoom in
-            gProjectionScale = 0.5f;
-        }
-        else if( gProjectionScale == 0.5f )
-        {
-            //Regular zoom
-            gProjectionScale = 1.f;
-        }
-
-        //Update projection matrix
-        glMatrixMode( GL_PROJECTION );
-        glLoadIdentity();
-        glOrtho( 0.0, SCREEN_WIDTH * gProjectionScale, SCREEN_HEIGHT * gProjectionScale, 0.0, 1.0, -1.0 );
-    }
 }
