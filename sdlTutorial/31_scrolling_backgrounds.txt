@@ -1,0 +1,10 @@
+
+Often times in games you may want a infinite or looping background. With scrolling backgrounds, you can cycle a background that goes on forever.
+Say if we want to move around a dot an a infinite background:
+All we have to do is render two iterations of the background next to each other and move them a little every frame. When the background have moved completely over, you can reset themotion:
+For this tutorial we'll be using a plain version of the dot that just stays on screen.
+Before we enter the main loop we declare a Dot object and the scrolling offset.
+Here we're updating the dot and updating the scrolling background.
+
+Updating the position of the scrolling background is just decrementing the x position and if the x position is less than the width of the background that means the background hasgone completely off screen and the position needs to be reset.
+Here we're rendering the background and the dot. First we render the scrolling background by rendering two iterations of the texture next to each other and then we render the dotover it. This will give us the effect of a smooth scrolling infinite background.

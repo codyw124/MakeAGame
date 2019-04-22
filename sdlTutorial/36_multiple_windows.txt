@@ -1,0 +1,19 @@
+
+One of the new features SDL 2 has is being able to handle multiple windows at once. In this tutorial we'll be moving around 3 resizable windows.
+Here is our window wrapper from before with a few adjustments. We want to be able to grab focus and we want to tell ifthe window is shown so we add functions to do that.
+
+Each window is going to have their own renderer so we add a member variable for that. We also keep track of the window ID to tell which events belong to which window and we also added a flag to keep track of whether the window is shown.
+For this program we'll have 3 globally allocated windows.
+Here is our window and renderer creation code. It is pretty much the same as we have always done it, only now it's happening inside our wrapper class. We do have to make sure to grabthe window ID after creating the window as we'll need the ID for event handling.
+All events from all windows go onto the same event queue, so to know which events belong to which window we check that the event's window ID matches ours.
+When you have multiple windows, Xing out the window doesn't necessarily mean we're quitting the program. What we're going to do instead is have each window hide when Xed out. Sowe'll need keep track of when the window is hidden/shown by checking for SDL_WINDOWEVENT_SHOWN/SDL_WINDOWEVENT_HIDDEN events.
+When you have multiple windows, Xing out the window gets interpreted as SDL_WINDOWEVENT_CLOSE window events. When we get these events we're going to hide the window using SDL_HideWindow.
+Here is our function for grabbing focus to a window. First we check if our window is even being shown and then show it withSDL_ShowWindow if it isn't being shown. Next we callSDL_RaiseWindow to focus the window.
+Like before, we only want to render if the window is not minimized.
+In the initialization function we open up a single window to check if window creation is functioning properly.
+In the clean up function we close out any windows that might be open.
+Before we enter the main loop we open up the rest of the windows we have.
+In the main loop after we handle the events for all the windows, we handle some special key presses. For this demo, when we press 1, 2, or 3 it will bring the corresponding window tofocus.
+Next we render all the windows and then go through all the windows to check if any of them are shown. If all of them have been closed out we set the quit flag to true to end theprogram.
+
+Now in this demo we did not actually render anything inside of the windows. This would involve having to manage renderers and windows and having them share resources. There is noright way to do this and the best way depends entirely on what type of application you're building. I recommend reading through the SDL documentation to understand how renderers workand then experimenting to figure out the best way for you to manage your resources.

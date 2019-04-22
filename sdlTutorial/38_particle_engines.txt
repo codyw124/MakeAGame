@@ -1,0 +1,13 @@
+
+Particles are just mini-animations. What we're going to do is take these animations:and spawn them around a dot to create a trail of colored shimmering particles.
+Here is a simple particle class. We have a constructor to set the position, a function to render it, and a function to tell if the particle is dead. In terms of data members we havea position, a frame of animation, and a texture we'll render with.
+Here is our dot with an array of particles and a function to render the particles on the dot.
+For our particle constructor we initialize the position around the given position with some randomness to it. We then initialize the frame of animation with some randomness so theparticles will have varying life. Finally we pick the type of texture we'll use for the particle also at random.
+In the rendering function we render our texture selected in the constructor and then every other frame we render a semitransparent shimmer texture over it to make it look like theparticle is shining. We then update the frame of animation.
+Once the particle has rendered for a max of 10 frames, we mark it as dead.
+The constructor/destructor now have to allocate/deallocate the particles we render over the dot.
+Our dot's rendering function now calls our particle rendering function. The particle rendering function checks if there is any particles that are dead and replaces them. After thedead particles are replaced we render all the current particles to the screen.
+To give our particles a semi transparent look we set their alpha to 192.
+Again, since our code is well encapsulated the code in the main loop hardly changes.
+
+Now like most of the tutorials this is a super simplified example. In larger program there would be particles controlled by a particle emitter that's its own class, but for the sakeof simplicity we're having the Dot class function as a particle emitter.

@@ -1,0 +1,22 @@
+
+Like with key presses, SDL has event structures to handle mouse events such as mouse motion, mouse button presses, and mouse button releasing. In this tutorial we'll make a bunch of buttons we can interact with.
+For this tutorial we'll have 4 buttons on the screen. Depending on whether the mouse moved over, clicked on, released on, or moved out of the button we'll display a different sprite.These constants are here to define all this.
+We're making a slight modification to the texture class. For this tutorial we won't be using SDL_ttf to render text.This means we don't need the loadFromRenderedText function. Rather than deleting code we may need in the future, we're going to wrap it in if definedstatements so the compiler will ignore it if we do not include SDL_ttf. Like #include, #ifdef is a macro which is used to talk to the compiler. In this case it says if SDL_ttf isnot defined, ignore this piece of code.
+Here is the class to represent a button. It has a constructor to initialize, a position setter, an event handler for the event loop, and a rendering function. It also has a positionand a sprite enumeration so we know which sprite to render for the button.
+To make sure our source compiles without SDL_ttf, here again we sandwich the loading from font function in another ifdef condition.
+Here are the constructor for the button and a position setting function. As you can see, they initialize the default sprite and set position.
+Here's the meat of the tutorial where we handle the mouse events. This function will be called in the event loop and will handle an event taken from the event queue for anindividual button.
+
+First we check if the event coming in is a mouse event specifically a mouse motion event (when the mouse moves), a mouse button down event (when you click a mouse button), ora mouse button up event (when you release a mouse click).
+
+If one of these mouse events do occur, we check the mouse position using SDL_GetMouseState. Depending onwhether the mouse is over the button or not, we'll want to display different sprites.
+Here we want to check if the mouse is inside the button or not. Since we use a different coordinate system with SDL,the origin of the button is at the top left. This means every x coordinate less than the x position is outside of the button and every y coordinate less than the y position is too.Everything right of the button is the x position + the width and everything below the button is the y position + the height.
+
+This is what this piece of code does. If the mouse position is in any way outside the button, it marks the inside marker as false. Otherwise it remains the initial true value.
+Finally, we set the button sprite depending on whether the mouse is inside the button and the mouse event.
+
+If the mouse isn't inside the button, we set the mouse out sprite. If the mouse is inside we set the sprite to mouse over on a mouse motion, mouse down on a mouse button press, andmouse up on a mouse button release.
+In the rendering function, we just render the current button sprite at the button position.
+Here is our main loop. In the event loop, we handle the quit event and the events for all the buttons. In the rendering section, all the buttons are rendered to the screen.
+
+There are also mouse wheel events which weren't covered here, but if you look at the documentation andplay around with it it shouldn't be too hard to figure out.

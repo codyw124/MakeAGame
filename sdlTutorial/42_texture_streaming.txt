@@ -1,0 +1,11 @@
+
+Sometime we want to render pixel data from a source other than a bitmap like a web cam. Using texture stream we can render pixels from any source.
+Here we're add more functionality to our texture class. The createBlank function allocates a blank texture that we can copy data to when streaming. The copyPixels function copies inthe pixel data we want to stream.
+Here is our data stream class. We won't go deep into how it works because we don't really care. When dealing with web cam, video decoding, etc APIs they typically don't go deep intohow they work because all we care about is getting the video and audio data from them.
+
+All we really care about is that getBuffer function which gets the current pixels from the data buffer.
+As you can see, all this function does is create a 32bit RGBA texture with stream access. One thing you have to make sure of when creating your texture is that the format of thetexture pixels matches the format of the pixels we're streaming.
+Here is our function to copy in the pixels from the stream. The function assumes the texture is locked and that the pixels are from an image the same size as the texture.
+In the main loop rendering we lock our stream texture, copy the pixels from the stream and then unlock the texture. With our texture holding the latest image from the stream, werender the image to the screen.
+
+When dealing with decoding APIs things may get trickier where we have to convert from one format to another but ultimately all we need is a means to get the pixel data and copy it to the screen.

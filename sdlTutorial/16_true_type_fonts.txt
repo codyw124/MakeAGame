@@ -1,0 +1,18 @@
+
+One way to render text with SDL is with the extension library SDL_ttf. SDL_ttf allows you to create images from TrueType fonts which we'll use here to create textures from font text.
+To use SDL_ttf, you have to set up the SDL_ttf extension library just like you wouldset up SDL_image. Like before, it's just a matter of having the headers files,library files, and binary files in the right place with your compiler configured to use them.
+Here we're adding another function to the texture class called loadFromRenderedText. The way SDL_ttf works is that youcreate a new image from a font and color. For our texture class all that means is that we're going to be loading our image from text rendered by SDL_ttf instead of a file.
+For this and future tutorials, we'll be using a global font for our text rendering. In SDL_ttf, the data type for fonts isTTF_Font.
+
+We also have a texture which will be generated from the font.
+Here is where we actually create the text texture we're going to render from the font. This function takes in the string of text we want to render and the color we want to use torender it. After that, this function pretty much works like loading from a file does, only this time we're using a SDL_Surface created by SDL_ttf instead of a file.
+
+After freeing any preexisting textures, we load a surface using TTF_RenderText_Solid. Thiscreates a solid color surface from the font, text, and color given. If the surface was created successfully,we create a texture out of it just like we did before when loading a surface from a file. After the texttexture is created, we can render with it just like any other texture.
+
+There are other ways to render text that are smoother or blended. Experiment with the different types of rendering outlined in theSDL_ttf documentation.
+Just like SDL_image, we have to initialize it or the font loading and rendering functions won't work properly. We start up SDL_ttf usingTTF_init. We can check for errors using TTF_GetError().
+In our loading function, we load our font using TTF_OpenFont. This takes in the path to thefont file and the point size we want to render at.
+
+If the font loaded successfully, we want to load a text texture using our loading method. As a general rule, you want to minimize the number of time you render text. Only rerender itwhen you need to and since we're using the same text surface for this whole program, we only want to render once.
+In our clean up function, we want to free the font using TTF_CloseFont. We also want to quitthe SDL_ttf library with TTF_Quit to complete the clean up.
+As you can see, after we render the text texture we can render it just like any other texture.

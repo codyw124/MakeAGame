@@ -1,0 +1,11 @@
+
+Another neat new feature with SDL 2 is the ability to handle multiple displays. Here we'll be making our window jump from display to display.
+Here is our window from previous tutorials with a window display ID to keep track of which display the window is on.
+Our displays all have a integer ID and a rectangle associated with them so we know the position and dimensions of each display on our desktop.
+Our window creation code is pretty much the same as before only now we made a call to SDL_GetWindowDisplayIndex so we know which display the window was created on.
+Here in our window's event handler we handle a SDL_WINDOWEVENT_MOVED event so we can update the display the window is on using SDL_GetWindowDisplayIndex.
+When we press up or down we change the display index to move to the next display.
+If we need to move to the next display, we first make sure the display is a valid index by bounding it. We then update the position of the window withSDL_SetWindowPosition. This call here will center the window in the next display.
+In our initialization function we find out how many displays are connect to the computer usingSDL_GetNumVideoDisplays. If there's only 1 display we output a warning.
+Now that we know how many displays are connected, we allocate rectangles for each of them and get the bounds for each one usingSDL_GetDisplayBounds. After this we initialize our window.
+Since our code is well encapsulated the main loop hasn't changed since all the changes have happened under the hood.

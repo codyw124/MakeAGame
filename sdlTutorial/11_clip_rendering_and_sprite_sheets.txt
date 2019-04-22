@@ -1,0 +1,15 @@
+
+Sometimes you only want to render part of a texture. A lot of times games like to keep multiple images on the same sprite sheet as opposed to having a bunch of textures. Using clip rendering, we can define a portion of the texture to render as opposed to rendering the whole thing.
+Here we're making a small tweak to the rendering function in the texture class. The render function now accepts a rectangle defining which portion of the texture we want to render.We give it a default argument of NULL in case we want to render the whole texture.
+For this tutorial, we're going to take this sprite sheet:
+
+And render each sprite in a different corner:
+
+So we're going to need a texture image and 4 rectangles to define the sprites, which are the variables you see declared here.
+Here's the new rendering function for the texture class that supports clip rendering. It's mostly the same as the previoustexture rendering function but with two changes.
+
+First, when you're clipping and you're using the dimensions of the clip rectangle instead of the texture, we're going to set the width/height of the destination rectangle (herecalled renderQuad) to the size of the clip rectangle.
+
+Secondly, we're going to pass in the clip rectangle to SDL_RenderCopy as the source rectangle. The source rectangle defines what part of the texture you want to render. When thesource rectangle is NULL, the whole texture is rendered.
+The media loading function loads the texture and then defines the clip rectangles for the circle sprites if the texture loaded successfully.
+Finally here in the main loop we render the same texture 4 times, but we're rendering a different portion of the sprite sheet in different places each call.

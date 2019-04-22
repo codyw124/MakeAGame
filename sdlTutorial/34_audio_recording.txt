@@ -1,0 +1,69 @@
+
+There more than you can do with audio than just hit play. This tutorial will cover some of the basics audio programming recording and playback.
+
+Also, make sure you're using the latest version of SDL. I had to upgrade to SDL 2.0.8 to get audio recording to work properly.
+To understand how audio recording recording works, it helps to understand how audio data works.
+
+This is a song:
+Now, let zoom in on it:
+As you can see, sound is a wave. A wave can be represented by a sequence of values (or in the case of this stereo song, two sequences with one for each sound wave). Playing audio is just sending a sequence of values to theaudio driver and recording audio is copying a sequence of values from the audio driver.
+Here are a couple constants we'll be using.
+
+First there's constant defining that we'll only support up to 10 recording devices to choose from (we only need one for this program to work). Then we have the maximum time we allow for recording and the maximum time we canstore in the buffer. We'll be recording for 5 seconds, but we allow for 6 seconds of recording for the sake of padding in case the application records 5.1 seconds or so.
+
+Lastly we have a set of enumerations for the different states in the program. First the user can select a recording device. Then after the user selects a device, the user is stopped waiting to start the recording. Then theuser starts the recording for 5 seconds. After the user has finished recording, the can either playback or record again. If anything results in an error, it will go in an error state.
+
+Typically in these tutorials we go down the source code explaining what everything means along the way, but in this tutorial we are going to jump around more by flow of execution. It makes things easier to understand thanjust going the source files. So don't get lost as we jump around in the source file.
+These two callbacks are going to be doing the actual recording to and playing from our audio buffer. We'll get into details on how these work later.
+Here we have some textures. One to prompt the user to let them know what's going on and another array of textures to store the names of the recording devices. We also have an integer to keep track of how many devices we haveavailable.
+
+We also have two SDL_AudioSpec variables. An SDL_AudioSpec is an audio specification which basically defines how audio is recorded or played back. Whenwe open an audio device for recording or playing, we request a specification but we may not get what we requested back because the audio driver does not support it. This is why we are going to store the specification weget back from the driver for recording and playback.
+The "gRecordingBuffer" is a buffer of unsigned bytes that'll store our audio data. "gBufferByteSize" will store how many bytes the buffer will hold. "gBufferBytePosition" controls where we are in the buffer during recording or playback. "gBufferByteMaxPosition" controls the maximum piece of the buffer we will be using.
+
+If that's confusing, remember that "gBufferByteSize" is 6 seconds of bytes (5 seconds + 1 second of padding) and "gBufferByteMaxPosition" is 5 seconds of bytes we'll be using.
+Make sure to remember to initialize audio before recording or playback. It's an easy thing to forget.
+After loading the font and rendering the initial prompt message we get the number of available recording devices using SDL_GetNumAudioDevices. Whenyou pass in a SDL_TRUE argument it will give us the number of recording devices. With SDL_FALSE, it will give us playback devices.
+
+If there isn't at least one recording devices connected, we error out of the function.
+If there are recording devices connected, we cap the number we use to 10 (which may dissapoint those with 11 microphones hooked up to their PC) and then go through the devices rendering their names to a texture. We getthe device name using SDL_GetAudioDeviceName and passing in the fact that we want recording device names with SDL_TRUE and the index of the recording device.
+In the main function after initializing and loading we set the initial recording state and declare two audio device IDs which are just integers to represent the recording and playback devices.
+In the event handling loop we have a switch statement that handles the different states. When the user presses 0-9, we convert it to an index which is easy because the SDLK constants are sequential and can be converted bysubtracting the keysym by SDLK_0.
+If the user pressed a valid index key, we then specify the recording audio spec.
+
+First we initialize the audio spec with SDL_zero. Always initialize memory before using it. Ask the SREs that had to deal with the heartbleed bug what happens when you don't.
+
+We set the frequency to 44.1 khz which is CD quality. We're using 32bit floating point format for the data. We have 2 channels since we want stereo. Samples are set to 4096 because that's a pretty standard size. Lastlywe give it the audio recording callback.
+
+With the spec set, we call SDL_OpenAudioDevice and pass in the recording device name, the fact that we want a recording device with SDL_TRUE, thespec we want to have, a pointer the the spec we get back from the driver, and lastly a flag that says we're ok with SDL_OpenAudioDevice giving us a different format than we requested.
+If we get no device ID, we go to an error state. If the device opened successfully, we create a playback spec that's mostly the same as the recording spec. The major difference is that it uses the playback callback insteadof the recording callback.
+
+Opening the playback device is also mostly the same. For this tutorial, we don't care which playback device we get so we pass in NULL to grab the first available one. Secondly, we pass in SDL_FALSE for the second argumentto open up a playback device instead of a recording device.
+If we get no playback device ID, we go to an error state. If the device opened successfully, we create a byte buffer to to hold the audio data we'll be recording and playing back.
+
+To calculate how much space we need first we need to calculate the bytes per sample. If we have 2 channels and 32 bits per channel sample (which we can get usingSDL_AUDIO_BITSIZE on the audio format), we'll get 2 channels * ( 32 bits / 8 bits per byte ) which is 8 bytes per sample.
+
+To get the bytes per second, we multiply the bytes per sample times the frequency which is the number sample per second. 8 bytes per sample * 44100 samples per seconds get us 705600 bytes per second.
+
+We want to have 6 seconds of buffer (5 seconds + 1 second of padding) so we set the buffer size to be 4233600 bytes. That seems like a lot, but it's a litle more than 4 megabytes. Remember, because of the max position,we only use 5 seconds of the 6 second buffer.
+
+After calculating the buffer size, we allocate the buffer and initialize it with memset. Finally, we set the prompt texture and move on to the next state.
+After we've allocated the buffer, we're ready to start recording. If the user presses 1, we set the buffer position back to 0 and unpause the audio device using SDL_PauseAudioDevice. The first argument is the device we want to pause/unpause and the second argument determines whether we want to pauseor unpause. Passing SDL_FALSE will unpause a device.
+
+Audio devices are paused be default meaning they will not record or play until you unpause them. If you're wondering why your callback isn't doing anything, this may be why.
+When the recording device is unpaused it will start calling the recording callback we gave it at regular intervals.
+
+As you can see it doesn't do much. All it does is copy bytes from the device stream into the current position in our recording buffer and then move the position in the buffer. That is all recording is, just grabbingchunks of audio data. Just remember that "len" is the size of the chunk from the stream in bytes.
+Here we're jumping to the update part of the main loop. When we're recording, we need to check whether we've filled the 5 seconds of buffer. Before we can check the buffer position we have to call SDL_LockAudioDevice. The thing is, the callback is being run in another thread and we don't want to have two threads accessing the same variableat the same time. SDL_LockAudioDevice stops the callback from being called while we need to access the buffer position which the callback also manipulates.
+
+Once the recording device is locked, we check if the buffer position is past 5 seconds of data. If it is, we pause the recording device to halt recording and we move on to the next state. Lastly, we callSDL_UnlockAudioDevice so if there's still data to record the recording device can continue.
+
+This is a very simple example of multithreading. If you would like to know more on the subject you can check tutorials on multithreading,semaphores, and mutexes.
+Here we're jumping back to event handling for after we recorded 5 seconds.
+
+As you can see, it's similar to when we started recording. We set the buffer position back to the beginning, unpause the playback device, and set the next state.
+The playback callback is also similar to the recording callback. The key difference here is that instead of copying from the device to the buffer, we're taking the data we recorded in the buffer and copying it back tothe device.
+Updating playback is again similar to recording. We lock the playback device, check the playback position, stop playback if the buffer position is past the end point, and unlock the playback device.
+Jumping back to event handling for after the user has recorded, we allow for the user to rerecord. When we want to record again, we just jump the buffer position back to the beginning, initialize the buffer, and unpausethe recording device.
+As always, don't forget to deallocate the buffer after using it to prevent memory leaks.
+
+Now, audio programming is a very large field which I am by no means an expert in. However, now that you know how to handle raw audio data, you can look into using audio libraries and frameworks to do more complicatedthings like audio compression and voice chat.

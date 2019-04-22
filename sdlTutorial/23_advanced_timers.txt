@@ -1,0 +1,17 @@
+
+Now that've made a basic timer with SDL, it's time to make one that can start/stop/pause.
+For these new features, we're going to make a timer class. It has all the basic function to start/stop/pause/unpause the timer and check its status. In terms of data members, we have the start time like before, a variable to store the time when paused, and status flags to keep track of whether the timer is running or paused.
+Our constructor initializes the internal data members.
+The start function sets the started and paused flags, gets the timer's start time and initializes the pause time to 0. For thistimer, if we want to restart it we just call start again. Since we can start the timer if it is paused and/or running, we should make sure to clear out the paused data.
+The stop function basically reinitializes all the variables.
+When pausing, we want to check if the timer is running because it doesn't make sense to pause a timer that hasn't started. If the timer is running, we set the pause flag, store thetime when the timer was paused in mPausedTicks, and reset the start time.
+So when we unpause the timer, we want to make sure the timer is running and paused because we can't unpause a timer that's stopped or running. We set the paused flag to false andset the new start time.
+
+Say if you start the timer when SDL_GetTicks() reports 5000 ms and then you pause it at 10000ms. This means the relative time at the time of pausing is 5000ms. If we were to unpauseit when SDL_GetTicks was at 20000, the new start time would be 20000 - 5000ms or 15000ms. This way the relative time will still be 5000ms away from the current SDL_GetTicks time.
+Getting the time is a little bit tricky since our timer can be running, paused, or stopped. If the timer is stopped, we just return the initial 0 value. If the timer is paused, wereturn the time stored when paused. If the timer is running and not paused, we return the time relative to when it started.
+Here we have some acccessor functions to check the status of the timer.
+Before we enter the main loop, we declare a timer object and a string stream to turn the time value into text.
+When we press s key, we check if the timer is started. If it is, we stop it. If it isn't, we start it. When we press p, we check if the timer is paused. If it is, we unpause it.Otherwise we pause it.
+Before we render, we write the current time to a string stream. The reason we divide it by 1000 is because we want seconds and there are 1000 milliseconds per second.
+
+After that we render the text to a texture and then finally draw all the textures to the screen.

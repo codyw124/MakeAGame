@@ -1,0 +1,23 @@
+
+When rendering multiple images on the screen, having images with transparent backgrounds is usually necessary. Fortunately SDL provides an easy way to do this using color keying.
+For this tutorial we're going to wrap the SDL_Texture in a class to make some things easier. For example, if you want to get certain information about the texture such as itswidth or height you would have to use some SDL functions to query the information for the texture. Instead what we're going to do is use a class to wrap and store the informationabout the texture.
+
+It's a fairly straight forward class in terms of design. It has a constructor/destructor pair, a file loader, a deallocator, a renderer that takes in a position, and functions to get the texture's dimensions. For member variables, it has the texture we're going to wrap, and variables to store the width/height.
+For this scene there's two textures we're going to load here declared as "gFooTexture" and "gBackgroundTexture". We're going to take this foo' texture:
+Color key the cyan (light blue) colored background and render it on top of this background:
+The constructor initializes variables and the destructor calls the deallocator which we'll cover later.
+The texture loading function pretty much works like it did in the texture loading tutorial but with some small butimportant tweaks. First off we deallocate the texture in case there's one that's already loaded.
+Next, we color key the image with SDL_SetColorKey before creating a texture from it. The first argument is the surface we wantto color key, the second argument covers whether we want to enable color keying, and the last argument is the pixel we want to color key with.
+
+The most cross platform way to create a pixel from RGB color is with SDL_MapRGB. The first argument is the format wewant the pixel in. Fortunately the loaded surface has a format member variable. The last three variables are the red, green, and blue components for color you want to map. Herewe're mapping cyan which is red 0, green 255, blue 255.
+After color keying the loaded surface, we create a texture from the loaded and color keyed surface. If the texture was created successfully, we store the width/height of the textureand return whether the texture loaded successfully.
+The deallocator simply checks if a texture exists, destroys it, and reinitializes the member variables.
+Here you see why we needed a wrapper class. Up until now, we've been pretty much been rendering full screen images so we didn't need to specify position. Because we didn't need tospecify position, we just called SDL_RenderCopy with the last two arguments as NULL.
+
+When rendering a texture in a certain place, you to specify a destination rectangle that sets the x/y position and width/height. We can't specify the width/height without knowingthe original image's dimensions. So here when we render our texture we create a rectangle with the position arguments and the member width/height, and pass in this rectangle to SDL_RenderCopy.
+These last member functions allow us to get the width/height when we need them.
+Here are the image loading functions in action.
+And here are the deallocators.
+Here is the main loop with our textures rendering. It's a basic loop that handles events, clears the screen, renders the background, renders the stick figure on top of it,and updates the screen.
+
+An important thing to note is that order matters when you're rendering multiple things to the screen every frame. If we to render the stick figure first, the background willrender over it and you won't be able to see the stick figure.

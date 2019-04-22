@@ -1,0 +1,7 @@
+
+Semaphores operate at an operating system level. Atomic operations are a way to lock data at a efficient CPU level. Here we'll be locking a critical section using GPU spinlocks.
+Instead of a semaphore we'll be using a spinlock to protect our data buffer.
+Unlike semaphores, spin locks do not need to be allocated and deallocated.
+Here our critical section is protected by SDL_AtomicLock and SDL_AtomicUnlock.
+
+In this case it may seem like semaphores and atomic locks are the same, but remember that semaphores can allow access beyond a single thread. Atomic operations are for when you wanta strict locked/unlocked state.

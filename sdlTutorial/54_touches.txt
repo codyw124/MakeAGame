@@ -1,0 +1,10 @@
+
+Now that we know how to load images on mobile, it's time to handle touch input events.
+For this demo we'll a set of textures we'll be using to indicate what type of touch event happens.
+We'll need to keep track of the touch location and the current touch texture. Here we're setting the default touch location as the center of the screen and the default touch texture to the touch up texture.
+When you interact with a touch display, you generate a SDL_TouchFingerEvent. When the touch starts you get a SDL_FINGERDOWN event, when you move aroundyour finger a SDL_FINGERMOTION happens, and when you release your touch you get a SDL_FINGERUP.
+
+Touch events function pretty much like mouse events with one major difference: touch coordinates are normalized. This means instead of going from 0 to 640 (or what ever the size of your mobile display), they always go from 0 to1. To get the touch coordinates in screen coordinates simply multiply the touch coordinates by the screen resolution. If you look at the code above that's exactly what we're doing here, along with setting the correspondingtexture for the given touch event.
+
+One thing not covered here is handling multiple fingers. All we do here is handle the most recent touch event. If you want to handle more than one finger, just keep track of them with their touch IDs. The touch IDs aren'tsimple 0, 1, 2, etc but a 64bit integer version of the pointer to the touch data. This quirk has tripped people over before so keep it in mind.
+As you can see in our rendering, we just render the touch texture at the touch position.

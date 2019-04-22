@@ -1,0 +1,21 @@
+
+SDL also supports resizable windows. When you have resizable windows there are additional events to handle, which is what we'll be doing here.
+Here is our window class we'll be using as a wrapper for the SDL_Window. It has a constructor, a initializer that creates the window, a function to create renderer from the window,an event handler, a deallocator, and some accessor functions to get various attributes from the window.
+
+In terms of data members, we have the window we're wrapping, the dimensions of the window, and flags for the types of focus the windows has. We'll go into more detail further in theprogram.
+We'll be using our window as a global object.
+In the constructor we initialize all our variables.
+Our initialization function creates the window with the SDL_WINDOW_RESIZABLE flag which allows for our windowto be resizable. If the function succeeds we set the corresponding flags and dimensions. Then we return whether the window is null or not.
+Here we're handling the creation of a renderer from the member window. We're returning the created renderer because rendering will be handled outside of the class.
+In our window's event handler we'll be looking for events of type SDL_WINDOWEVENT. SDL_WindowEvents are actuallya family of events. Depending on the event we may have to update the caption of the window, so we have a flag that keeps track of that.
+When we have a window event we then want to check the SDL_WindowEventID to see what type of event it is.An SDL_WINDOWEVENT_SIZE_CHANGED is a resize event, so we get the new dimensions and refresh the image on the screen.
+
+An SDL_WINDOWEVENT_EXPOSED just means that window was obscured in some way and now is not obscured so we want to repaint the window.
+SDL_WINDOWEVENT_ENTER/SDL_WINDOWEVENT_LEAVE handles when the mouse moves into and out of the window. SDL_WINDOWEVENT_FOCUS_GAINED/SDL_WINDOWEVENT_FOCUS_LOST have to do when thewindow is getting input from the keyboard. Since our caption keeps track of mouse/keyboard focus, we set the update caption flag when any of these events happen.
+Finally here we handle when the window was minimized, maximized, or restored from being minimized.
+If the caption needs to be updated, we load a string stream with the updated data and update the caption withSDL_SetWindowTitle.
+For this demo we'll be toggling fullscreen with the return key. We can set fullscreen mode usingSDL_SetWindowFullscreen.
+Here is a quick rundown of the accessors we use.
+In our initialization function we create our window and renderer only this time with our window wrapper.
+In our clean up function we still deallocate our window and renderer.
+In the main loop we make sure to pass events to the window wrapper to handle resize events and in the rendering part of our code we make sure to only render when the window is notminimized because this can cause some bugs when we try to render to a minimized window.

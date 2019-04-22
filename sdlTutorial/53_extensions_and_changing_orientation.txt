@@ -1,0 +1,6 @@
+
+Now that we got SDL_image loading PNGs, it's time to handle when our mobile device rotates.
+For this application we'll be having a different textures render depending on whether the device is in portrait or landscape mode.
+When you rotate your device, the height/width of the window changes which means the window size changes. In order to support rotation, the window needs to be created as resizable.
+SDL2 turns orientation change events into window change events. We check for window events and if the window event is a size change, we get the new dimensions, and update the screen.
+How do we tell if the device is in portrait or landscape? Simple: if the height is greater width, it's in portrait. Otherwise, it's in landscape.

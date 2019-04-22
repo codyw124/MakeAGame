@@ -1,0 +1,15 @@
+
+Being able to save and load data is needed to keep data between play sessions. SDL_RWops file handling allows us to do cross platform file IO to save data.
+Here we're declaring an array of Signed integers that are 32 bits long. This will be the data we will be loading and saving. For this demo this array will beof length 10.
+In our media loading function we're opening the save file for reading using SDL_RWFromFile. The first argumentis the path to the file and the second argument defines how we will be opening it. "r+b" means it is being opened for reading in binary.
+Now if the file does not exist that doesn't exactly mean an error. It could mean this is the first time the program has run and the file has not been created yet. If the file doesnot exist we prompt a warning and create a file by opening a file with "w+b". This will open a new file for writing in binary.
+If a new file was created successfully we then start writing the initialized data to it using SDL_RWwrite. The firstargument is the file we're writing to, the second argument is the address of the objects in memory we're writing, the third argument is the number of bytes per object we're writing,and the last one is the number of objects we're writing. After we're done writing out all the objects, we close the file for writing using SDL_RWclose.
+
+If the file was never created in the first place, we report an error to the console and set the success flag to false.
+Now if our file loaded successfully on the first try, all we have to do is reading in the data using SDL_RWread,which basically functions like SDL_RWwrite but in reverse.
+After the file is loaded we render the text textures that correspond with each of our data numbers. OurloadFromRenderedText function only accepts strings so we have to convert the integers to strings.
+When we close the program, we open up the file again for writing and write out all the data.
+Before we go into the main loop we declare currentData to keep track of which of our data integers we're altering. We also declare a plain text color and a highlight color forrendering text.
+When we press up or down we want to rerender the the old current data in plain color, move to the next data point (with some bounds checking), and rerender the new current datain the highlight color.
+When we press left or right we decrement or increment the current data and rerender the texture associated with it.
+At the end of the main loop we render all the textures to the screen.

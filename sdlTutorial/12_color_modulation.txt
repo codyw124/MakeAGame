@@ -1,0 +1,18 @@
+
+Color modulation allows you to alter the color of your rendered textures. Here we're going to modulate a texture using various colors.
+We're adding a function to the texture wrapper class that will allow the texture modulation to be set. All it does is take in a red, green, and blue color components.
+And setting texture modulation is as easy as making a call to SDL_SetTextureColorMod. You just pass inthe texture you want to modulate and the color you want to modulate with.
+
+Now how does color modulation work? Let's say you have this texture:
+
+
+And you modulate it with red 255, green 128, and blue 255. You'll end up with this:
+
+
+
+You may have noticed that SDL_SetTextureColorMod accepts Uint8 as arguments for the color components. An Uint8 is just an integer that is Unsigned and8bit. This means it goes from 0 to 255. 128 is about halfway between 0 and 255, so when you modulate green to 128 it halves the green component for any pixel on the texture.
+
+The red and blue squares don't get affected because they have no green in them, but the green becomes half as bright and the white turns a light magenta (magenta is red 255, green 0,blue 255). Color modulation is just a way to multiply a color throughout the whole texture.
+Here we are right before the main loop. For this demo we're going to modulate the individual color components using key presses. To do that we'll need to keep track of the valuesfor the color components.
+In our event loop we'll have the q, w, and e keys increase the red, green, and blue components and we'll have the a, s, and d key decrease the red, green, and blue components. Theyincrease/decrease the components by 32 so it's noticable with every key press.
+And here we are setting the texture modulation and rendering the texture.

@@ -1,0 +1,13 @@
+
+SDL 2's hardware accelerated texture rendering also gives ability to give us fast image flipping and rotation. In this tutorial we'll be using this to make an arrow texture spin and flip.
+Here we're adding more functionality to the texture class. The render function now takes in a rotation angle, a point torotate the texture around, and a SDL flipping enum.
+
+Like with clipping rectangles, we give the arguments default values in case you want to render the texture without rotation or flipping.
+As you can see, all we're doing is passing in the arguments from our function to SDL_RenderCopyEx. This functionworks the same as the original SDL_RenderCopy, but with additional arguments for rotation and flipping.
+Before we enter the main loop we declare variables to keep track of the rotation angle and flipping type.
+In the event loop, we want to increment/decrement the rotation with the a/d keys and change the type of flipping with the q,w, and e keys.
+Here we do the actual rendering. First we pass in the x and y coordinates. That may seem like a complicated equation, but all it does is center the image. If the image is 440 pixelswide on a 640 pixel wide screen, we want it to be padded by 100 pixels on each side. In other words, the x coordinate will be the screen width (640) minus the image width (440) alldivided by 2 ( (640 - 440 ) / 2 = 100).
+
+The next argument is the clip rectangle and since we're rendering the whole texture it is set to null. The next argument is the rotation angle in degrees. The next argument is thepoint we're rotation around. When this is null, it will rotate around the center of the image. The last argument is how the image flipped.
+
+The best way to wrap your mind around how to use rotation is to play around with it. Experiment to see the type of effects you get by combining different rotations/flipping.

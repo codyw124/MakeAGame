@@ -1,0 +1,32 @@
+
+Once you know how to check collision between two rectangles, you can check collision between any two images since all images are made out of rectangles.
+Everything can be made out of rectangles in a video game, even this dot:
+
+
+Don't see it? Let's zoom in:
+
+Still don't see it? How about now:
+
+Images are made out of pixels which are squares which are rectangles. To do per-pixel collision detection all we have to do is have each object have a set of box colliders and checkcollision of one set of collision boxes against another like so:
+Here is our dot now with per-pixel collision detection. Its velocity is reduced to 1 pixel per frame to make the collision easier to see. The move function now takes in a vectorof collision boxes so we can check two sets against each other. Since we're going to have two dots colliding, we need to be able to get the colliders so we have a function forthat.
+
+Instead of having a single collision box, we have a vector of colliders. We also have an internal function to shift the colliders to match the position of the dot.
+Here we have our new collision detector that checks sets of collision boxes against each other.
+Just like before, we have to set the collider dimensions in the constructor. Only difference here is that we have multiple collision boxes to set.
+This functions pretty much the same as before. Whenever we move the dot, we move the collider(s) with it. After we move the dot, we check if it went off screen or hit something. Ifit did, we move the dot back and move its colliders with it.
+Don't worry too much about how shiftColliders works. It's a short hand way of mColliders[ 0 ].x = ..., mColliders[ 1 ].x = ..., etc and it works for this specific case. For your ownper-pixel objects you'll have your own placing functions.
+
+And after shiftColliders, have an accessor function to get the colliders.
+Here in our collision detection function, we have a for loop that calculates the top/bottom/left/right of each collision box in object a.
+We then check calculate the top/bottom/left/right of each collision box in object b. We then check if there is no separating axis. If this no separating axis, we return true. If weget through both sets without a collision, we return false.
+Before we go into the main loop we declare our dot and the other dot we'll be colliding against.
+Once again in the main loop we handle events for the dot, move with collision check for the dot, and then finally we render our objects.
+A questions I get asked a lot is how to make a function that loads an image and auto generates the set of collision boxes for per pixel collision detection. The answer is simple:
+
+Don't.
+
+In most games, you don't want 100% accuracy. The more collision boxes you have the more collision checks you have and the slower it is. What most games go for is close enough, likein Street Fighter:
+
+The results are not pixel perfect but they are close enough.
+
+Also there's one optimization we could have done here. We could have had a bounding box for the dot that encapsulates all the other collision boxes and then checks that one firstbefore getting to the per-pixel collison boxes. This does add one more collision detection, but since it is much more likely that two objects do not collide it will more likely saveus additional collision detection. In games, this is usually done with a tree structure that has different levels of detail to allow for early outs to prevent unneeded checks at theper-pixel level. Like in previous tutorials, tree structures are outside the scope of these tutorials.

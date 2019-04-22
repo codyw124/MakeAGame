@@ -1,0 +1,51 @@
+
+Tiling is a way of making levels out of uniformly sized reusable pieces. In this tutorial we'll be making a 1280x960 sized level of out only a 160x120 sized tile set.
+Say if we want to make a level like this:
+We could make one huge level or we could create a tile set of 12 pieces:
+And then create a level out of those pieces allowing us to save memory and save time by reusing pieces. This is why back in the early days of gaming tiling engines were so popularon low resource systems and are still used today in some games.
+In our previous tutorials we did our file reading and writing with SDL RWOps. Here we'll be using fstream whichis part of the standard C++ library and is relatively easy to use with text files.
+Here we're defining some constants. We'll be using scrolling so we have constants for both the screen and the level. We'llalso have constants to define the tiles and the tile types.
+Here is our tile class with a constructor that defines position and type, a renderer that uses a camera, and some accessors to get the tile's type and collision box. In terms of datamembers we have a collision box and type indicator.
+
+Normally it's a good idea to have position and collider separate when doing collision detection, but for the sake ofsimplicity we're using the collider to hold position.
+Here is the dot class yet again, now with the ability to check for collision against the tiles when moving.
+Our media loading function will also be initializing tiles so it need to take them in as an argument.
+
+We also the touchesWall function that checks a collision box against every wall in a tile set which will be used when we need to check the dot against the whole tile set. Finallythe setTiles function loads and sets the tiles.
+The tile constructor initializes position, dimensions, and type.
+When we render we only want to show tiles that are in the camera's sight:
+So we check if the tile collides with the camera before rendering it. Notice also that we render the tile relative to the camera.
+And here are the accessors to get the tile's type and collision box.
+When we move the dot we check if it goes off the level or hits a wall tile. If it does we correct it.
+Here is the rendering code largely lifted from the scrolling/camera tutorial.
+In our loading function we not only load the textures but also the tile set.
+Near the top of the setTiles function we declare x/y offsets that define where we'll be place the tiles. As we load in more tiles we'll be shift the x/y position left to right andtop to bottom.
+
+We then open the lazy.map file which is just a text file with the follow contents:
+
+00 01 02 00 01 02 00 01 02 00 01 02 00 01 02 00
+01 02 00 01 02 00 01 02 00 01 02 00 01 02 00 01
+02 00 11 04 04 04 04 04 04 04 04 04 04 05 01 02
+00 01 10 03 03 03 03 03 03 03 03 03 03 06 02 00
+01 02 10 03 08 08 08 08 08 08 08 03 03 06 00 01
+02 00 10 06 00 01 02 00 01 02 00 10 03 06 01 02
+00 01 10 06 01 11 05 01 02 00 01 10 03 06 02 00
+01 02 10 06 02 09 07 02 00 01 02 10 03 06 00 01
+02 00 10 06 00 01 02 00 01 02 00 10 03 06 01 02
+00 01 10 03 04 04 04 05 02 00 01 09 08 07 02 00
+01 02 09 08 08 08 08 07 00 01 02 00 01 02 00 01
+02 00 01 02 00 01 02 00 01 02 00 01 02 00 01 02
+
+Using fstream we can read text from a file much like we would read keyboard input with iostream. Before we can continue we have to check if the map loaded correctly by checking ifit's NULL. If it is NULL we abort and if not we continue loading the file.
+
+Note: depending on which compiler you use (like certain versions of Visual Studio), this piece of code may not compile. Instead of checking if map == NULL, you have to check !map.is_open().
+If the file loaded successfully we have a for loop that reads in all the numbers from the text file. We read a number into the tileType variable and then check if the read failed.If the read failed, we abort.
+
+If not we then check if the tile type number is valid. If it is valid we create a new tile of the given type, if not we print an error and stop loading tiles.
+After loading a tile we move to the text tile position to the right. If we reached the end of a line of tiles, we move down to the next row.
+After all the tiles are loaded we set the clip rectangles for the tile sprites. Finally we load the map file and return.
+The touchesWall function checks a given collision box against tiles of type TILE_CENTER, TILE_TOP, TILE_TOPRIGHT, TILE_RIGHT, TILE_BOTTOMRIGHT, TILE_BOTTOM, TILE_BOTTOMLEFT, TILE_LEFT,and TILE_TOPLEFT which are all wall tiles. If you check back when we defined these constants, you'll see that these are numbered right next to each other so all we have to do ischeck if the type is between TILE_CENTER and TILE_TOPLEFT.
+
+If the given collision box collides with any tile that is a wall this function returns true,
+In the main function right before we load the media we declare our array of tile pointers.
+Our main loop is pretty much the same with some adjustments. When we move the dot we pass in the tile set and then set the camera over the dot after it moved. We then render thetile set and finally render the dot over the level.

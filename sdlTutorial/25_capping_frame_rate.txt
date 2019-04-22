@@ -1,0 +1,10 @@
+
+Another thing we can do with SDL timers is manually cap the frame rate. Here we'll disable vsync and maintain a maximum frame rate.
+For this demo, we're going render our frame normally, but at the end of the frame we're going to wait until the frame time is completed. For example here, when you want to render at60 fps you have to spend 16 and 2/3rd milliseconds per frame ( 1000ms / 60 frames ). This is why here we calculate the number of ticks per frame in milliseconds.
+As you can see, we're disabling VSync for this demo because we'll be manually capping the frame rate.
+For this program we'll not only need a timer to calculate the frame rate, but also a timer to cap the frames persecond. Here before we enter the main loop we declare some variables and start the fps calculator timer.
+To cap the FPS we need to know how long the frame has taken to render which is why we start a timer at the beginning of each frame.
+Here we have frame rendering and fps calculation code from before.
+Finally here we have the code to cap the frame rate. First we get how many ticks the frame took to complete. If the number of ticks the frame took to execute is less than the ticksneeded per frame, we then delay for the remaining time to prevent the application from running too fast.
+
+There's a reason we'll using VSync for these tutorials as opposed to manually capping the frame rate. When running this application, you'll notice that it runs slightly fast. Sincewe're using integers (because floating point numbers are not precise), the ticks per frame will be 16ms as opposed to the exact 16 2/3ms. This solution is more of a stop gap in caseyou have to deal with hardware that does not support VSync.

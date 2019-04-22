@@ -1,0 +1,19 @@
+
+Animation in a nutshell is just showing one image after another to create the illusion of motion. Here we'll be showing different sprites to animate a stick figure.
+Say if we had these frames of animation (that clearly demonstrate I am not an animator):
+And showed one right after the other every 10th of a second we'd get this animation:
+Since images in SDL 2 are typically SDL_Textures, animating in SDL is a matter of showing different parts of a texture (or different whole textures) one right after the other.
+So here we have the spritesheet with sprites that we're going to use for the animation.
+For this (and future tutorials), we want to use Vertical Sync. VSync allows the rendering to update at the same time as when your monitor updates during vertical refresh. For thistutorial it will make sure the animation doesn't run too fast. Most monitors run at about 60 frames per second and that's the assumption we're making here. If you have a differentmonitor refresh rate, that would explain why the animation is running too fast or slow.
+After we load the sprite sheet we want to define the sprites for the individual frames of animation.
+Before the main loop we have to declare a variable to keep track of the current frame of animation.
+After the screen is cleared in the main loop, we want to render the current frame of animation.
+
+The animation goes from frames 0 to 3. Since there are only 4 frames of animation, we want to slow down the animation a bit. This is why when we get the current clip sprite, we wantto divide the frame by 4. This way the actual frame of animation only updates every 4 frames since with int data types 0 / 4 = 0, 1 / 4 = 0, 2 / 4 = 0, 3 / 4 = 0, 4 / 4 = 1,5 / 4 = 1, etc.
+
+After we get the current sprite, we want to render it to the screen and update the screen.
+Now in order for the frame to update, we need to increment the frame value every frame. If we didn't, then the animation would stay at the first frame.
+
+We also want the animation to cycle, so when the frame hits the final value ( 16 / 4 = 4 ) we reset the frame back to 0 so the animation starts over again.
+
+After we update the frame by either incrementing it or cycling it back to 0, we reach the end of the main loop. This main loop will keep showing a frame and updating the animationvalue to animate the sprite.

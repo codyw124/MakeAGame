@@ -1,0 +1,9 @@
+
+Now that we know how to how to use joysticks with SDL, we can now use the new haptics API to make the controller shake.
+A haptic device is something that gives some sort of physical feedback. In this case, it makes the controller rumble. The datatype for a haptics device is intuitively namedSDL_haptic.
+Like with the joysticks subsystem, you need to make sure to initialize the haptic specific subsystem in order to use haptics.
+After we initialize the joystick, we need to get the haptics device from the joystick usingSDL_HapticOpenFromJoystick on an opened joystick. If we manage to get the haptic device fromcontroller we have to initialize the rumble using SDL_HapticRumbleInit.
+Once we're done with a haptic device, we call SDL_HapticClose.
+To actually make the controller rumble, you need to make it play some sort of rumbling. The easiest way to make your controller shake is by callingSDL_HapticRumblePlay, which takes in the haptic device, strength in percentage, and duration of the rumble.Here we make the controller rumble at 75% strength for half a second whenever a SDL_JoyButtonEvent happens.
+
+Now the SDL 2 haptics API has many more features not covered here including making custom effects, handling multi rumble devices, and handling haptic mice. You can check them outin the SDL 2 force feedback documentation.

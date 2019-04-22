@@ -1,0 +1,7 @@
+
+Now that you covered the hard part of getting the application to compile and run, let's go over the application code.
+Since mobile devices vary a lot in resolution, we're going to use variable screen dimensions instead of constant ones.
+Here we call SDL_GetCurrentDisplayMode to get the resolution of the mobile device. We then create a window using the device dimensions.
+
+Notice how we're using SDL_Log instead of printf. This is because Android/iOS have their own platform specific ways to print to the console and SDL gives us a nicewrapper to make our code cross platform.
+Other than the fact that we're using SDL_Log, the code is pretty much the same as before.

@@ -1,0 +1,17 @@
+
+Whether you want to be able to handle unstable frame rates or support multiple frame rates, you can set your movement based on time to make it independent of frame rate.
+The dot class returns adapted for frame independent movement. Notice how the velocity is now 640. The way we did per frame velocity previously would cause this to fly across thescreen in a single frame. For this demo we're going to base things on time and the standard unit of time is 1 second. 640 pixels per second translates into little more than 10pixels per frame in a 60 frames per second application.
+
+In order to move based on frame time, the move function needs to know how much time is moving per frame. This is why the move function takes in a time step which is how much timehas passed since the last update.
+
+Also notice how the position and velocity are floats instead of integers. If we used integers the motion would be always truncated to the nearest integer which would cause greaterinaccuracies.
+Here is the move function changed for time based movement as opposed to frame based movement.
+
+We update the position by moving it over by velocity * time. Say if we had (for simplicity's sake) a velocity of 600 pixels per second and a time step of 1 60th of a second. Thismeans we would move over by 600 * 1/60 pixels or 10 pixels.
+
+Because of the non uniform movement we can't just move back when we go off screen, we have to correct the value to be something on screen.
+To prevent the compiler from barking at us, we convert the positions to integers when rendering the dot.
+For this demo we disabled vsync to show it can run regardless of the frame rate. In order to know how much time has passed between renders, we need to timer to keep track of thetime step.
+When we move around the dot we first get the time from the step time so we know how much time has passed since the last time we moved. We turn it from milliseconds into seconds andpass it to the move function. After we're done moving we restart the step timer so we'll now how much time has passed for when we need to move again. Finally we render as wenormally do.
+
+For most of these tutorials, things are simplified to make things easier to digest. For most if not all applications we use time based movement as opposed to frame based movement.Even when we have a fixed frame rate, we just use a constant time step. The thing is when using time based movement you run into problems with floating point errors which requirevector math to fix, and vector math is beyond the scope of this tutorial which is why frame based movement is used for most of the tutorials.

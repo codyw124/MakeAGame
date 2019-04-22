@@ -1,0 +1,6 @@
+
+Some times you only want to render part of the screen for things like minimaps. Using the viewport you can control where you render on the screen.
+After we clear the screen, it's time to get drawing. There's 3 regions we're going to draw a full screen image to:
+First we're going to render the top left. This is as easy as creating a rectangle with half the width/height as the screen, and passing this region toSDL_RenderSetViewport. Any rendering done after that call will render inside the region defined by thegiven viewport. It will also use the coordinate system of the window it was created in, so the bottom of the view we created will still be y = 480 even though it's only 240 pixelsdown from the top.
+Here we define the top right area and draw to it. It's pretty much the same as before, only now the x coordinate is half the screen over.
+Finally we render one more time in the bottom half of the screen. Again, the viewport will use the same coordinate system as the window it is used in, so the image will appearsquished since the viewport is half the height.

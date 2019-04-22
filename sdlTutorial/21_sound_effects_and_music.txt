@@ -1,0 +1,22 @@
+
+Up until now we've only been dealing with video and input. Most games made require some sort of sound and here we'll be using SDL_mixer to play audio for us.
+SDL_mixer is a library we use to make audio playing easier (because it can getcomplicated). We have to set it up just like we set up SDL_image. Like before, it's just a matter of having the headers files,library files, and binary files in the right place with your compiler configured to use them.
+The SDL_mixer data type for music isMix_Music and one short sounds isMix_Chunk. Here we declare pointers for the music and sound effects we'll be using.
+Since we're using music and sound effects, we need to initialize audio along with video for this demo.
+To initialize SDL_mixer we need to call Mix_OpenAudio. The first argument sets the sound frequency, and 44100 is a standard frequency that works on most systems. The second argument determines the sample format, which again here we're using the default. Thethird argument is the number of hardware channels, and here we're using 2 channels for stereo. The last argument is the sample size, which determines the size of the chunks we usewhen playing sound. 2048 bytes (AKA 2 kilobyes) worked fine for me, but you may have to experiment with this value to minimize lag when playing sounds.
+
+If there's any errors with SDL_mixer, they're reported with Mix_GetError.
+Here we load our splash texture and sound.
+
+To load music we call Mix_LoadMUSand to load sound effect we call Mix_LoadWAV.
+When we're done with audio and want to free it, we callMix_FreeMusic to free music andMix_FreeChunk to free a sound effect.We call Mix_Quit to close down SDL_mixer.
+In the event loop, we play a sound effect when the 1, 2, 3, or 4 keys are pressed. The way to play a Mix_Chunk is by callingMix_PlayChannel. The first argument is the channel you want to use to play it. Sincewe don't care which channel it comes out of, we set the channel to negative 1 which will use the nearest available channel. The second argument is the sound effect and last argumentis the number of times to repeat the effect. We only want it to play once per button press, so we have it repeat 0 times.
+
+A channel in this case is not the same as a hardware channel that can represent the left and right channel of a stereo system. Every sound effect that's played has a channelassociated with it. When you want to pause or stop an effect that is play, you can halt its channel.
+For this demo, we want to play/pause the music on a 9 keypress and stop the music on a 0 keypress.
+
+When the 9 key pressed we first check if the music is not playing with Mix_PlayingMusic. If it isn't, we start the music withMix_PlayMusic. The first argument is the music we want to play and the last argument isthe number of times to repeat it. Negative 1 is a special value saying we want to loop it until it is stopped.
+
+If there is music playing, we check if the music is paused using Mix_PausedMusic. If themusic is paused, we resume it using Mix_ResumeMusic. If the music is not paused we pauseit using Mix_PauseMusic.
+
+When 0 is pressed, we stop music if it playing using Mix_HaltMusic.

@@ -1,0 +1,22 @@
+
+Thanks to new hardware accelerated rendering, transparency is much faster in SDL 2.0. Here we'll use alpha modulation (which works much like color modulation) to control the transparency of a texture.
+Here we're going to add two functions to support alpha transparency on a texture. First there's setAlpha which will function much like setColor did in the color modulation tutorial.There's also setBlendMode which will control how the texture is blended. In order to get blending to work properly, you must set the blend mode on the texture. We'll cover this indetail later.
+Here in the texture loading function we're loading the front texture we're going to alpha blend and a background texture. As the front texture gets more transparent, we'll be able tosee more of the back texture. As you can see in the code, after we load the front texture successfully we set theSDL BlendMode to blend so blending is enabled. Since the background isn't going to be transparent, we don'thave to set the blending on it.
+
+Now how does alpha work? Alpha is opacity, and the lower the opacity the more we can see through it. Like red, green, or blue color components it goes from 0 to 255 when modulatingit. The best way to understand it is with some examples. Say if we had the front image on a white background.
+
+This is the front image at 255 (100% alpha):
+
+This is the front image at 191 (75% alpha):
+
+This is the front image at 127 (50% alpha):
+
+This is the front image at 63 (25% alpha):
+
+This is the front image at 0 (0% alpha):
+
+As you can see, the lower the alpha the more transparent it is.
+Here are the actual SDL functions that do the actual work.SDL_SetTextureBlendMode in setBlendMode allows us to enable blending andSDL_SetTextureAlphaMod allows us to set the amount of alpha for the whole texture.
+Right before entering the main loop, we declare a variable to control how much alpha the texture has. It is initialized to 255 so the front texture starts out completely opaque.
+The event loop handles quit events and making the alpha value go up/down with the w/s keys.
+At the end of the main loop we do our rendering. After clearing the screen we render the background first and then we render the front modulated texture over it. Right beforerendering the front texture, we set its alpha value. Try increasing/decreasing the alpha value to see how transparency affects the rendering.

@@ -1,0 +1,12 @@
+
+We've covered timers with SDL before, but there are also timer callback which execute a function after a given amount of time. In this tutorial we'll make a simple program that prints to the console after a set time.
+When creating a call back function, know that they have to be declared a certain way. You can't just create any type of function and use it as a callback.
+
+The call back function needs to have a 32 bit integer as its first argument, a void pointer as its second argument, and it has to return a 32 bit integer.
+Here is our simple call back function which prints a message to the console after a given amount of time. The interval argument isn't used here but is typically used for timer callbacks that need to repeat themselves.
+
+Since void pointers can point to anything, this function is going to take in a string and print it to the console.
+Do make sure to initialize with SDL_INIT_TIMER to use timer callbacks.
+We kick off our timer callback using SDL_AddTimer. The first argument is how long the callback will take which inthis case is set to 3000 milliseconds or 3 seconds. The second argument is the callback function and the last argument is the void data pointer we're sending it.
+
+This application will kick off the call back and then run the main loop. While the main loop is running the callback may spit out the message to the console. In case the callbackdoesn't happen before the main loop ends, we remove the callback timer using SDL_RemoveTimer. Careful, the timercall back is asynchronous which means it can happen while we're doing something else. Don't have your call back mess with data while your main thread is messing with that same pieceof data.

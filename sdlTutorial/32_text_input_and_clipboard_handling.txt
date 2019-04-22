@@ -1,0 +1,13 @@
+
+Getting text input from the keyboard is a common task in games. Here we'll be getting text using SDL 2's new text input and clip board handling.
+Before we go into the main loop we declare a string to hold our text and render it to a texture. We then call SDL_StartTextInput so the SDL text input functionality is enabled.
+We only want to update the input text texture when we need to so we have a flag that keeps track of whether we need to update the texture.
+There are a couple special key presses we want to handle. When the user presses back space we want to remove the last character from the string.
+
+When the user is holding control and presses c, we want to copy the current text to the clip board usingSDL_SetClipboardText. You can check if the ctrl key is being held usingSDL_GetModState.
+
+When the user does ctrl + v, we want to get the text from the clip board using SDL_GetClipboardText. Alsonotice that whenever we alter the contents of the string we set the text update flag.
+With text input enabled, your key presses will also generate SDL_TextInputEvents which simplifies things likeshift key and caps lock. Here we first want to check that we're not getting a ctrl and c/v event because we want to ignore those since they are already handled as keydown events.If it isn't a copy or paste event, we append the character to our input string.
+If the text render update flag has been set, we rerender the texture. One little hack we have here is if we have an empty string, we render a space because SDL_ttf will not renderan empty string.
+At the end of the main loop we render the prompt text and the input text.
+Once we're done with text input we disable it since enabling text input introduces some overhead.

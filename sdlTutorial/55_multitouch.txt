@@ -1,0 +1,11 @@
+
+In this tutorial we'll be using SDL 2's built in functionality to handle multi touch gestures like pinch and rotate.
+Like in the previous tutorial, we'll be using a set of textures to show which type of input is happening.
+Also like the previous tutorial, we'll need to keep track of the touch location and the current texture to render.
+When a multi touch gesture happens a SDL_MultiGestureEvent gets generated. Here we check for rotations first by checking the angle on the gesture. The thing toremember is that the smallest rotation will get reported so if you pinch and rotate by a 1000th of a radian, it will show up in the gesture. Here we make sure the rotation is at least one degree before reporting it as arotation.
+
+If the rotation is big enough, we set the location of the gesture and set the texture.
+If the rotation wasn't big enough, we then check if the distance of the pinch. Again remember that coordinates are normalized so a 10 pixel pinch on a 1920 resolution tablet will be reported at around 0.0052.
+
+If the pinch is big enough, we set the gesture position and then check if the pinch was opening or closing.
+Once again like the previous tutorial, in the rendering we show the current gesture texture and the gesture position.

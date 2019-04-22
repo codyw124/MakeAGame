@@ -1,0 +1,25 @@
+
+With OpenGL 3 there was a massive overhaul that made everything shader based. In this tutorial we'll be rendering a quad using core modern OpenGL.
+For this tutorial we'll be using the OpenGL Extension Wrangler. Certain operating systems like windowsonly support a limited amount of OpenGL by default. Using GLEW you can get the latest functionality. If you use GLEW, make sure to include the GLEW header before any OpenGLheaders.
+
+GLEW is an extension library and if you can set up any of the SDL extension libraries you can set up GLEW.
+Here are some custom functions we're making to report any errors when making our shader programs.
+The way modern OpenGL works is that we create shader programs (gProgramID) that process vertex attributes like positions (gVertexPos2DLocation). We put vertices inVertex Buffer Objects (gVBO) and specify the order in which to draw them using Index Buffer Objects.
+Here we're initializing for a version 3.1 core context. 3.1 core gets rid off all the old functionality. We specify the major and minor version like before and make it a corecontext by setting the profile mask to core.
+After we create our context we initialize GLEW. Since we want the latest features, we have to set glewExperimental to true. After that we call glewInit() to initialize GLEW.
+In our initialization function we're going to create our shader program to render with along with the VBO and IBO data.
+
+If you've never worked with OpenGL shaders, this function is probably going to go over your head. It's OK because this tutorial is about how to use SDL's 3.0+ context controls, notso much the detail about how OpenGL 3.0+ works. Just try to get a general idea on how a shader works.
+Here we are loading a vertex shader from an in code source. If the vertex shader failed to load and compile we use our log printing function to spit out there error.
+If the vertex shader loaded successfully we attach it to the program and then compile the fragment shader.
+If the fragment shader compiled, we attach it to the shader program and link it.
+If the program linked successfully we then get the attribute from the shader program so we can send it vertex data.
+After we get the shader program working, we create the VBO and IBO. As you can see, the VBO has the same positions as the quad from the last tutorial.
+Here are our log printing functions. These grab the shader log from the given shader or program and spit it out to the console.
+In our rendering function, we bind our shader program, enable vertex positions, bind the VBO, set the data offset, bind the IBO, and draw the quad as triangle fan. Once we're donewe disable the vertex attribute and unbind the program.
+
+Again this tutorial is more for people with some OpenGL experience that want to know how to switch over to core functionality. The fact is that this code will work with an OpenGL 2.1context as well as a 3.0 context (Well, except for the shader code because OpenGL 2.1 only supports up to #version 120). Core OpenGL just removes OpenGL calls that don't reflect modern hardware.
+
+If you want to learn more about modern opengl, I have OpenGL shader tutorials too.
+
+Also, I get e-mails of how this code is broken because if you set the version to 3.2+ it won't work because it doesn't use vertex array objects (or VAOs). The thing is this code works fine for version 3.1 core, which it is designed to be. However, OpenGL 3.2+ requires you create a VAO. Fortunately I cover VAOs in the OpenGL tutorial.

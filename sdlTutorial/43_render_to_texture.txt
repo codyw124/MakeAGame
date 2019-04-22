@@ -1,0 +1,10 @@
+
+For some effects being able to render a scene to texture is needed. Here we'll be rendering a scene to a texture to achieve a spinning scene effect.
+Here we are adding more functionality to the texture class. The createBlank function now takes in another argument that defines how it is accessed. We also have the setAsRenderTargetfunction which makes it so we can render to this texture.
+When we want to render to a texture we need to set its texture access to SDL_TEXTUREACCESS_TARGET, which iswhy this function takes an additional argument now.
+To render to a texture we have to set it as the render target which is done here using a call toSDL_SetRenderTarget.
+We create our target texture in the media loading function.
+For this demo we'll render some geometry to a texture and spin that texture around the center of the screen. This is why we have variables for angle of rotation and center of screen.
+In our main loop before we do any rendering we set the target texture as a target. We then render our scene full of geometry and once we're done rendering to a texture we callSDL_SetRenderTarget with a NULL texture so any rendering done afterward will be done to the screen.
+
+With our scene rendered to a texture, we then render the target texture to the screen at a rotated angle.
