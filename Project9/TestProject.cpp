@@ -79,8 +79,33 @@ void runTestTwo()
     standingRightAnimation.push(40);
     standingRightAnimation.push(41);
 
+    std::queue<int> standingUpAnimation = std::queue<int>();
+    standingUpAnimation.push(80);
+
+    std::queue<int> walkingDownAnimation = std::queue<int>();
+    walkingDownAnimation.push(2);
+    walkingDownAnimation.push(3);
+    walkingDownAnimation.push(4);
+    walkingDownAnimation.push(5);
+
+    std::queue<int> walkingRightAnimation = std::queue<int>();
+    walkingRightAnimation.push(42);
+    walkingRightAnimation.push(43);
+    walkingRightAnimation.push(44);
+    walkingRightAnimation.push(45);
+
+    std::queue<int> walkingUpAnimation = std::queue<int>();
+    walkingUpAnimation.push(81);
+    walkingUpAnimation.push(82);
+    walkingUpAnimation.push(83);
+    walkingUpAnimation.push(84);
+
     character.setAnimation(character.STANDING, character.DOWN, standingDownAnimation);
-    character.setAnimation(character.STANDING, character.RIGHT, standingDownAnimation);
+    character.setAnimation(character.STANDING, character.RIGHT, standingRightAnimation);
+    character.setAnimation(character.STANDING, character.UP, standingUpAnimation);
+    character.setAnimation(character.WALKING, character.DOWN, walkingDownAnimation);
+    character.setAnimation(character.WALKING, character.RIGHT, walkingRightAnimation);
+    character.setAnimation(character.WALKING, character.UP, walkingUpAnimation);
     character.setCurrentAnimation(&(character.getAnimation(character.STANDING, character.DOWN)));
 
     window.setPlayer(character);

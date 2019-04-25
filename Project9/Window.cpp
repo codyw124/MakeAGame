@@ -103,15 +103,19 @@ void Window::runMainLoop()
                 switch (e.key.keysym.sym)
                 {
                 case SDLK_w:
+                    playerCharacter_->setCurrentAnimation(&playerCharacter_->getAnimation(playerCharacter_->WALKING, playerCharacter_->UP));
                     break;
 
                 case SDLK_s:
+                    playerCharacter_->setCurrentAnimation(&playerCharacter_->getAnimation(playerCharacter_->WALKING, playerCharacter_->DOWN));
                     break;
 
                 case SDLK_a:
+                    // playerCharacter_->setCurrentAnimation(&playerCharacter_->getAnimation(playerCharacter_->WALKING, playerCharacter_->LEFT));
                     break;
 
                 case SDLK_d:
+                    playerCharacter_->setCurrentAnimation(&playerCharacter_->getAnimation(playerCharacter_->WALKING, playerCharacter_->RIGHT));
                     break;
 
                 case SDLK_j:
@@ -133,6 +137,29 @@ void Window::runMainLoop()
                     break;
 
                 default:
+                    break;
+                }
+            }
+             //User releases a key
+            else if (e.type == SDL_KEYUP)
+            {
+                //Select surfaces based on key press
+                switch (e.key.keysym.sym)
+                {
+                case SDLK_w:
+                    playerCharacter_->setCurrentAnimation(&playerCharacter_->getAnimation(playerCharacter_->STANDING, playerCharacter_->UP));
+                    break;
+
+                case SDLK_s:
+                    playerCharacter_->setCurrentAnimation(&playerCharacter_->getAnimation(playerCharacter_->STANDING, playerCharacter_->DOWN));
+                    break;
+
+                case SDLK_a:
+                    // playerCharacter_->setCurrentAnimation(&playerCharacter_->getAnimation(playerCharacter_->STANDING, playerCharacter_->LEFT));
+                    break;
+
+                case SDLK_d:
+                    playerCharacter_->setCurrentAnimation(&playerCharacter_->getAnimation(playerCharacter_->STANDING, playerCharacter_->RIGHT));
                     break;
                 }
             }

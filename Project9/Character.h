@@ -7,7 +7,7 @@
 class Character
 {
 public:
-    enum Action{ STANDING };
+    enum Action{ STANDING, WALKING };
     enum Direction{ UP, DOWN, RIGHT };
 
     Character();
