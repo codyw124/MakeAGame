@@ -1,6 +1,6 @@
 COMPILER = g++
 COMPILER_FLAGS = -Wall -g -c
-LINKER_FLAGS = -lSDL2 -lSDL2_image 
+LINKER_FLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
 
 all:TestProject
 
