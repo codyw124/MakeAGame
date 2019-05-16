@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "Character.h"
+#include "Timer.h"
 
 class Window
 {
@@ -13,6 +14,7 @@ private:
     SDL_Renderer* renderer_;
     bool open_;
     Character* playerCharacter_;
+    Timer timer_;
 public:
     Window(const int& width, const int& height, const std::string& name);
     ~Window();

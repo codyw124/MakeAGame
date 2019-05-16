@@ -13,8 +13,8 @@ void runTestThree();
 int main(int argc, char *argv[])
 {
     // runTests();
-    // runTestTwo();
-    runTestThree();
+    runTestTwo();
+    // runTestThree();
     return 0;
 }
 

@@ -17,5 +17,7 @@ void createWindow()
     //make a window  with this width and height
     Window window = Window(240, 160, "Level 1");
 
+    window.setScene("Level1.scene");
+
     window.runMainLoop();
 }

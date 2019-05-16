@@ -1,15 +1,19 @@
 #include "../headers/Scene.h"
 
-Scene::Scene()
+Scene::Scene(std::string filename)
 {
     gameObjects_ = std::list<GameObject>();
+
+    if(fileExistsInCurrentDirectory(filename))
+    {
+    }
 }
 
 Scene::~Scene()
 {
 }
 
-std::string Scene::toXML()
+std::string Scene::save()
 {
     std::string returnValue = "<scene>\n";
 
@@ -31,4 +35,15 @@ void Scene::addGameObject(GameObject toBeAdded)
 void Scene::removeGameObject(GameObject toBeRemoved)
 {
     gameObjects_.remove(toBeRemoved);
+}
+
+bool Scene::fileExistsInCurrentDirectory(std::string filename)
+{
+    std::ifstream ifs (filename, std::ifstream::in);
+
+    bool isGood = ifs.good();
+
+    ifs.close();
+    
+    return isGood;
 }

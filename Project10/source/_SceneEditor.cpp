@@ -81,41 +81,7 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-vector<string> _list(string mode)
-{
-    vector<string> files = vector<string>();
 
-    DIR *dir = opendir(".");
-
-    struct dirent *dp;
-
-    while ((dp = readdir(dir)) != NULL)
-    {
-        //get current file name
-        string currentFileName = dp->d_name;
-
-        //get its last letter
-        string::reverse_iterator currentFileNameLetterCheck = currentFileName.rbegin();
-
-        //get modes last letter
-        string::reverse_iterator currentModeLetterCheck = mode.rbegin();
-
-        while (*currentModeLetterCheck == *currentFileNameLetterCheck && currentModeLetterCheck != mode.rend())
-        {
-            currentModeLetterCheck++;
-            currentFileNameLetterCheck++;
-        }
-
-        if (currentModeLetterCheck == mode.rend())
-        {
-            files.push_back(currentFileName);
-        }
-    }
-
-    closedir(dir);
-
-    return files;
-}
 
 void save(string mode, string newFileName)
 {
@@ -159,20 +125,6 @@ void _delete(string mode, string fileToTryAndDelete)
     {
         cout << fileToTryAndDelete << "." << mode <<" has been deleted" << endl;
     }
-}
-
-bool fileExistsInCurrentDirectory(string fileName, string mode)
-{
-    vector<string> currentFiles = _list(mode);
-
-    vector<string>::iterator it = currentFiles.begin();
-
-    while (it != currentFiles.end() && *it != fileName + "." + mode)
-    {
-        it++;
-    }
-
-    return it != currentFiles.end();
 }
 
 void _new(string mode)

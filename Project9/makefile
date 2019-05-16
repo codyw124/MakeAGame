@@ -13,7 +13,7 @@ Character.o: Character.cpp Character.h
 TestProject.o: TestProject.cpp Window.h Character.h Timer.h
 	$(COMPILER) $(COMPILER_FLAGS) TestProject.cpp $(LINKER_FLAGS) -o TestProject.o
 
-Window.o: Window.cpp Window.h Character.h
+Window.o: Window.cpp Window.h Character.h Timer.h
 	$(COMPILER) $(COMPILER_FLAGS) Window.cpp $(LINKER_FLAGS) -o Window.o
 
 Timer.o: Timer.cpp Timer.h 

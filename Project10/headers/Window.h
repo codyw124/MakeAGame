@@ -25,4 +25,5 @@ public:
     void free();
     void runMainLoop();
     SDL_Renderer* getRenderer();
+    void setScene(const std::string& fileName);
 };

@@ -29,7 +29,7 @@ Window::Window(const int& width, const int& height, const std::string& name)
     else
     {
         //create a renderer
-        renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+        renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
 
         //if the renderer didnt load  throw an error
         if (renderer_ == NULL)
@@ -83,6 +83,10 @@ void Window::runMainLoop()
 {
     //Event handler
     SDL_Event e;
+
+    //Start counting frames per second
+    int countedFrames = 0;
+    timer_.start();
 
     //while not quit
     while (open_)
@@ -163,16 +167,26 @@ void Window::runMainLoop()
                     break;
                 }
             }
-
-            //Clear screen
-            SDL_RenderClear(renderer_);
-
-            //render the current player
-            renderPlayer();
-
-            //Update screen
-            SDL_RenderPresent(renderer_);
         }
+
+        //Calculate and correct fps
+        float avgFPS = countedFrames / ( timer_.getTicks() / 1000.f );
+        if( avgFPS > 2000000 )
+        {
+            avgFPS = 0;
+        }
+
+        //Clear screen
+        SDL_RenderClear(renderer_);
+
+        //render the current player
+        renderPlayer();
+
+        //Update screen
+        SDL_RenderPresent(renderer_); 
+        
+        //increment the number of frames we have displayed
+        ++countedFrames;
     }
 }
 

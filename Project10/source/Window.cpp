@@ -53,11 +53,21 @@ void Window::free()
     if (window_ != NULL)
     {
         SDL_DestroyWindow(window_);
-        open_ = false;
         window_ = NULL;
     }
 
+    if(renderer_ != NULL)
+    {
+        SDL_DestroyRenderer(renderer_);
+        renderer_ = NULL;
+    }
+
     SDL_Quit();
+
+    delete scene_;
+    scene_ = NULL;
+
+    open_ = false;
 }
 
 const int& Window::getHeight()
@@ -170,3 +180,8 @@ SDL_Renderer* Window::getRenderer()
 {
     return renderer_;
 }
+
+ void Window::setScene(const std::string& fileName)
+ {
+    scene_ = new Scene(fileName);
+ }
