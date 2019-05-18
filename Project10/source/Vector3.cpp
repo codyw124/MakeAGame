@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <ostream>
 #include <cmath>
-#include "./headers/Vector3.h"
+#include "../headers/Vector3.h"
 
 //constructor that initialized instance with default values
 Vector3::Vector3()
