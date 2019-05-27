@@ -3,6 +3,9 @@
 #include <fstream>
 #include <string>
 #include "GameObject.h"
+#include "tinyxml2.h"
+
+using namespace tinyxml2;
 
 class Scene
 {

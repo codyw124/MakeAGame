@@ -4,9 +4,16 @@ Scene::Scene(std::string filename)
 {
     gameObjects_ = std::list<GameObject>();
 
-    if(fileExistsInCurrentDirectory(filename))
-    {
-    }
+    // XMLDocument doc;
+
+	// XMLError result = doc.LoadFile(filename.c_str());
+
+    // XMLNode * pRoot = doc.FirstChild();
+
+    // if (pRoot == nullptr) 
+    // {
+    //     //throw exception 
+    // }
 }
 
 Scene::~Scene()

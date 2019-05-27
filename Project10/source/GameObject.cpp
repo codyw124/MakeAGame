@@ -23,6 +23,16 @@ std::string GameObject::toXML()
     return returnValue;
 }
 
+void GameObject::save(std::string filename) const
+{
+
+}
+
+void GameObject::load(std::string filename)
+{
+
+}
+
 bool GameObject::operator==(const GameObject & r) const
 {
     bool areSame = true;

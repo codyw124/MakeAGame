@@ -13,4 +13,7 @@ public:
     bool operator==(const GameObject& r) const;
 
     std::string toXML();
+
+    void save(std::string filename) const;
+    void load(std::string filename);
 };

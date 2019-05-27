@@ -36,7 +36,7 @@ double PhysicsVector::correctDegrees(double degrees)
 }
 
 //compares two doubles using an epsilon
-double PhysicsVector::epsilonCompare(double a, double b)
+bool PhysicsVector::epsilonCompare(double a, double b)
 {
     //get the distance between the two numbers on a number line
     double distance = abs(a - b);
