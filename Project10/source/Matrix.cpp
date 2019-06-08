@@ -1,351 +1,604 @@
-//Cody Ware
-//1/9/19
+#include <iostream>
+#include <vector>
+#include <cassert>
 
-#include "../headers/Matrix.h"
+using namespace std;
 
-//default constructor that does nothing. this just exists so implicit one doesn't get made
-Matrix::Matrix()
+
+/*
+todo list
+
+*/
+template <class T>
+class Matrix
 {
+	private:
+		vector<vector<T>> data_;
+		
+	public:
+		Matrix(const int& r, const int& c);
+		Matrix(const Matrix<T>& other);
+		Matrix(Matrix&& other);
+		~Matrix();		
+		Matrix<T>& operator=(const Matrix<T>& other);
+		Matrix<T>& operator=(Matrix<T>&& other);
+		vector<T>& operator[](const int& i);
+		bool operator==(const Matrix<T>& rhs);
+		bool operator!=(const Matrix<T>& rhs);
+		void operator*(const Matrix<T>& other);
+		void operator*(const double& other);
 
-}
+		void transpose();
+		Matrix<T> transposed();
 
-Matrix::Matrix(const int& r, const int& c, const int* data)
+		int getRows();
+		int getColumns();
+		
+	private:
+		void deepCopy(const Matrix<T>& other);
+};
+
+template <class T>
+Matrix<T>::Matrix(const int& r, const int& c)
 {
-	//set rows and columns
-	r_ = r;
-	c_ = c;
-
-	//initialize first dimension
-	//the number of rows we want
-	data_ = new double*[r];
-
-	//track what piece of data we need to place next
-	int currentDataIndex = 0;
-
-	//for each row 
-	for (int row = 0; row < r; row++)
+	data_ = vector<vector<T>>();
+	
+	for(int _r =0; _r < r; _r++)
 	{
-		//give it the right number of columns
-		data_[row] = new double[c];
-
-		for (int column = 0; column < c; column++)
+		vector<T> v;
+		
+		for(int _c = 0; _c < c; _c++)
 		{
-			//place a piece of data in the matrix
-			data_[row][column] = data[currentDataIndex];
-
-			//move on to the next piece of data
-			currentDataIndex++;
+			v.push_back(0);
 		}
+		
+		data_.push_back(v);
 	}
 }
 
-Matrix::Matrix(const Matrix& other)
+template <class T>
+Matrix<T>::Matrix(const Matrix<T>& other)
 {
-	*this = other;
+	deepCopy(other);
 }
 
-Matrix::Matrix(Matrix&& other)
+template <class T>
+Matrix<T>::Matrix(Matrix&& other)
 {
 	deepCopy(other);
 
-	for (int r = 0; r < other.r_; r++)
-	{
-		delete [] other.data_[r];
-	}
-
-	delete [] other.data_;
-
-	other.data_ = NULL;
-
-	other.r_ = 0;
-	other.c_ = 0;
+	other.data_.clear();
 }
 
-Matrix::~Matrix()
+template <class T>
+Matrix<T>::~Matrix()
 {
-	//if there is data
-	if (data_ != NULL)
-	{
-		//for each row 
-		for (int row = 0; row < r_; row++)
-		{
-			//delete that array of data
-			delete [] data_[row];
-		}
-
-		//delete the array of arrays
-		delete [] data_;
-	}
+	
 }
 
-double* Matrix::operator[](const int& i) const
-{
-	if (i < r_)
-	{
-		return data_[i];
-	}
-	else
-	{
-		throw std::range_error("Out of Range of this Matrix.\n");
-	}
-}
-
-Matrix Matrix::operator+(const Matrix& other) const
-{
-	Matrix returnMatrix;
-
-	//if both matrix sizes match
-	if (r_ == other.r_ && c_ == other.c_)
-	{
-		//make a deep copy of other
-		returnMatrix = Matrix(other);
-
-		//for each row 
-		for (int row = 0; row < r_; row++)
-		{
-			//for each column
-			for (int column = 0; column < c_; column++)
-			{
-				//for each spot add my values to the copy
-				returnMatrix[row][column] += data_[row][column];
-			}
-		}
-	}
-	else
-	{
-		throw std::logic_error("Matrix dimensions must match.");
-	}
-
-	return returnMatrix;
-}
-
-Matrix Matrix::operator-(const Matrix& other) const
-{
-	Matrix returnMatrix;
-
-	//if both matrix sizes match
-	if (r_ == other.r_ && c_ == other.c_)
-	{
-		//make a deep copy of other
-		returnMatrix = Matrix(other);
-
-		//for each row 
-		for (int row = 0; row < r_; row++)
-		{
-			//for each column
-			for (int column = 0; column < c_; column++)
-			{
-				//for each spot subtract my values to the copy
-				returnMatrix[row][column] -= data_[row][column];
-			}
-		}
-	}
-	else
-	{
-		throw std::logic_error("Matrix dimensions must match.");
-	}
-
-	return returnMatrix;
-}
-
-Matrix Matrix::operator*(const Matrix& r) const
-{
-	return Matrix();
-}
-
-Matrix Matrix::operator*(const double& scalar) const
-{
-	//make a deep copy of myself
-	Matrix returnMatrix(*this);
-
-	//for each row 
-	for (int row = 0; row < r_; row++)
-	{
-		//for each column
-		for (int column = 0; column < c_; column++)
-		{
-			//for each spot multiply by scalar
-			returnMatrix[row][column] *= scalar;
-		}
-	}
-
-
-	return returnMatrix;
-}
-
-void Matrix::deepCopy(const Matrix& other)
-{
-	//set the dimensions
-	r_ = other.r_;
-	c_ = other.c_;
-
-	//initialize first dimension
-	//the number of rows we want
-	data_ = new double*[r_];
-
-	//for each piece of data in the 2 dimensions
-	for (int row = 0; row < r_; row++)
-	{
-		//set the second dimension
-		data_[row] = new double[c_];
-
-		for (int column = 0; column < c_; column++)
-		{
-			//set my data piece equal to what the others data piece is in this spot
-			data_[row][column] = other.data_[row][column];
-		}
-	}
-}
-
-bool Matrix::operator!=(const Matrix& other) const
-{
-	return !(*this == other);
-}
-
-void Matrix::transpose()
-{
-	//make new data with inverted dimensions
-	double** newData = new double*[c_];
-	for (int newDataRows = 0; newDataRows<r_; newDataRows++)
-	{
-		newData[newDataRows] = new double[r_];
-	}
-
-	//for each piece of data in the original 2 dimensions
-	for (int row = 0; row < r_; row++)
-	{
-		for (int column = 0; column < c_; column++)
-		{
-			//set my data piece equal to what the others data piece is in this spot
-			newData[column][row] = data_[row][column];
-		}
-
-		delete[] data_[row];
-	}
-
-	delete[] data_;
-
-	data_ = newData;
-	std::swap(r_, c_);
-}
-
-Matrix Matrix::transposed()
-{
-	Matrix returnValue = Matrix(*this);
-
-	returnValue.transpose();
-
-	return returnValue;
-}
-
-int Matrix::getRows() const
-{
-	return r_;
-}
-
-int Matrix::getColumns() const
-{
-	return c_;
-}
-
-double ** Matrix::getData() const
-{
-	return data_;
-}
-
-bool Matrix::operator==(const Matrix& other) const
-{
-	//check if dimension sizes match
-	bool areEqual = r_ == other.r_ && c_ == other.c_;
-
-	//if the dimensions were equal
-	if (areEqual) 
-	{
-		//check the data
-		int currentlyCheckedRow = 0;
-		int currentlyCheckedColumn;
-
-		//while no data has not matched and we have not checked all rows
-		while(currentlyCheckedRow < r_ && areEqual)
-		{
-			currentlyCheckedColumn = 0;
-
-			//while no data has not matched and we have  not checked all columns
-			while (currentlyCheckedColumn < c_ && areEqual)
-			{
-				//make sure this piece of data matches
-				areEqual = data_[currentlyCheckedRow][currentlyCheckedColumn] == other.data_[currentlyCheckedRow][currentlyCheckedColumn];
-
-				currentlyCheckedColumn++;
-			}
-
-			currentlyCheckedRow++;
-		}
-	}
-
-	return areEqual;
-}
-
-Matrix& Matrix::operator*=(const double& r)
-{
-	return *this;
-}
-
-Matrix& Matrix::operator*=(const Matrix& r)
-{
-	return *this;
-}
-
-Matrix& Matrix::operator-=(const Matrix& r)
-{
-	*this = *this - r;
-	return *this;
-}
-
-Matrix& Matrix::operator+=(const Matrix& r)
-{
-	*this = *this + r;
-	return *this;
-}
-
-Matrix& Matrix::operator=(Matrix&& other)
+template <class T>
+Matrix<T>& Matrix<T>::operator=(const Matrix<T>& other)
 {
 	deepCopy(other);
 
-	for (int r = 0; r < other.r_; r++)
-	{
-		delete[] other.data_[r];
-	}
-
-	delete[] other.data_;
-
-	other.data_ = NULL;
-
-	other.r_ = 0;
-	other.c_ = 0;
-
 	return *this;
 }
 
-Matrix& Matrix::operator=(const Matrix& other)
+template <class T>
+Matrix<T>& Matrix<T>::operator=(Matrix&& other)
 {
 	deepCopy(other);
+
+	other.data_.clear();
+
 	return *this;
 }
 
-std::ostream & operator<<(std::ostream & os, const Matrix & v)
+template <class T>
+vector<T>& Matrix<T>::operator[](const int& i)
 {
-	for (int r = 0; r < v.getRows(); r++)
+	return data_[i];
+}
+
+template <class T>
+bool Matrix<T>::operator==(const Matrix<T>& rhs)
+{
+
+}
+
+template <class T>
+bool Matrix<T>::operator!=(const Matrix<T>& rhs)
+{
+
+}
+
+template <class T>
+void Matrix<T>::deepCopy(const Matrix<T>& other)
+{
+	data_ = vector<vector<T>>();
+
+	int r = other.data_.size();
+	int c = other.data_[0].size();
+	
+	for(int _r =0; _r < r; _r++)
 	{
-		os << "[\t";
-
-		for (int c = 0; c < v.getColumns(); c++)
+		vector<T> v;
+		
+		for(int _c = 0; _c < c; _c++)
 		{
-			os << v.getData()[r][c] << '\t';
+			v.push_back(other.data_[_r][_c]);
 		}
+		
+		data_.push_back(v);
+	}
+}
 
-		os << "]\n";
+template<class T>
+void Matrix<T>::transpose()
+{
+
+}
+
+template<class T>
+Matrix<T> Matrix<T>::transposed()
+{
+	
+}
+
+template <class T>
+int Matrix<T>::getRows()
+{
+	return data_.size();
+}
+
+template <class T>
+int Matrix<T>::getColumns()
+{
+	int retVal = 0;
+	
+	if(!data_.empty())
+	{
+		retVal = data_[0].size();
 	}
 
-	return os;
+	return retVal;
+}
+
+
+void T01_defaultConstructor();
+void T02_copyConstructor();
+void T03_moveConstructor();
+void T04_assignmentOperator();
+void T05_moveAssignmentOperator();
+void T06_accessOperator();
+void T07_transpose();
+void T08_transposed();
+void T09_multiplicationOperator();
+
+int main()
+{
+	T01_defaultConstructor();
+	T02_copyConstructor();
+	T03_moveConstructor();
+	T04_assignmentOperator();
+	T05_moveAssignmentOperator();
+	T06_accessOperator();
+	T07_transpose();
+	T08_transposed();
+	T09_multiplicationOperator();
+
+	cout<< "All Tests Passed" << endl;
+}
+
+void T01_defaultConstructor()
+{
+	Matrix<int> a(3, 3);
+
+	a[0][0] = 0.0;
+	a[0][1] = 1.0;
+	a[0][2] = 2.0;
+	a[1][0] = 3.0;
+	a[1][1] = 4.0;
+	a[1][2] = 5.0;
+	a[2][0] = 6.0;
+	a[2][1] = 7.0;
+	a[2][2] = 8.0;
+
+	assert(0.0 == a[0][0]);
+	assert(1.0 == a[0][1]);
+	assert(2.0 == a[0][2]);
+	assert(3.0 == a[1][0]);
+	assert(4.0 == a[1][1]);
+	assert(5.0 == a[1][2]);
+	assert(6.0 == a[2][0]);
+	assert(7.0 == a[2][1]);
+	assert(8.0 == a[2][2]);
+}
+
+void T02_copyConstructor()
+{
+	Matrix<int> a(3, 3);
+
+	a[0][0] = 0.0;
+	a[0][1] = 1.0;
+	a[0][2] = 2.0;
+	a[1][0] = 3.0;
+	a[1][1] = 4.0;
+	a[1][2] = 5.0;
+	a[2][0] = 6.0;
+	a[2][1] = 7.0;
+	a[2][2] = 8.0;
+
+	assert(0.0 == a[0][0]);
+	assert(1.0 == a[0][1]);
+	assert(2.0 == a[0][2]);
+	assert(3.0 == a[1][0]);
+	assert(4.0 == a[1][1]);
+	assert(5.0 == a[1][2]);
+	assert(6.0 == a[2][0]);
+	assert(7.0 == a[2][1]);
+	assert(8.0 == a[2][2]);
+
+	Matrix<int> b(a);
+
+	assert(0.0 == b[0][0]);
+	assert(1.0 == b[0][1]);
+	assert(2.0 == b[0][2]);
+	assert(3.0 == b[1][0]);
+	assert(4.0 == b[1][1]);
+	assert(5.0 == b[1][2]);
+	assert(6.0 == b[2][0]);
+	assert(7.0 == b[2][1]);
+	assert(8.0 == b[2][2]);
+
+	b[0][0] = 7;
+
+	assert(7.0 == b[0][0]);
+	assert(0.0 == a[0][0]);
+}
+
+void T03_moveConstructor()
+{
+	//make a 3X3 matrix with those values
+	Matrix<int> a(3, 3);
+
+	a[0][0] = 0.0;
+	a[0][1] = 1.0;
+	a[0][2] = 2.0;
+	a[1][0] = 3.0;
+	a[1][1] = 4.0;
+	a[1][2] = 5.0;
+	a[2][0] = 6.0;
+	a[2][1] = 7.0;
+	a[2][2] = 8.0;
+
+	//make sure they are in the matrix
+	assert(0.0 == a[0][0]);
+	assert(1.0 == a[0][1]);
+	assert(2.0 == a[0][2]);
+	assert(3.0 == a[1][0]);
+	assert(4.0 == a[1][1]);
+	assert(5.0 == a[1][2]);
+	assert(6.0 == a[2][0]);
+	assert(7.0 == a[2][1]);
+	assert(8.0 == a[2][2]);
+
+	//make a matrix and move the memory of 'a' into this matrix
+	Matrix<int> moveHere(std::move(a));
+
+	//make sure the rows and columns reflect the dimensions of a matrix with no data
+	assert(0 == a.getRows());
+	assert(0 == a.getColumns());
+
+	//make sure that everything got moved
+	assert(0.0 == moveHere[0][0]);
+	assert(1.0 == moveHere[0][1]);
+	assert(2.0 == moveHere[0][2]);
+	assert(3.0 == moveHere[1][0]);
+	assert(4.0 == moveHere[1][1]);
+	assert(5.0 == moveHere[1][2]);
+	assert(6.0 == moveHere[2][0]);
+	assert(7.0 == moveHere[2][1]);
+	assert(8.0 == moveHere[2][2]);
+}
+
+void T04_assignmentOperator()
+{
+	//make a 3X3 matrix with those values
+	Matrix<int> a(3, 3);
+
+	a[0][0] = 0.0;
+	a[0][1] = 1.0;
+	a[0][2] = 2.0;
+	a[1][0] = 3.0;
+	a[1][1] = 4.0;
+	a[1][2] = 5.0;
+	a[2][0] = 6.0;
+	a[2][1] = 7.0;
+	a[2][2] = 8.0;
+
+	//make sure they are in the matrix
+	assert(0.0 == a[0][0]);
+	assert(1.0 == a[0][1]);
+	assert(2.0 == a[0][2]);
+	assert(3.0 == a[1][0]);
+	assert(4.0 == a[1][1]);
+	assert(5.0 == a[1][2]);
+	assert(6.0 == a[2][0]);
+	assert(7.0 == a[2][1]);
+	assert(8.0 == a[2][2]);
+
+	//make a matrix and move the memory of 'a' into this matrix
+	Matrix<int> assignment(3, 3);
+
+	assignment = a;
+
+	//check that 'a' still has its original values
+	assert(0.0 == a[0][0]);
+	assert(1.0 == a[0][1]);
+	assert(2.0 == a[0][2]);
+	assert(3.0 == a[1][0]);
+	assert(4.0 == a[1][1]);
+	assert(5.0 == a[1][2]);
+	assert(6.0 == a[2][0]);
+	assert(7.0 == a[2][1]);
+	assert(8.0 == a[2][2]);
+
+	//make sure that everything got moved
+	assert(0.0 == assignment[0][0]);
+	assert(1.0 == assignment[0][1]);
+	assert(2.0 == assignment[0][2]);
+	assert(3.0 == assignment[1][0]);
+	assert(4.0 == assignment[1][1]);
+	assert(5.0 == assignment[1][2]);
+	assert(6.0 == assignment[2][0]);
+	assert(7.0 == assignment[2][1]);
+	assert(8.0 == assignment[2][2]);
+}
+
+void T05_moveAssignmentOperator()
+{
+	//make a 3X3 matrix with those values
+	Matrix<int> a(3, 3);
+
+	a[0][0] = 0.0;
+	a[0][1] = 1.0;
+	a[0][2] = 2.0;
+	a[1][0] = 3.0;
+	a[1][1] = 4.0;
+	a[1][2] = 5.0;
+	a[2][0] = 6.0;
+	a[2][1] = 7.0;
+	a[2][2] = 8.0;
+
+	//make sure they are in the matrix
+	assert(0.0 == a[0][0]);
+	assert(1.0 == a[0][1]);
+	assert(2.0 == a[0][2]);
+	assert(3.0 == a[1][0]);
+	assert(4.0 == a[1][1]);
+	assert(5.0 == a[1][2]);
+	assert(6.0 == a[2][0]);
+	assert(7.0 == a[2][1]);
+	assert(8.0 == a[2][2]);
+
+	//make a matrix and move the memory of 'a' into this matrix
+	Matrix<int> moveHere = std::move(a);
+
+	//make sure the rows and columns reflect the dimensions of a matrix with no data
+	assert(0 == a.getRows());
+	assert(0 == a.getColumns());
+
+	//make sure that everything got moved
+	assert(0.0 == moveHere[0][0]);
+	assert(1.0 == moveHere[0][1]);
+	assert(2.0 == moveHere[0][2]);
+	assert(3.0 == moveHere[1][0]);
+	assert(4.0 == moveHere[1][1]);
+	assert(5.0 == moveHere[1][2]);
+	assert(6.0 == moveHere[2][0]);
+	assert(7.0 == moveHere[2][1]);
+	assert(8.0 == moveHere[2][2]);
+}
+
+void T06_accessOperator()
+{
+	//make a 3X3 matrix with those values
+	Matrix<int> a = Matrix<int>(3, 3);
+
+	a[0][0] = 0.0;
+	a[0][1] = 1.0;
+	a[0][2] = 2.0;
+	a[1][0] = 3.0;
+	a[1][1] = 4.0;
+	a[1][2] = 5.0;
+	a[2][0] = 6.0;
+	a[2][1] = 7.0;
+	a[2][2] = 8.0;
+
+	//make sure they are in the matrix
+	assert(0.0 == a[0][0]);
+	assert(1.0 == a[0][1]);
+	assert(2.0 == a[0][2]);
+	assert(3.0 == a[1][0]);
+	assert(4.0 == a[1][1]);
+	assert(5.0 == a[1][2]);
+	assert(6.0 == a[2][0]);
+	assert(7.0 == a[2][1]);
+	assert(8.0 == a[2][2]);
+}
+
+void T07_transpose()
+{
+	//make a 3X3 matrix with those values
+	Matrix<int> a(3, 3);
+
+	a[0][0] = 0.0;
+	a[0][1] = 1.0;
+	a[0][2] = 2.0;
+	a[1][0] = 3.0;
+	a[1][1] = 4.0;
+	a[1][2] = 5.0;
+	a[2][0] = 6.0;
+	a[2][1] = 7.0;
+	a[2][2] = 8.0;
+
+	//make sure they are in the matrix
+	assert(0.0 == a[0][0]);assert(1.0 == a[0][1]);assert(2.0 == a[0][2]);
+	assert(3.0 == a[1][0]);assert(4.0 == a[1][1]);assert(5.0 == a[1][2]);
+	assert(6.0 == a[2][0]);assert(7.0 == a[2][1]);assert(8.0 == a[2][2]);
+
+	//transpose it
+	a.transpose();
+
+	//make sure they are transposed
+	assert(0.0 == a[0][0]);assert(3.0 == a[0][1]);assert(6.0 == a[0][2]);
+	assert(1.0 == a[1][0]);assert(4.0 == a[1][1]);assert(7.0 == a[1][2]);
+	assert(2.0 == a[2][0]);assert(5.0 == a[2][1]);assert(8.0 == a[2][2]);
+}
+
+void T08_transposed()
+{
+
+	//make a 3X3 matrix with those values
+	Matrix<int> a(3, 3);
+
+	a[0][0] = 0.0;
+	a[0][1] = 1.0;
+	a[0][2] = 2.0;
+	a[1][0] = 3.0;
+	a[1][1] = 4.0;
+	a[1][2] = 5.0;
+	a[2][0] = 6.0;
+	a[2][1] = 7.0;
+	a[2][2] = 8.0;
+
+	//make sure they are in the matrix
+	assert(0.0 == a[0][0]);
+	assert(1.0 == a[0][1]);
+	assert(2.0 == a[0][2]);
+	assert(3.0 == a[1][0]);
+	assert(4.0 == a[1][1]);
+	assert(5.0 == a[1][2]);
+	assert(6.0 == a[2][0]);
+	assert(7.0 == a[2][1]);
+	assert(8.0 == a[2][2]);
+
+	//transpose it
+	Matrix<int> transposed = a.transposed();
+
+	//make sure they are transposed
+	assert(0.0 == transposed[0][0]);
+	assert(3.0 == transposed[0][1]);
+	assert(6.0 == transposed[0][2]);
+	assert(1.0 == transposed[1][0]);
+	assert(4.0 == transposed[1][1]);
+	assert(7.0 == transposed[1][2]);
+	assert(2.0 == transposed[2][0]);
+	assert(5.0 == transposed[2][1]);
+	assert(8.0 == transposed[2][2]);
+}
+
+void T09_multiplicationOperator()
+{
+	//make a 3X3 matrix with those values
+	Matrix<int> a(3, 3);
+
+	a[0][0] = 0.0;
+	a[0][1] = 1.0;
+	a[0][2] = 2.0;
+	a[1][0] = 3.0;
+	a[1][1] = 4.0;
+	a[1][2] = 5.0;
+	a[2][0] = 6.0;
+	a[2][1] = 7.0;
+	a[2][2] = 8.0;
+
+	//make sure they are in the matrix
+	assert(0.0 == a[0][0]);
+	assert(1.0 == a[0][1]);
+	assert(2.0 == a[0][2]);
+	assert(3.0 == a[1][0]);
+	assert(4.0 == a[1][1]);
+	assert(5.0 == a[1][2]);
+	assert(6.0 == a[2][0]);
+	assert(7.0 == a[2][1]);
+	assert(8.0 == a[2][2]);
+
+	//multiply by 3
+	Matrix<int> b = a * 3;
+
+	//make sure matrix a is the same
+	assert(0.0 == a[0][0]);
+	assert(1.0 == a[0][1]);
+	assert(2.0 == a[0][2]);
+	assert(3.0 == a[1][0]);
+	assert(4.0 == a[1][1]);
+	assert(5.0 == a[1][2]);
+	assert(6.0 == a[2][0]);
+	assert(7.0 == a[2][1]);
+	assert(8.0 == a[2][2]);
+
+
+	//make sure matrix b has the right values
+	assert(0.0 == b[0][0]);
+	assert(3.0 == b[0][1]);
+	assert(6.0 == b[0][2]);
+	assert(9.0 == b[1][0]);
+	assert(12.0 == b[1][1]);
+	assert(15.0 == b[1][2]);
+	assert(18.0 == b[2][0]);
+	assert(21.0 == b[2][1]);
+	assert(24.0 == b[2][2]);
+
+	//use shorthand
+	a *= 3;
+
+	//make sure a has right values now
+	assert(0.0 == a[0][0]);
+	assert(3.0 == a[0][1]);
+	assert(6.0 == a[0][2]);
+	assert(9.0 == a[1][0]);
+	assert(12.0 == a[1][1]);
+	assert(15.0 == a[1][2]);
+	assert(18.0 == a[2][0]);
+	assert(21.0 == a[2][1]);
+	assert(24.0 == a[2][2]);
+
+	//make a 2X3 matrix and a 3X2 matrix and a 2X2 to test multiplying two matrices
+	//make a 2X3 matrix with those values
+	Matrix<int> x(2, 3);
+
+	x[0][0] = 2;
+	x[0][1] = 3;
+	x[1][0] = 4;
+	x[1][1] = 5;
+	x[2][0] = 6;
+	x[2][1] = 7;
+
+	//make a 3X2 matrix with those values
+	Matrix<int> y(3, 2);
+
+	y[0][0] = 10;
+	y[0][1] = 20;
+	y[1][0] = 30;
+	y[1][1] = 40;
+	y[2][0] = 50;
+	y[2][1] = 60;
+
+	//make a 2X2 matrix with those values
+	Matrix<int> z(2, 2);
+
+	z[0][0] = 0;
+	z[0][1] = 1;
+	z[1][0] = 2;
+	z[1][1] = 3;
+
+	//check the operator=(Matrix other)
+	assert(z == (x*y));
+
+	//check the operator*=(Matrix other)
+	x *= y;
+
+	assert(z == x);
 }
