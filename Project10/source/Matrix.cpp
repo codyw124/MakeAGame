@@ -8,27 +8,22 @@ using namespace std;
 /*
 todo list
 pass these
-void T09_multiplicationOperator();
-void T10_additionOperator();
-void T11_subtractionOperator();
-void T12_equivalence();
-void T13_outputoperator();
 */
 template <class T>
 class Matrix
 {
-	private:
+	protected:
 		vector<vector<T>> data_;
 		
 	public:
-		Matrix(const int& r, const int& c);
+		Matrix(const size_t& r, const size_t& c);
 		Matrix(const Matrix<T>& other);
 		Matrix(Matrix&& other);
 		~Matrix();		
 		Matrix<T>& operator=(const Matrix<T>& other);
 		Matrix<T>& operator=(Matrix<T>&& other);
-		vector<T>& operator[](const int& i);
-		const vector<T>& operator[](const int& i) const;
+		vector<T>& operator[](const size_t& i);
+		const vector<T>& operator[](const size_t& i) const;
 		bool operator==(const Matrix<T>& rhs) const;
 		bool operator!=(const Matrix<T>& rhs) const;
 		Matrix<T>& operator*=(const double& other);
@@ -43,23 +38,23 @@ class Matrix
 		void transpose();
 		Matrix<T> transposed() const;
 
-		int getRows() const;
-		int getColumns() const;
+		size_t getRows() const;
+		size_t getColumns() const;
 		
 	private:
 		void deepCopy(const Matrix<T>& other);
 };
 
 template <class T>
-Matrix<T>::Matrix(const int& r, const int& c)
+Matrix<T>::Matrix(const size_t& r, const size_t& c)
 {
 	data_ = vector<vector<T>>();
 	
-	for(int _r = 0; _r < r; _r++)
+	for(size_t _r = 0; _r < r; _r++)
 	{
 		vector<T> v;
 		
-		for(int _c = 0; _c < c; _c++)
+		for(size_t _c = 0; _c < c; _c++)
 		{
 			v.push_back(0);
 		}
@@ -107,13 +102,13 @@ Matrix<T>& Matrix<T>::operator=(Matrix&& other)
 }
 
 template <class T>
-vector<T>& Matrix<T>::operator[](const int& i)
+vector<T>& Matrix<T>::operator[](const size_t& i)
 {
 	return data_[i];
 }
 
 template <class T>
-const vector<T>& Matrix<T>::operator[](const int& i) const
+const vector<T>& Matrix<T>::operator[](const size_t& i) const
 {
 	return data_[i];
 }
@@ -128,8 +123,8 @@ bool Matrix<T>::operator==(const Matrix<T>& other) const
 	if (areEqual) 
 	{
 		//check the data
-		int currentlyCheckedRow = 0;
-		int currentlyCheckedColumn;
+		size_t currentlyCheckedRow = 0;
+		size_t currentlyCheckedColumn;
 
 		//while no data has not matched and we have not checked all rows
 		while(currentlyCheckedRow < getRows() && areEqual)
@@ -175,12 +170,14 @@ Matrix<T>& Matrix<T>::operator*=(const Matrix<T>& other)
 template<class T>
 Matrix<T>& Matrix<T>::operator+=(const Matrix<T>& other)
 {
+	*this = *this + other;
 	return *this;
 }
 
 template<class T>
 Matrix<T>& Matrix<T>::operator-=(const Matrix<T>& other)
 {
+	*this = *this - other;
 	return *this;
 }
 
@@ -210,28 +207,51 @@ Matrix<T> Matrix<T>::operator*(const double& scalar) const
 template <class T>
 Matrix<T> Matrix<T>::operator*(const Matrix<T>& other) const
 {
-	return Matrix<T>(data_.size(), data_[0].size());
+	size_t innerDimension = getColumns();
+
+	if(innerDimension != other.getRows())
+	{
+		throw std::logic_error("Matrix inner dimensions must match.");
+	}
+	
+	size_t newRows = getRows();
+	size_t newColumns = other.getColumns();
+
+	Matrix<T> ret(newRows, newColumns);
+
+	for (size_t r = 0; r < newRows; r++)
+	{
+		for (size_t c = 0; c < newColumns; c++)
+		{
+			for (size_t i = 0; i < innerDimension; i++)
+			{
+				ret[r][c] += data_[r][i] * other[i][c];
+			}
+		}
+	}	
+
+	return ret;
 }
 
 template <class T>
 Matrix<T> Matrix<T>::operator+(const Matrix<T>& other) const
 {
-	int r = data_.size();
-	int c = data_[0].size();
+	size_t r = getRows();
+	size_t c = getColumns();
 
 	Matrix<T> returnMatrix(r,c);
 
 	//if both matrix sizes match
-	if (r == other.data_.size() && c == other.data_[0].size())
+	if (r == other.getRows() && c == other.getColumns())
 	{
 		//make a deep copy of other
 		returnMatrix = Matrix(other);
 
 		//for each row 
-		for (int row = 0; row < r; row++)
+		for (size_t row = 0; row < r; row++)
 		{
 			//for each column
-			for (int column = 0; column < c; column++)
+			for (size_t column = 0; column < c; column++)
 			{
 				//for each spot add my values to the copy
 				returnMatrix[row][column] += data_[row][column];
@@ -249,8 +269,8 @@ Matrix<T> Matrix<T>::operator+(const Matrix<T>& other) const
 template <class T>
 Matrix<T> Matrix<T>::operator-(const Matrix<T>& other) const
 {
-	int r = data_.size();
-	int c = data_[0].size();
+	size_t r = data_.size();
+	size_t c = data_[0].size();
 
 	Matrix<T> returnMatrix(r,c);
 
@@ -261,10 +281,10 @@ Matrix<T> Matrix<T>::operator-(const Matrix<T>& other) const
 		returnMatrix = Matrix(other);
 
 		//for each row 
-		for (int row = 0; row < r; row++)
+		for (size_t row = 0; row < r; row++)
 		{
 			//for each column
-			for (int column = 0; column < c; column++)
+			for (size_t column = 0; column < c; column++)
 			{
 				//for each spot subtract my values to the copy
 				returnMatrix[row][column] -= data_[row][column];
@@ -314,15 +334,15 @@ Matrix<T> Matrix<T>::transposed() const
 }
 
 template <class T>
-int Matrix<T>::getRows() const
+size_t Matrix<T>::getRows() const
 {
 	return data_.size();
 }
 
 template <class T>
-int Matrix<T>::getColumns() const
+size_t Matrix<T>::getColumns() const
 {
-	int retVal = 0;
+	size_t retVal = 0;
 	
 	if(!data_.empty())
 	{
@@ -356,11 +376,11 @@ void Matrix<T>::deepCopy(const Matrix<T>& other)
 template <class T>
 std::ostream & operator<<(std::ostream & os, const Matrix<T>& v)
 {
-	for (int r = 0; r < v.getRows(); r++)
+	for (size_t r = 0; r < v.getRows(); r++)
 	{
 		os << "[\t";
 
-		for (int c = 0; c < v.getColumns(); c++)
+		for (size_t c = 0; c < v.getColumns(); c++)
 		{
 			os << v[r][c] << '\t';
 		}
@@ -369,6 +389,82 @@ std::ostream & operator<<(std::ostream & os, const Matrix<T>& v)
 	}
 
 	return os;
+}
+
+template <class T>
+class SquareMatrix : public Matrix<T>
+{
+	public:
+		SquareMatrix(const size_t& dimensions);
+
+		SquareMatrix<T> cut(const size_t& row, const size_t& column);
+		size_t getDimensions();
+		void cofactor(){};
+		void minor(){};
+		void determinant(){};
+		void adjugate(){};
+		void inverse(){};
+};
+
+template <class T>
+SquareMatrix<T>::SquareMatrix(const size_t& dimensions) : Matrix<T>(dimensions, dimensions)
+{
+
+}
+
+template <class T>
+SquareMatrix<T> SquareMatrix<T>::cut(const size_t& row, const size_t& column)
+{
+	size_t originalDimension = getDimensions();
+
+	SquareMatrix<T> returnMatrix(originalDimension-1);
+
+	const size_t MIN_SIZE = 2;
+
+	if(originalDimension < MIN_SIZE)
+	{
+		throw std::logic_error("Matrix does not meet minimum size requirement\n");
+	}
+	else if(row > originalDimension)
+	{
+		throw std:: logic_error("row is out of bounds of the original Matrix\n");
+	}
+	else if(column > originalDimension)
+	{
+		throw std:: logic_error("column is out of bounds of the original Matrix\n");
+	}
+	else
+	{
+		size_t newMatrixRowIndex = 0;
+		size_t newMatrixColumnIndex;
+		
+		for(size_t currentRowInOrig = 0; currentRowInOrig < originalDimension; currentRowInOrig++)
+		{
+			newMatrixColumnIndex = 0;
+
+			if(currentRowInOrig != row)
+			{
+				for(size_t currentColumnInOrig = 0; currentColumnInOrig < originalDimension; currentColumnInOrig++)
+				{
+					if(currentColumnInOrig != column)
+					{
+						returnMatrix[newMatrixRowIndex][newMatrixColumnIndex] =  this->data_[currentRowInOrig][currentColumnInOrig];
+						newMatrixColumnIndex++;
+					}
+				}
+
+				newMatrixRowIndex++;
+			}
+		}
+	}
+	
+	return returnMatrix;
+}
+
+template <class T>
+size_t SquareMatrix<T>::getDimensions()
+{
+	return this->getRows();
 }
 
 void T01_defaultConstructor();
@@ -384,6 +480,8 @@ void T10_additionOperator();
 void T11_subtractionOperator();
 void T12_equivalence();
 void T13_outputoperator();
+void T14_defaultConstructSquareMatrix();
+void T15_cut();
 
 int main()
 {
@@ -396,10 +494,12 @@ int main()
 	T07_transpose();
 	T08_transposed();
 	T09_multiplicationOperator();
-	// T10_additionOperator();
-	// T11_subtractionOperator();
-	// T12_equivalence();
-	// T13_outputoperator();
+	T10_additionOperator();
+	T11_subtractionOperator();
+	T12_equivalence();
+	T13_outputoperator();
+	T14_defaultConstructSquareMatrix();
+	T15_cut();
 
 	cout<< "All Tests Passed" << endl;
 }
@@ -787,10 +887,10 @@ void T09_multiplicationOperator()
 
 	x[0][0] = 2;
 	x[0][1] = 3;
-	x[1][0] = 4;
-	x[1][1] = 5;
-	x[2][0] = 6;
-	x[2][1] = 7;
+	x[0][2] = 4;
+	x[1][0] = 5;
+	x[1][1] = 6;
+	x[1][2] = 7;
 
 	//make a 3X2 matrix with those values
 	Matrix<int> y(3, 2);
@@ -805,10 +905,10 @@ void T09_multiplicationOperator()
 	//make a 2X2 matrix with those values
 	Matrix<int> z(2, 2);
 
-	z[0][0] = 0;
-	z[0][1] = 1;
-	z[1][0] = 2;
-	z[1][1] = 3;
+	z[0][0] = 310;
+	z[0][1] = 400;
+	z[1][0] = 580;
+	z[1][1] = 760;
 
 	//check the operator=(Matrix other)
 	assert(z == (x*y));
@@ -821,11 +921,6 @@ void T09_multiplicationOperator()
 
 void T10_additionOperator()
 {
-	//make 9 values
-	int x[9] = { 0,1,2,3,4,5,6,7,8 };
-
-	int result[9] = { 0,2,4,6,8,10,12,14,16 };
-
 	//make a 3X3 matrix with those values
 	Matrix<int> a(3, 3);
 
@@ -893,11 +988,6 @@ void T10_additionOperator()
 
 void T11_subtractionOperator()
 {
-	//make 9 values
-	int x[9] = { 0,1,2,3,4,5,6,7,8 };
-
-	int result[9] = { 0,0,0,0,0,0,0,0,0 };
-
 	//make a 3X3 matrix with those values
 	Matrix<int> a(3, 3);
 
@@ -977,17 +1067,7 @@ void T12_equivalence()
 	a[2][1] = 7.0;
 	a[2][2] = 8.0;
 
-	Matrix<int> b(3, 3);
-
-	b[0][0] = 0.0;
-	b[0][1] = 1.0;
-	b[0][2] = 2.0;
-	b[1][0] = 3.0;
-	b[1][1] = 4.0;
-	b[1][2] = 5.0;
-	b[2][0] = 6.0;
-	b[2][1] = 7.0;
-	b[2][2] = 8.0;
+	Matrix<int> b(a);
 
 	Matrix<int> c(3, 3);
 
@@ -1042,4 +1122,64 @@ void T13_outputoperator()
 	std::string testText = "[\t0\t1\t2\t]\n[\t3\t4\t5\t]\n[\t6\t7\t8\t]\n";
 
 	assert(testText == out.str());
+}
+
+void T14_defaultConstructSquareMatrix()
+{
+	SquareMatrix<int> x(3);
+
+	assert(x.getColumns() == 3);
+	assert(x.getRows() == 3);
+}
+
+void T15_cut()
+{
+	SquareMatrix<int> a(3);
+
+	a[0][0] = 0.0;
+	a[0][1] = 1.0;
+	a[0][2] = 2.0;
+	a[1][0] = 3.0;
+	a[1][1] = 4.0;
+	a[1][2] = 5.0;
+	a[2][0] = 6.0;
+	a[2][1] = 7.0;
+	a[2][2] = 8.0;
+
+	SquareMatrix<int> b = a.cut(1,1);
+
+	SquareMatrix<int> c(2);
+
+	c[0][0] = 0;
+	c[0][1] = 2;
+	c[1][0] = 6;
+	c[1][1] = 8;
+
+	assert(b == c);
+
+	SquareMatrix<int> d(1);
+
+	//make sure you cant cut a 1 dimensional matrix
+	try
+	{
+		d.cut(1,1);
+		assert(false);
+	}
+	catch (std::logic_error e)
+	{
+		//otherwise it passed
+		assert(true);
+	}
+
+	//make sure that it throws an exception for out of range tests
+	try
+	{
+		a.cut(5,5);
+		assert(false);
+	}
+	catch (std::logic_error e)
+	{
+		//otherwise it passed
+		assert(true);
+	}
 }
