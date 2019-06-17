@@ -5,10 +5,6 @@
 
 using namespace std;
 
-/*
-todo list
-pass these
-*/
 template <class T>
 class Matrix
 {
@@ -397,13 +393,15 @@ class SquareMatrix : public Matrix<T>
 	public:
 		SquareMatrix(const size_t& dimensions);
 
-		SquareMatrix<T> cut(const size_t& row, const size_t& column);
+		SquareMatrix<T> getCut(const size_t& row, const size_t& column);
 		size_t getDimensions();
-		void cofactor(){};
-		void minor(){};
-		void determinant(){};
-		void adjugate(){};
-		void inverse(){};
+		T getDeterminant();
+		SquareMatrix<T> getMinors();
+		T getMinor(const size_t& row, const size_t& column);
+		SquareMatrix<T> getCofactors();
+		T getCofactor(const size_t& row, const size_t& column);
+		// void adjugate();
+		// void inverse();
 };
 
 template <class T>
@@ -413,7 +411,7 @@ SquareMatrix<T>::SquareMatrix(const size_t& dimensions) : Matrix<T>(dimensions, 
 }
 
 template <class T>
-SquareMatrix<T> SquareMatrix<T>::cut(const size_t& row, const size_t& column)
+SquareMatrix<T> SquareMatrix<T>::getCut(const size_t& row, const size_t& column)
 {
 	size_t originalDimension = getDimensions();
 
@@ -466,6 +464,68 @@ size_t SquareMatrix<T>::getDimensions()
 {
 	return this->getRows();
 }
+
+template <class T>
+T SquareMatrix<T>::getDeterminant()
+{
+	T sum();
+	//loop through any row of the matrix 
+	for(size_t columnElement = 0; columnElement < getDimensions(); columnElement++)
+	{
+		//sum up the result of multiplying each of the elements in the row by their respective cofactor.
+		sum += *this[0][columnElement] * getCofactor(0,columnElement);
+	}
+
+	return sum;
+}
+
+template <class T>
+SquareMatrix<T> SquareMatrix<T>::getMinors()
+{
+	
+}
+
+template <class T>
+T SquareMatrix<T>::getMinor(const size_t& row, const size_t& column)
+{
+	return T();
+}
+
+template <class T>
+SquareMatrix<T> SquareMatrix<T>::getCofactors()
+{
+	size_t dimensions = getDimensions();
+
+	SquareMatrix<T> returnMatrix(dimensions);
+
+	for(size_t row = 0; row < dimensions; row++)
+	{
+		for(size_t column = 0; column < dimensions; column++)
+		{
+			returnMatrix = getCofactor(row,column);
+		}
+	}
+
+	return returnMatrix;
+}
+
+template <class T>
+T SquareMatrix<T>::getCofactor(const size_t& row, const size_t& column)
+{
+	return T();
+}
+
+// template <class T>
+// void SquareMatrix<T>::adjugate()
+// {
+
+// }
+
+// template <class T>
+// void SquareMatrix<T>::inverse()
+// {
+
+// }
 
 void T01_defaultConstructor();
 void T02_copyConstructor();
@@ -1146,7 +1206,7 @@ void T15_cut()
 	a[2][1] = 7.0;
 	a[2][2] = 8.0;
 
-	SquareMatrix<int> b = a.cut(1,1);
+	SquareMatrix<int> b = a.getCut(1,1);
 
 	SquareMatrix<int> c(2);
 
@@ -1162,7 +1222,7 @@ void T15_cut()
 	//make sure you cant cut a 1 dimensional matrix
 	try
 	{
-		d.cut(1,1);
+		d.getCut(1,1);
 		assert(false);
 	}
 	catch (std::logic_error e)
@@ -1174,7 +1234,7 @@ void T15_cut()
 	//make sure that it throws an exception for out of range tests
 	try
 	{
-		a.cut(5,5);
+		a.getCut(5,5);
 		assert(false);
 	}
 	catch (std::logic_error e)
