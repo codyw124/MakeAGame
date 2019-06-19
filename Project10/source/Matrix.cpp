@@ -2,6 +2,7 @@
 #include <vector>
 #include <cassert>
 #include <sstream>
+#include <cmath>
 
 using namespace std;
 
@@ -393,8 +394,8 @@ class SquareMatrix : public Matrix<T>
 	public:
 		SquareMatrix(const size_t& dimensions);
 
-		SquareMatrix<T> getCut(const size_t& row, const size_t& column);
 		size_t getDimensions();
+		SquareMatrix<T> getCut(const size_t& row, const size_t& column);
 		T getDeterminant();
 		SquareMatrix<T> getMinors();
 		T getMinor(const size_t& row, const size_t& column);
@@ -411,6 +412,12 @@ SquareMatrix<T>::SquareMatrix(const size_t& dimensions) : Matrix<T>(dimensions, 
 }
 
 template <class T>
+size_t SquareMatrix<T>::getDimensions()
+{
+	return this->getRows();
+}
+
+template <class T>
 SquareMatrix<T> SquareMatrix<T>::getCut(const size_t& row, const size_t& column)
 {
 	size_t originalDimension = getDimensions();
@@ -419,17 +426,17 @@ SquareMatrix<T> SquareMatrix<T>::getCut(const size_t& row, const size_t& column)
 
 	const size_t MIN_SIZE = 2;
 
-	if(originalDimension < MIN_SIZE)
+	if(originalDimension >= MIN_SIZE)
 	{
 		throw std::logic_error("Matrix does not meet minimum size requirement\n");
 	}
-	else if(row > originalDimension)
+	else if(row >= originalDimension)
 	{
-		throw std:: logic_error("row is out of bounds of the original Matrix\n");
+		throw std::logic_error("row is out of bounds of the original Matrix\n");
 	}
-	else if(column > originalDimension)
+	else if(column >= originalDimension)
 	{
-		throw std:: logic_error("column is out of bounds of the original Matrix\n");
+		throw std::logic_error("column is out of bounds of the original Matrix\n");
 	}
 	else
 	{
@@ -460,35 +467,75 @@ SquareMatrix<T> SquareMatrix<T>::getCut(const size_t& row, const size_t& column)
 }
 
 template <class T>
-size_t SquareMatrix<T>::getDimensions()
-{
-	return this->getRows();
-}
-
-template <class T>
 T SquareMatrix<T>::getDeterminant()
 {
-	T sum();
-	//loop through any row of the matrix 
-	for(size_t columnElement = 0; columnElement < getDimensions(); columnElement++)
-	{
-		//sum up the result of multiplying each of the elements in the row by their respective cofactor.
-		sum += *this[0][columnElement] * getCofactor(0,columnElement);
-	}
+	const size_t MIN_DIMENSIONS = 2;
 
+	size_t dimensions = getDimensions();
+
+	T sum;
+	if(dimensions >= MIN_DIMENSIONS)
+	{
+		//loop through any row of the matrix 
+		for(size_t columnElement = 0; columnElement < getDimensions(); columnElement++)
+		{
+			//sum up the result of multiplying each of the elements in the row by their respective cofactor.
+			sum += this->data_[0][columnElement] * getCofactor(0,columnElement);
+		}
+	}
+	else
+	{
+		sum += this->data_[0][0];
+	}
+	
 	return sum;
 }
 
 template <class T>
 SquareMatrix<T> SquareMatrix<T>::getMinors()
 {
-	
+	size_t dimensions = getDimensions();
+
+	SquareMatrix<T> returnMatrix(dimensions);
+
+	for(size_t row = 0; row < dimensions; row++)
+	{
+		for(size_t column = 0; column < dimensions; column++)
+		{
+			returnMatrix[row][column] = getMinor(row,column);
+		}
+	}
+
+	return returnMatrix;
 }
 
 template <class T>
 T SquareMatrix<T>::getMinor(const size_t& row, const size_t& column)
 {
-	return T();
+	size_t originalDimension = getDimensions();
+
+	SquareMatrix<T> smallerMatrix(originalDimension - 1);
+
+	const size_t MIN_SIZE = 2;
+
+	if(originalDimension >= MIN_SIZE)
+	{
+		throw std::logic_error("Matrix does not meet minimum size requirement\n");
+	}
+	else if(row >= originalDimension)
+	{
+		throw std::logic_error("row is out of bounds of the original Matrix\n");
+	}
+	else if(column >= originalDimension)
+	{
+		throw std::logic_error("column is out of bounds of the original Matrix\n");
+	}
+	else
+	{
+		smallerMatrix = getCut(row,column);
+	}
+	
+	return smallerMatrix.getDeterminant();
 }
 
 template <class T>
@@ -512,7 +559,24 @@ SquareMatrix<T> SquareMatrix<T>::getCofactors()
 template <class T>
 T SquareMatrix<T>::getCofactor(const size_t& row, const size_t& column)
 {
-	return T();
+	size_t originalDimension = getDimensions();
+
+	const size_t MIN_SIZE = 2;
+
+	if(originalDimension >= MIN_SIZE)
+	{
+		throw std::logic_error("Matrix does not meet minimum size requirement\n");
+	}
+	else if(row >= originalDimension)
+	{
+		throw std::logic_error("row is out of bounds of the original Matrix\n");
+	}
+	else if(column >= originalDimension)
+	{
+		throw std::logic_error("column is out of bounds of the original Matrix\n");
+	}
+
+	return getMinor(row,column) * pow(-1,(row + column));
 }
 
 // template <class T>
@@ -542,6 +606,7 @@ void T12_equivalence();
 void T13_outputoperator();
 void T14_defaultConstructSquareMatrix();
 void T15_cut();
+void T16_testDeterminant();
 
 int main()
 {
@@ -560,6 +625,7 @@ int main()
 	T13_outputoperator();
 	T14_defaultConstructSquareMatrix();
 	T15_cut();
+	T16_testDeterminant();
 
 	cout<< "All Tests Passed" << endl;
 }
@@ -1190,6 +1256,7 @@ void T14_defaultConstructSquareMatrix()
 
 	assert(x.getColumns() == 3);
 	assert(x.getRows() == 3);
+	assert(x.getDimensions() == 3);
 }
 
 void T15_cut()
@@ -1243,3 +1310,35 @@ void T15_cut()
 		assert(true);
 	}
 }
+
+void T16_testDeterminant()
+{
+	SquareMatrix<int> a(1);
+
+	a[0][0] = 5.0;
+	
+	int adet = a.getDeterminant();
+
+	assert(adet == 5);
+
+	SquareMatrix<int> b(3);
+
+	b[0][0] = 1.0;
+	b[0][1] = 2.0;
+	b[0][2] = 3.0;
+	b[1][0] = 4.0;
+	b[1][1] = 5.0;
+	b[1][2] = 6.0;
+	b[2][0] = 7.0;
+	b[2][1] = 8.0;
+	b[2][2] = 9.0;
+
+	int bdet = b.getDeterminant();
+
+	assert(bdet == 0);
+}
+// T getDeterminant();
+// SquareMatrix<T> getMinors();
+// T getMinor(const size_t& row, const size_t& column);
+// SquareMatrix<T> getCofactors();
+// T getCofactor(const size_t& row, const size_t& column);
