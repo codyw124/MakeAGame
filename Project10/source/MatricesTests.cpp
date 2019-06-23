@@ -1,3 +1,6 @@
+//Cody Ware
+//5/30/19
+
 #include <iostream>
 #include "../headers/Matrix.h"
 #include "../headers/SquareMatrix.h"

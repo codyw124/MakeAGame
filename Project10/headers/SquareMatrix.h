@@ -1,3 +1,6 @@
+//Cody Ware
+//1/19/19
+
 #pragma once
 
 #include <iostream>

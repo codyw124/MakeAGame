@@ -1,3 +1,6 @@
+//Cody Ware
+//5/19/19
+
 #include "../headers/Window.h"
 
 Window::Window(const int& width, const int& height, const std::string& name)

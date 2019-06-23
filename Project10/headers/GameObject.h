@@ -1,4 +1,8 @@
+//Cody Ware
+//5/19/19
+
 #pragma once
+
 #include <vector>
 #include <string>
 #include "Component.h"

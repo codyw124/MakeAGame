@@ -1,4 +1,8 @@
+//Cody Ware
+//5/19/19
+
 #pragma once
+
 #include <string>
 #include "Component.h"
 #include "Vector3.h"
@@ -13,5 +17,5 @@ public:
     Transform();
     ~Transform();
 
-    std::string toXML()
+    std::string toXML();
 };

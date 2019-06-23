@@ -1,3 +1,6 @@
+//Cody Ware
+//5/19/19
+
 #include<iostream>
 #include "../headers/GameObject.h"
 
