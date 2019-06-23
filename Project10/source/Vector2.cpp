@@ -189,8 +189,8 @@ Vector2 & Vector2::operator/=(const double & r)
 //equivalence operator
 bool Vector2::operator==(const Vector2 & r) const
 {
-	return epsilonCompare(*this->x_, *r.x_)
-		&& epsilonCompare(*this->y_, *r.y_);
+	return PhysicsHelper::epsilonCompare(*this->x_, *r.x_)
+		&& PhysicsHelper::epsilonCompare(*this->y_, *r.y_);
 }
 
 //the not equal operator
@@ -232,7 +232,7 @@ double Vector2::distanceSquared(const Vector2 & other) const
 //rotates this vector by a given amount of degrees
 Vector2 Vector2::rotate(const double & degrees) const
 {
-	double radians = degreesToRadians(degrees);
+	double radians = PhysicsHelper::degreesToRadians(degrees);
 
 	double s = sin(radians);
 	double c = cos(radians);
@@ -270,7 +270,7 @@ Vector2 Vector2::normalized() const
 double Vector2::angle(const Vector2 & other) const
 {
 	double m = sqrt(magnitudeSquared() * other.magnitudeSquared());
-	return radiansToDegrees(acos(dot(other) / m));
+	return PhysicsHelper::radiansToDegrees(acos(dot(other) / m));
 }
 
 //returns a vector2 with this vectors magnitude in the given direction

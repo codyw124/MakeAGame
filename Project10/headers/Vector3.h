@@ -4,9 +4,9 @@
 #pragma once 
  
 #include <iostream>
-#include "PhysicsVector.h"
+#include "PhysicsHelper.h"
 
-class  Vector3 : public PhysicsVector
+class  Vector3
 {
 public:
 	Vector3();

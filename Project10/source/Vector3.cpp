@@ -202,7 +202,9 @@ Vector3 &Vector3::operator/=(const double &r)
 //equivalence operator
 bool Vector3::operator==(const Vector3 &r) const
 {
-	return epsilonCompare(*this->x_, *r.x_) && epsilonCompare(*this->y_, *r.y_) && epsilonCompare(*this->z_, *r.z_);
+	return PhysicsHelper::epsilonCompare(*this->x_, *r.x_) 
+		&& PhysicsHelper::epsilonCompare(*this->y_, *r.y_) 
+		&& PhysicsHelper::epsilonCompare(*this->z_, *r.z_);
 }
 
 //the not equal operator
@@ -271,7 +273,7 @@ Vector3 Vector3::normalized() const
 double Vector3::angle(const Vector3 &other) const
 {
 	double m = sqrt(magnitudeSquared() * other.magnitudeSquared());
-	return radiansToDegrees(acos(dot(other) / m));
+	return PhysicsHelper::radiansToDegrees(acos(dot(other) / m));
 }
 
 //returns a vector3 with this vectors magnitude in the given direction
