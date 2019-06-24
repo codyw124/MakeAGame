@@ -3,10 +3,13 @@ COMPILER_FLAGS = -Wall -g -c -std=c++11
 LINKER_FLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
 
 all: objects \
-objects/MatricesTests.o \
 objects/Vector2.o \
 objects/Vector3.o \
 objects/Vector2Tests.o \
+objects/Vector3Tests.o \
+objects/MatricesTests.o \
+objects/Transform.o \
+objects/Geometry2DTests.o\
 objects/Level1.o \
 objects/Scene.o \
 objects/GameObject.o \
@@ -14,8 +17,6 @@ objects/SceneEditor.o \
 objects/Window.o \
 objects/tinyxml2.o \
 objects/SaveGameObject.o \
-objects/Vector3Tests.o \
-objects/Geometry2DTests.o \
 Vector2Tests \
 Vector3Tests \
 MatricesTests \
@@ -55,8 +56,8 @@ SaveGameObject: objects/SaveGameObject.o objects/GameObject.o
 
 
 #gamephysics objects and gamephysics test objects
-objects/MatricesTests.o: source/MatricesTests.cpp headers/Matrix.h headers/SquareMatrix.h
-	$(COMPILER) $(COMPILER_FLAGS) source/MatricesTests.cpp -o objects/MatricesTests.o
+objects/PhysicsHelper.o: source/PhysicsHelper.cpp headers/PhysicsHelper.h
+	$(COMPILER) $(COMPILER_FLAGS) source/PhysicsHelper.cpp -o objects/PhysicsHelper.o
 
 objects/Vector2.o: source/Vector2.cpp headers/Vector2.h headers/PhysicsHelper.h
 	$(COMPILER) $(COMPILER_FLAGS) source/Vector2.cpp -o objects/Vector2.o
@@ -64,14 +65,17 @@ objects/Vector2.o: source/Vector2.cpp headers/Vector2.h headers/PhysicsHelper.h
 objects/Vector3.o: source/Vector3.cpp headers/Vector3.h headers/PhysicsHelper.h
 	$(COMPILER) $(COMPILER_FLAGS) source/Vector3.cpp -o objects/Vector3.o
 
-objects/PhysicsHelper.o: source/PhysicsHelper.cpp headers/PhysicsHelper.h
-	$(COMPILER) $(COMPILER_FLAGS) source/PhysicsHelper.cpp -o objects/PhysicsHelper.o
-
 objects/Vector2Tests.o: source/Vector2Tests.cpp headers/Vector2.h
 	$(COMPILER) $(COMPILER_FLAGS) source/Vector2Tests.cpp -o objects/Vector2Tests.o
 
 objects/Vector3Tests.o: source/Vector3Tests.cpp headers/Vector3.h
 	$(COMPILER) $(COMPILER_FLAGS) source/Vector3Tests.cpp -o objects/Vector3Tests.o
+
+objects/MatricesTests.o: source/MatricesTests.cpp headers/Matrix.h
+	$(COMPILER) $(COMPILER_FLAGS) source/MatricesTests.cpp -o objects/MatricesTests.o
+
+objects/Transform.o: source/Transform.cpp headers/Transform.h
+	$(COMPILER) $(COMPILER_FLAGS) source/Transform.cpp -o objects/Transform.o
 
 objects/Geometry2DTests.o: source/Geometry2DTests.cpp headers/Geometry2D.h
 	$(COMPILER) $(COMPILER_FLAGS) source/Geometry2DTests.cpp -o objects/Geometry2DTests.o
@@ -103,4 +107,4 @@ objects/SaveGameObject.o: source/SaveGameObject.cpp headers/GameObject.h
 
 
 clean:
-	rm objects/*.o Vector2Tests Vector3Tests MatricesTests Geometry2DTests SceneEditor Level1 SaveGameObject
+	rm Vector2Tests Vector3Tests MatricesTests Geometry2DTests SceneEditor Level1 SaveGameObject; rm -r .vscode objects;

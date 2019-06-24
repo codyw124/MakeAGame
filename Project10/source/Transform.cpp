@@ -3,28 +3,36 @@
 
 #include "../headers/Transform.h"
 
-Transform::Transform()
+Transform::Transform() : data_(TRANSFORM_DIMENSIONS, TRANSFORM_DIMENSIONS)
 {
+}
+
+Transform::Transform(const Transform& other): data_(other.data_)
+{
+    
+}
+
+Transform::Transform(const Transform&& other) : data_(std::move(other.data_))
+{
+    
 }
 
 Transform::~Transform()
 {
+    
 }
 
-std::string Transform::toXML()
+Transform& Transform::operator=(const Transform& other)
 {
-    std::string returnValue = "<transform>\n";
-    returnValue += "<location>\n";
-    returnValue += location_[0];
-    returnValue += location_[1];
-    returnValue += location_[2];
-    returnValue += "</location>\n";
-    returnValue += "<rotation>\n";
-    returnValue += rotation_[0];
-    returnValue += rotation_[1];
-    returnValue += rotation_[2];
-    returnValue += "</rotation>\n";
-    returnValue += "</transform>\n";
+    
+}
 
-    return returnValue;
+Transform Transform::operator=(const Transform&& other)
+{
+    
+}
+
+void Transform::deepCopy()
+{
+
 }

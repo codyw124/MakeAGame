@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include "../headers/Matrix.h"
-#include "../headers/SquareMatrix.h"
 
 using namespace std;
 
@@ -20,7 +19,6 @@ void T10_additionOperator();
 void T11_subtractionOperator();
 void T12_equivalence();
 void T13_outputoperator();
-void T14_defaultConstructSquareMatrix();
 void T15_cut();
 void T16_testDeterminant();
 void T17_testMinors();
@@ -43,7 +41,6 @@ int main()
 	T11_subtractionOperator();
 	T12_equivalence();
 	T13_outputoperator();
-	T14_defaultConstructSquareMatrix();
 	T15_cut();
 	T16_testDeterminant();
 	T17_testMinors();
@@ -674,18 +671,9 @@ void T13_outputoperator()
 	assert(testText == out.str());
 }
 
-void T14_defaultConstructSquareMatrix()
-{
-	SquareMatrix<int> x(3);
-
-	assert(x.getColumns() == 3);
-	assert(x.getRows() == 3);
-	assert(x.getDimensions() == 3);
-}
-
 void T15_cut()
 {
-	SquareMatrix<int> a(3);
+	Matrix<int> a(3, 3);
 
 	a[0][0] = 0.0;
 	a[0][1] = 1.0;
@@ -697,9 +685,9 @@ void T15_cut()
 	a[2][1] = 7.0;
 	a[2][2] = 8.0;
 
-	SquareMatrix<int> b = a.getCut(1,1);
+	Matrix<int> b = a.getCut(1,1);
 
-	SquareMatrix<int> c(2);
+	Matrix<int> c(2, 2);
 
 	c[0][0] = 0;
 	c[0][1] = 2;
@@ -708,7 +696,7 @@ void T15_cut()
 
 	assert(b == c);
 
-	SquareMatrix<int> d(1);
+	Matrix<int> d(1, 1);
 
 	//make sure you cant cut a 1 dimensional matrix
 	try
@@ -737,7 +725,7 @@ void T15_cut()
 
 void T16_testDeterminant()
 {
-	SquareMatrix<int> a(1);
+	Matrix<int> a(1, 1);
 
 	a[0][0] = 5.0;
 	
@@ -745,7 +733,7 @@ void T16_testDeterminant()
 
 	assert(adet == 5);
 
-	SquareMatrix<int> b(3);
+	Matrix<int> b(3, 3);
 
 	b[0][0] = 1.0;
 	b[0][1] = 2.0;
@@ -764,7 +752,7 @@ void T16_testDeterminant()
 
 void T17_testMinors()
 {
-	SquareMatrix<int> a(1);
+	Matrix<int> a(1, 1);
 
 	a[0][0] = 5;
 
@@ -791,7 +779,7 @@ void T17_testMinors()
 		assert(true);
 	}
 
-	SquareMatrix<int> b(3);
+	Matrix<int> b(3, 3);
 
 	b[0][0] = 1.0;
 	b[0][1] = 2.0;
@@ -803,9 +791,9 @@ void T17_testMinors()
 	b[2][1] = 8.0;
 	b[2][2] = 9.0;
 
-	SquareMatrix<int> bMinors = b.getMinors();
+	Matrix<int> bMinors = b.getMinors();
 
-	SquareMatrix<int> bExpectedMinors(3);
+	Matrix<int> bExpectedMinors(3, 3);
 
 	bExpectedMinors[0][0] = -3;
 	bExpectedMinors[0][1] = -6;
@@ -822,7 +810,7 @@ void T17_testMinors()
 
 void T18_testCofactors()
 {
-	SquareMatrix<int> a(1);
+	Matrix<int> a(1, 1);
 
 	a[0][0] = 5;
 
@@ -849,7 +837,7 @@ void T18_testCofactors()
 		assert(true);
 	}
 
-	SquareMatrix<int> b(3);
+	Matrix<int> b(3, 3);
 
 	b[0][0] = 1.0;
 	b[0][1] = 2.0;
@@ -861,9 +849,9 @@ void T18_testCofactors()
 	b[2][1] = 8.0;
 	b[2][2] = 9.0;
 
-	SquareMatrix<int> bCofactors = b.getCofactors();
+	Matrix<int> bCofactors = b.getCofactors();
 
-	SquareMatrix<int> bExpectedCofactors(3);
+	Matrix<int> bExpectedCofactors(3, 3);
 
 	bExpectedCofactors[0][0] = -3;
 	bExpectedCofactors[0][1] = 6;
@@ -880,7 +868,7 @@ void T18_testCofactors()
 
 void T19_testAdjugate()
 {
-	SquareMatrix<int> a(1);
+	Matrix<int> a(1, 1);
 
 	a[0][0] = 5;
 
@@ -895,7 +883,7 @@ void T19_testAdjugate()
 		assert(true);
 	}
 
-	SquareMatrix<int> b(3);
+	Matrix<int> b(3, 3);
 
 	b[0][0] = 1.0;
 	b[0][1] = 2.0;
@@ -907,9 +895,9 @@ void T19_testAdjugate()
 	b[2][1] = 8.0;
 	b[2][2] = 9.0;
 
-	SquareMatrix<int> bAdjugate = b.getAdjugate();
+	Matrix<int> bAdjugate = b.getAdjugate();
 
-	SquareMatrix<int> bExpectedAdjugates(3);
+	Matrix<int> bExpectedAdjugates(3, 3);
 
 	bExpectedAdjugates[0][0] = -3;
 	bExpectedAdjugates[0][1] = 6;
@@ -926,5 +914,59 @@ void T19_testAdjugate()
 
 void T20_testInverse()
 {
+	Matrix<int> b(3, 3);
 
+	b[0][0] = 1.0;
+	b[0][1] = 2.0;
+	b[0][2] = 3.0;
+	b[1][0] = 4.0;
+	b[1][1] = 5.0;
+	b[1][2] = 6.0;
+	b[2][0] = 7.0;
+	b[2][1] = 8.0;
+	b[2][2] = 9.0;
+
+	Matrix<int> bInverse = b.getInverse();
+
+	Matrix<int> bInverseExpected(3, 3);
+
+	bInverseExpected[0][0] = 1.0;
+	bInverseExpected[0][1] = 0.0;
+	bInverseExpected[0][2] = 0.0;
+	bInverseExpected[1][0] = 0.0;
+	bInverseExpected[1][1] = 1.0;
+	bInverseExpected[1][2] = 0.0;
+	bInverseExpected[2][0] = 0.0;
+	bInverseExpected[2][1] = 0.0;
+	bInverseExpected[2][2] = 1.0;
+
+	assert(bInverseExpected == bInverse);
+
+	Matrix<int> c(3, 3);
+
+	c[0][0] = 1.0;
+	c[0][1] = 0.0;
+	c[0][2] = -3.0;
+	c[1][0] = 2.0;
+	c[1][1] = -2.0;
+	c[1][2] = 1.0;
+	c[2][0] = 0.0;
+	c[2][1] = -1.0;
+	c[2][2] = 3.0;
+
+	Matrix<int> cInverse = c.getInverse();
+
+	Matrix<int> cInverseExpected(3, 3);
+
+	cInverseExpected[0][0] = -5.0;
+	cInverseExpected[0][1] = 3.0;
+	cInverseExpected[0][2] = -6.0;
+	cInverseExpected[1][0] = -6.0;
+	cInverseExpected[1][1] = 3.0;
+	cInverseExpected[1][2] = -7.0;
+	cInverseExpected[2][0] = -2.0;
+	cInverseExpected[2][1] = 1.0;
+	cInverseExpected[2][2] = -2.0;
+
+	assert(cInverseExpected == cInverse);	
 }
