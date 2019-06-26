@@ -1,32 +1,9 @@
 //Cody Ware
 //5/30/19
 
-#include <iostream>
-#include "../headers/Matrix.h"
+#include "../headers/MatricesTests.h"
 
-using namespace std;
-
-void T01_defaultConstructor();
-void T02_copyConstructor();
-void T03_moveConstructor();
-void T04_assignmentOperator();
-void T05_moveAssignmentOperator();
-void T06_accessOperator();
-void T07_transpose();
-void T08_transposed();
-void T09_multiplicationOperator();
-void T10_additionOperator();
-void T11_subtractionOperator();
-void T12_equivalence();
-void T13_outputoperator();
-void T15_cut();
-void T16_testDeterminant();
-void T17_testMinors();
-void T18_testCofactors();
-void T19_testAdjugate();
-void T20_testInverse();
-
-int main()
+void MatricesTests::runAllTests()
 {
 	T01_defaultConstructor();
 	T02_copyConstructor();
@@ -48,10 +25,10 @@ int main()
 	T19_testAdjugate();
 	T20_testInverse();
 
-	cout<< "All Tests Passed" << endl;
+	cout<< "All Matrices Tests Passed" << endl;
 }
 
-void T01_defaultConstructor()
+void MatricesTests::T01_defaultConstructor()
 {
 	Matrix<int> a(3, 3);
 
@@ -76,7 +53,7 @@ void T01_defaultConstructor()
 	assert(8.0 == a[2][2]);
 }
 
-void T02_copyConstructor()
+void MatricesTests::T02_copyConstructor()
 {
 	Matrix<int> a(3, 3);
 
@@ -118,7 +95,7 @@ void T02_copyConstructor()
 	assert(0.0 == a[0][0]);
 }
 
-void T03_moveConstructor()
+void MatricesTests::T03_moveConstructor()
 {
 	//make a 3X3 matrix with those values
 	Matrix<int> a(3, 3);
@@ -163,7 +140,7 @@ void T03_moveConstructor()
 	assert(8.0 == moveHere[2][2]);
 }
 
-void T04_assignmentOperator()
+void MatricesTests::T04_assignmentOperator()
 {
 	//make a 3X3 matrix with those values
 	Matrix<int> a(3, 3);
@@ -217,7 +194,7 @@ void T04_assignmentOperator()
 	assert(8.0 == assignment[2][2]);
 }
 
-void T05_moveAssignmentOperator()
+void MatricesTests::T05_moveAssignmentOperator()
 {
 	//make a 3X3 matrix with those values
 	Matrix<int> a(3, 3);
@@ -262,7 +239,7 @@ void T05_moveAssignmentOperator()
 	assert(8.0 == moveHere[2][2]);
 }
 
-void T06_accessOperator()
+void MatricesTests::T06_accessOperator()
 {
 	//make a 3X3 matrix with those values
 	Matrix<int> a(3, 3);
@@ -292,7 +269,7 @@ void T06_accessOperator()
 	assert(0.0 == a[X][X]);
 }
 
-void T07_transpose()
+void MatricesTests::T07_transpose()
 {
 	//make a 3X3 matrix with those values
 	Matrix<int> a(3, 3);
@@ -321,7 +298,7 @@ void T07_transpose()
 	assert(2.0 == a[2][0]);assert(5.0 == a[2][1]);assert(8.0 == a[2][2]);
 }
 
-void T08_transposed()
+void MatricesTests::T08_transposed()
 {
 
 	//make a 3X3 matrix with those values
@@ -363,7 +340,7 @@ void T08_transposed()
 	assert(8.0 == transposed[2][2]);
 }
 
-void T09_multiplicationOperator()
+void MatricesTests::T09_multiplicationOperator()
 {
 	//make a 3X3 matrix with those values
 	Matrix<int> a(3, 3);
@@ -466,7 +443,7 @@ void T09_multiplicationOperator()
 	assert(z == x);
 }
 
-void T10_additionOperator()
+void MatricesTests::T10_additionOperator()
 {
 	//make a 3X3 matrix with those values
 	Matrix<int> a(3, 3);
@@ -533,7 +510,7 @@ void T10_additionOperator()
 	}
 }
 
-void T11_subtractionOperator()
+void MatricesTests::T11_subtractionOperator()
 {
 	//make a 3X3 matrix with those values
 	Matrix<int> a(3, 3);
@@ -600,7 +577,7 @@ void T11_subtractionOperator()
 	}
 }
 
-void T12_equivalence()
+void MatricesTests::T12_equivalence()
 {
 	Matrix<int> a(3, 3);
 
@@ -648,7 +625,7 @@ void T12_equivalence()
 
 }
 
-void T13_outputoperator()
+void MatricesTests::T13_outputoperator()
 {
 	Matrix<int> a(3,3);
 
@@ -671,7 +648,7 @@ void T13_outputoperator()
 	assert(testText == out.str());
 }
 
-void T15_cut()
+void MatricesTests::T15_cut()
 {
 	Matrix<int> a(3, 3);
 
@@ -723,7 +700,7 @@ void T15_cut()
 	}
 }
 
-void T16_testDeterminant()
+void MatricesTests::T16_testDeterminant()
 {
 	Matrix<int> a(1, 1);
 
@@ -750,7 +727,7 @@ void T16_testDeterminant()
 	assert(bdet == 0);
 }
 
-void T17_testMinors()
+void MatricesTests::T17_testMinors()
 {
 	Matrix<int> a(1, 1);
 
@@ -808,7 +785,7 @@ void T17_testMinors()
 	assert(bExpectedMinors == bMinors);
 }
 
-void T18_testCofactors()
+void MatricesTests::T18_testCofactors()
 {
 	Matrix<int> a(1, 1);
 
@@ -866,7 +843,7 @@ void T18_testCofactors()
 	assert(bExpectedCofactors == bCofactors);
 }
 
-void T19_testAdjugate()
+void MatricesTests::T19_testAdjugate()
 {
 	Matrix<int> a(1, 1);
 
@@ -912,7 +889,7 @@ void T19_testAdjugate()
 	assert(bExpectedAdjugates == bAdjugate);
 }
 
-void T20_testInverse()
+void MatricesTests::T20_testInverse()
 {
 	Matrix<int> b(3, 3);
 

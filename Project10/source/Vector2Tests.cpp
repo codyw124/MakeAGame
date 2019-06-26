@@ -1,50 +1,9 @@
 //Cody Ware
 //10/2/18
 
-#include <iostream>
-#include <sstream>
-#include <cassert>
-#include <cmath>
-#include <cfloat>
-#include "../headers/Vector2.h"
-// #include "../headers/PhysicsVector.h"
+#include "../headers/Vector2Tests.h"
 
-using namespace std;
-
-void T01_constructor();
-void T02_constructorWithValues();
-void T03_copyConstructor();
-void T04_moveConstructor();
-void T05_assignmentOperator();
-void T06_moveAssignmentOperator();
-void T07_additionOperator();
-void T08_subtractionOperator();
-void T09_multiplyOperator();
-void T10_multiplyByDoubleOperator();
-void T11_equivalenceOperators();
-void T12_dotProduct();
-void T13_magnitude();
-void T14_magnitudeSquared();
-void T15_divideOperator();
-void T16_divideByDoubleOperator();
-void T17_additionShorthandOperator();
-void T18_subtractionShorthandOperator();
-void T19_multiplyShorthandOperator();
-void T20_multiplyByDoubleShorthandOperator();
-void T21_divideShorthandOperator();
-void T22_divideByDoubleShorthandOperator();
-void T23_distance();
-void T24_distanceSquared();
-void T25_normalize();
-void T26_normalized();
-void T27_project();
-void T28_outputOperator();
-void T29_perpendicular();
-void T30_rotate();
-void T31_angle();
-void T32_reflect();
-
-int main()
+void Vector2Tests::runAllTests()
 {
 	T01_constructor();
 	T02_constructorWithValues();
@@ -79,11 +38,10 @@ int main()
 	T31_angle();
 	T32_reflect();
 
-	cout<<"All Tests Passed\n";
-	return 0;
+	cout<<"All Vector2 Tests Passed\n";
 }
 
-void T01_constructor()
+void Vector2Tests::T01_constructor()
 {
 	Vector2 test = Vector2();
 
@@ -92,7 +50,7 @@ void T01_constructor()
 	assert(test[1] == 0.0);
 }
 
-void T02_constructorWithValues()
+void Vector2Tests::T02_constructorWithValues()
 {
 	Vector2 test = Vector2(5.5, 7.1);
 
@@ -101,7 +59,7 @@ void T02_constructorWithValues()
 	assert(test[1] == 7.1);
 }
 
-void T03_copyConstructor()
+void Vector2Tests::T03_copyConstructor()
 {
 	Vector2 test = Vector2(5.5, 7.1);
 
@@ -122,7 +80,7 @@ void T03_copyConstructor()
 	assert(&test[1] != &copy[1]);
 }
 
-void T04_moveConstructor()
+void Vector2Tests::T04_moveConstructor()
 {
 	Vector2 test = Vector2(5, 6);
 
@@ -138,7 +96,7 @@ void T04_moveConstructor()
 	assert(moveHere[1] == 6.0);
 }
 
-void T05_assignmentOperator()
+void Vector2Tests::T05_assignmentOperator()
 {
 	Vector2 test = Vector2(55, 10);
 
@@ -159,7 +117,7 @@ void T05_assignmentOperator()
 	assert(&test[1] != &assigned[1]);
 }
 
-void T06_moveAssignmentOperator()
+void Vector2Tests::T06_moveAssignmentOperator()
 {
 	Vector2 test = Vector2(5, 6);
 
@@ -175,7 +133,7 @@ void T06_moveAssignmentOperator()
 	assert(moveAssignHere[1] == 6.0);
 }
 
-void T07_additionOperator()
+void Vector2Tests::T07_additionOperator()
 {
 	Vector2 orig = Vector2(5, 10);
 
@@ -196,7 +154,7 @@ void T07_additionOperator()
 	assert(&sum[1] != &plus[1]);
 }
 
-void T08_subtractionOperator()
+void Vector2Tests::T08_subtractionOperator()
 {
 	Vector2 orig = Vector2(5, 10);
 
@@ -217,7 +175,7 @@ void T08_subtractionOperator()
 	assert(&difference[1] != &minus[1]);
 }
 
-void T09_multiplyOperator()
+void Vector2Tests::T09_multiplyOperator()
 {
 	Vector2 orig = Vector2(5, 10);
 
@@ -238,7 +196,7 @@ void T09_multiplyOperator()
 	assert(&product[1] != &times[1]);
 }
 
-void T10_multiplyByDoubleOperator()
+void Vector2Tests::T10_multiplyByDoubleOperator()
 {
 	Vector2 orig = Vector2(5, 10);
 
@@ -255,7 +213,7 @@ void T10_multiplyByDoubleOperator()
 	assert(&product[1] != &orig[1]);
 }
 
-void T11_equivalenceOperators()
+void Vector2Tests::T11_equivalenceOperators()
 {
 	Vector2 test = Vector2(50, 70);
 
@@ -272,7 +230,7 @@ void T11_equivalenceOperators()
 	assert(test != test4);
 }
 
-void T12_dotProduct()
+void Vector2Tests::T12_dotProduct()
 {
 	Vector2 orig = Vector2(5, 10);
 
@@ -283,7 +241,7 @@ void T12_dotProduct()
 	assert(product == 40.0);
 }
 
-void T13_magnitude()
+void Vector2Tests::T13_magnitude()
 {
 	Vector2 test = Vector2(5, 10);
 
@@ -292,7 +250,7 @@ void T13_magnitude()
 	assert(magnitude > 11.1 && magnitude < 11.2);
 }
 
-void T14_magnitudeSquared()
+void Vector2Tests::T14_magnitudeSquared()
 {
 	Vector2 test = Vector2(5, 10);
 
@@ -301,7 +259,7 @@ void T14_magnitudeSquared()
 	assert(magnitudeSq == 125.0);
 }
 
-void T15_divideOperator()
+void Vector2Tests::T15_divideOperator()
 {
 	Vector2 orig = Vector2(6, 10);
 
@@ -322,7 +280,7 @@ void T15_divideOperator()
 	assert(&quotient[1] != &divisor[1]);
 }
 
-void T16_divideByDoubleOperator()
+void Vector2Tests::T16_divideByDoubleOperator()
 {
 	Vector2 orig = Vector2(6, 10);
 
@@ -339,7 +297,7 @@ void T16_divideByDoubleOperator()
 	assert(&quotient[1] != &orig[1]);
 }
 
-void T17_additionShorthandOperator()
+void Vector2Tests::T17_additionShorthandOperator()
 {
 	Vector2 orig = Vector2(5, 10);
 
@@ -356,7 +314,7 @@ void T17_additionShorthandOperator()
 	assert(&orig[1] != &plus[1]);
 }
 
-void T18_subtractionShorthandOperator()
+void Vector2Tests::T18_subtractionShorthandOperator()
 {
 	Vector2 orig = Vector2(5, 10);
 
@@ -373,7 +331,7 @@ void T18_subtractionShorthandOperator()
 	assert(&orig[1] != &minus[1]);
 }
 
-void T19_multiplyShorthandOperator()
+void Vector2Tests::T19_multiplyShorthandOperator()
 {
 	Vector2 orig = Vector2(5, 10);
 
@@ -390,7 +348,7 @@ void T19_multiplyShorthandOperator()
 	assert(&orig[1] != &times[1]);
 }
 
-void T20_multiplyByDoubleShorthandOperator()
+void Vector2Tests::T20_multiplyByDoubleShorthandOperator()
 {
 	Vector2 orig = Vector2(5, 10);
 
@@ -403,7 +361,7 @@ void T20_multiplyByDoubleShorthandOperator()
 	assert(orig[1] == 20.0);
 }
 
-void T21_divideShorthandOperator()
+void Vector2Tests::T21_divideShorthandOperator()
 {
 	Vector2 orig = Vector2(6, 10);
 
@@ -420,7 +378,7 @@ void T21_divideShorthandOperator()
 	assert(&orig[1] != &divisor[1]);
 }
 
-void T22_divideByDoubleShorthandOperator()
+void Vector2Tests::T22_divideByDoubleShorthandOperator()
 {
 	Vector2 orig = Vector2(6, 10);
 
@@ -433,7 +391,7 @@ void T22_divideByDoubleShorthandOperator()
 	assert(orig[1] == 5.0);
 }
 
-void T23_distance()
+void Vector2Tests::T23_distance()
 {
 	Vector2 test = Vector2(5, 10);
 
@@ -448,7 +406,7 @@ void T23_distance()
 	assert(distance == sqrt(53.0));
 }
 
-void T24_distanceSquared()
+void Vector2Tests::T24_distanceSquared()
 {
 	Vector2 test = Vector2(5, 10);
 
@@ -463,7 +421,7 @@ void T24_distanceSquared()
 	assert(distanceSquared == 53.0);
 }
 
-void T25_normalize()
+void Vector2Tests::T25_normalize()
 {
 	Vector2 test = Vector2(0, 10);
 
@@ -502,7 +460,7 @@ void T25_normalize()
 	}
 }
 
-void T26_normalized()
+void Vector2Tests::T26_normalized()
 {
 	Vector2 test = Vector2(0, 10);
 
@@ -544,7 +502,7 @@ void T26_normalized()
 	}
 }
 
-void T27_project()
+void Vector2Tests::T27_project()
 {
 	Vector2 first = Vector2(5, 5);
 	Vector2 second = Vector2(-3, 2);
@@ -555,7 +513,7 @@ void T27_project()
 	assert(-10.0/13.0 == projected[1]);
 }
 
-void T28_outputOperator()
+void Vector2Tests::T28_outputOperator()
 {
 	Vector2 test = Vector2(55, 703);
 
@@ -568,7 +526,7 @@ void T28_outputOperator()
 	assert(testText == out.str());
 }
 
-void T29_perpendicular()
+void Vector2Tests::T29_perpendicular()
 {
 	Vector2 first = Vector2(5, 5);
 	Vector2 second = Vector2(-3, 2);
@@ -591,7 +549,7 @@ void T29_perpendicular()
 
 }
 
-void T30_rotate()
+void Vector2Tests::T30_rotate()
 {
 	Vector2 test = Vector2(5, 5);
 
@@ -605,7 +563,7 @@ void T30_rotate()
 	assert(rotatedLeft[0] >= 0);
 }
 
-void T31_angle()
+void Vector2Tests::T31_angle()
 {
 	Vector2 first = Vector2(5, 5);
 	Vector2 second = Vector2(-5, 5);
@@ -621,7 +579,7 @@ void T31_angle()
 	assert(testAngle2 < 120);
 }
 
-void T32_reflect()
+void Vector2Tests::T32_reflect()
 {
 	Vector2 right = Vector2(1, 0);
 

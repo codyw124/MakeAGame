@@ -1,49 +1,9 @@
 //Cody Ware
 //10/4/18
 
-#include <iostream>
-#include <sstream>
-#include <cassert>
-#include <cmath>
-#include <cfloat>
-#include "../headers/Vector3.h"
+#include "../headers/Vector3Tests.h"
 
-using namespace std;
-
-void T01_constructor();
-void T02_constructorWithValues();
-void T03_copyConstructor();
-void T04_moveConstructor();
-void T05_assignmentOperator();
-void T06_moveAssignmentOperator();
-void T07_additionOperator();
-void T08_subtractionOperator();
-void T09_multiply2Vector3sOperator();
-void T10_multiplyVector3ByDouble();
-void T11_equivalenceOperators();
-void T12_dotProduct();
-void T13_magnitude();
-void T14_magnitudeSquared();
-void T15_divide2Vector3sOperator();
-void T16_divideVector3ByDoubleOperator();
-void T17_additionShorthandOperator();
-void T18_subtractionShorthandOperator();
-void T19_multiply2Vector3sShorthandOperator();
-void T20_multiplyVector3ByDoubleShorthandOperator();
-void T21_divide2Vector3sShorthandOperator();
-void T22_divideVector3ByDoubleShorthandOperator();
-void T23_distance();
-void T24_distanceSquared();
-void T25_normalize();
-void T26_normalized();
-void T27_project();
-void T28_outputOperator();
-void T29_perpendicular();
-void T30_angle();
-void T31_reflect();
-void T32_crossProduct();
-
-int main()
+void Vector3Tests::runAllTests()
 {
 	T01_constructor();
 	T02_constructorWithValues();
@@ -78,11 +38,10 @@ int main()
 	T31_reflect();
 	T32_crossProduct();
 
-	cout << "All Tests Passed\n";
-	return 0;
+	cout << "All Vector3 Tests Passed\n";
 }
 
-void T01_constructor()
+void Vector3Tests::T01_constructor()
 {
 	Vector3 test = Vector3();
 
@@ -93,7 +52,7 @@ void T01_constructor()
 	assert(test[2] == 0.0);
 }
 
-void T02_constructorWithValues()
+void Vector3Tests::T02_constructorWithValues()
 {
 	Vector3 test = Vector3(5.5, 7.1, 9.6);
 
@@ -104,7 +63,7 @@ void T02_constructorWithValues()
 	assert(test[2] == 9.6);
 }
 
-void T03_copyConstructor()
+void Vector3Tests::T03_copyConstructor()
 {
 	Vector3 test = Vector3(5.5, 7.1, 9.6);
 
@@ -131,7 +90,7 @@ void T03_copyConstructor()
 	assert(&test[2] != &copy[2]);
 }
 
-void T04_moveConstructor()
+void Vector3Tests::T04_moveConstructor()
 {
 	Vector3 test = Vector3(5, 6, 9);
 
@@ -151,7 +110,7 @@ void T04_moveConstructor()
 	assert(moveHere[2] == 9.0);
 }
 
-void T05_assignmentOperator()
+void Vector3Tests::T05_assignmentOperator()
 {
 	Vector3 test = Vector3(55, 10, 6);
 
@@ -178,7 +137,7 @@ void T05_assignmentOperator()
 	assert(&test[2] != &assigned[2]);
 }
 
-void T06_moveAssignmentOperator()
+void Vector3Tests::T06_moveAssignmentOperator()
 {
 	Vector3 test = Vector3(5, 6, 8);
 
@@ -198,7 +157,7 @@ void T06_moveAssignmentOperator()
 	assert(moveAssignHere[2] == 8.0);
 }
 
-void T07_additionOperator()
+void Vector3Tests::T07_additionOperator()
 {
 	Vector3 orig = Vector3(5, 10, 2);
 
@@ -225,7 +184,7 @@ void T07_additionOperator()
 	assert(&sum[2] != &plus[2]);
 }
 
-void T08_subtractionOperator()
+void Vector3Tests::T08_subtractionOperator()
 {
 	Vector3 orig = Vector3(5, 10, 6);
 
@@ -252,7 +211,7 @@ void T08_subtractionOperator()
 	assert(&difference[2] != &minus[2]);
 }
 
-void T09_multiply2Vector3sOperator()
+void Vector3Tests::T09_multiply2Vector3sOperator()
 {
 	Vector3 orig = Vector3(5, 10, 15);
 
@@ -279,7 +238,7 @@ void T09_multiply2Vector3sOperator()
 	assert(&product[2] != &times[2]);
 }
 
-void T10_multiplyVector3ByDouble()
+void Vector3Tests::T10_multiplyVector3ByDouble()
 {
 	Vector3 orig = Vector3(5, 10, 6);
 
@@ -300,7 +259,7 @@ void T10_multiplyVector3ByDouble()
 	assert(&product[2]!= &orig[2]);
 }
 
-void T11_equivalenceOperators()
+void Vector3Tests::T11_equivalenceOperators()
 {
 	Vector3 test = Vector3(50, 70, 60);
 
@@ -317,7 +276,7 @@ void T11_equivalenceOperators()
 	assert(test != test4);
 }
 
-void T12_dotProduct()
+void Vector3Tests::T12_dotProduct()
 {
 	Vector3 orig = Vector3(5, 10, 3);
 
@@ -328,7 +287,7 @@ void T12_dotProduct()
 	assert(product == 52.0);
 }
 
-void T13_magnitude()
+void Vector3Tests::T13_magnitude()
 {
 	Vector3 test = Vector3(5, 10, 12);
 
@@ -337,7 +296,7 @@ void T13_magnitude()
 	assert(magnitude == sqrt(269));
 }
 
-void T14_magnitudeSquared()
+void Vector3Tests::T14_magnitudeSquared()
 {
 	Vector3 test = Vector3(5, 10, 12);
 
@@ -346,7 +305,7 @@ void T14_magnitudeSquared()
 	assert(magnitudeSq == 269.0);
 }
 
-void T15_divide2Vector3sOperator()
+void Vector3Tests::T15_divide2Vector3sOperator()
 {
 	Vector3 orig = Vector3(6, 10, 9);
 
@@ -373,7 +332,7 @@ void T15_divide2Vector3sOperator()
 	assert(&quotient[2] != &divisor[2]);
 }
 
-void T16_divideVector3ByDoubleOperator()
+void Vector3Tests::T16_divideVector3ByDoubleOperator()
 {
 	Vector3 orig = Vector3(6, 10, 15);
 
@@ -394,7 +353,7 @@ void T16_divideVector3ByDoubleOperator()
 	assert(&quotient[2] != &orig[2]);
 }
 
-void T17_additionShorthandOperator()
+void Vector3Tests::T17_additionShorthandOperator()
 {
 	Vector3 orig = Vector3(5, 10, 19);
 
@@ -415,7 +374,7 @@ void T17_additionShorthandOperator()
 	assert(&orig[2] != &plus[2]);
 }
 
-void T18_subtractionShorthandOperator()
+void Vector3Tests::T18_subtractionShorthandOperator()
 {
 	Vector3 orig = Vector3(5, 10, 25);
 
@@ -436,7 +395,7 @@ void T18_subtractionShorthandOperator()
 	assert(&orig[2] != &minus[2]);
 }
 
-void T19_multiply2Vector3sShorthandOperator()
+void Vector3Tests::T19_multiply2Vector3sShorthandOperator()
 {
 	Vector3 orig = Vector3(5, 10, 15);
 
@@ -457,7 +416,7 @@ void T19_multiply2Vector3sShorthandOperator()
 	assert(&orig[2] != &times[2]);
 }
 
-void T20_multiplyVector3ByDoubleShorthandOperator()
+void Vector3Tests::T20_multiplyVector3ByDoubleShorthandOperator()
 {
 	Vector3 orig = Vector3(5, 10, 30);
 
@@ -472,7 +431,7 @@ void T20_multiplyVector3ByDoubleShorthandOperator()
 	assert(orig[2] == 60.0);
 }
 
-void T21_divide2Vector3sShorthandOperator()
+void Vector3Tests::T21_divide2Vector3sShorthandOperator()
 {
 	Vector3 orig = Vector3(6, 10, 9);
 
@@ -493,7 +452,7 @@ void T21_divide2Vector3sShorthandOperator()
 	assert(&orig[2] != &divisor[2]);
 }
 
-void T22_divideVector3ByDoubleShorthandOperator()
+void Vector3Tests::T22_divideVector3ByDoubleShorthandOperator()
 {
 	Vector3 orig = Vector3(6, 10, 20);
 
@@ -508,7 +467,7 @@ void T22_divideVector3ByDoubleShorthandOperator()
 	assert(orig[2] == 10.0);
 }
 
-void T23_distance()
+void Vector3Tests::T23_distance()
 {
 	Vector3 test = Vector3(5, 10, 20);
 
@@ -523,7 +482,7 @@ void T23_distance()
 	assert(distance == sqrt(249.0));
 }
 
-void T24_distanceSquared()
+void Vector3Tests::T24_distanceSquared()
 {
 	Vector3 test = Vector3(5, 10, 20);
 
@@ -538,7 +497,7 @@ void T24_distanceSquared()
 	assert(distance == 249.0);
 }
 
-void T25_normalize()
+void Vector3Tests::T25_normalize()
 {
 	Vector3 test = Vector3(0, 10, 0);
 
@@ -586,7 +545,7 @@ void T25_normalize()
 	}
 }
 
-void T26_normalized()
+void Vector3Tests::T26_normalized()
 {
 	Vector3 test = Vector3(0, 10, 0);
 
@@ -634,7 +593,7 @@ void T26_normalized()
 	}
 }
 
-void T27_project()
+void Vector3Tests::T27_project()
 {
 		Vector3 first = Vector3(3, 4, -3);
 		Vector3 second = Vector3(2,0,6);
@@ -646,7 +605,7 @@ void T27_project()
 		assert(18.0 / 17.0 == projected[2]);
 }
 
-void T28_outputOperator()
+void Vector3Tests::T28_outputOperator()
 {
 	Vector3 test = Vector3(55, 703, 5.5);
 
@@ -659,7 +618,7 @@ void T28_outputOperator()
 	assert(testText == out.str());
 }
 
-void T29_perpendicular()
+void Vector3Tests::T29_perpendicular()
 {
 		Vector3 first = Vector3(5, 5, 11);
 		Vector3 second = Vector3(-3, 2, 8);
@@ -685,7 +644,7 @@ void T29_perpendicular()
 		assert(5.0 == perpendicular2[2]);
 }
 
-void T30_angle()
+void Vector3Tests::T30_angle()
 {
 		Vector3 first = Vector3(5, 5, 5);
 		Vector3 second = Vector3(-5, 5, 5);
@@ -704,7 +663,7 @@ void T30_angle()
 		assert(126.70983 > test2);
 }
 
-void T31_reflect()
+void Vector3Tests::T31_reflect()
 {
 	Vector3 a = Vector3(5, 0, 5);
 
@@ -722,7 +681,7 @@ void T31_reflect()
 		assert(0.0 == ba[2]);
 }
 
-void T32_crossProduct()
+void Vector3Tests::T32_crossProduct()
 {
 	Vector3 right = Vector3(5, 0, 0);
 	Vector3 up = Vector3(0, 5, 0);
