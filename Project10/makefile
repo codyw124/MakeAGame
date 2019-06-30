@@ -8,6 +8,7 @@ objects/Vector3.o \
 objects/Vector2Tests.o \
 objects/Vector3Tests.o \
 objects/MatricesTests.o \
+objects/TransformTests.o \
 objects/Transform.o \
 objects/Level1.o \
 objects/Scene.o \
@@ -33,6 +34,8 @@ objects/Vector2.o \
 objects/Vector3Tests.o \
 objects/Vector3.o \
 objects/MatricesTests.o \
+objects/TransformTests.o \
+objects/GeometryTests.o \
 objects/TestAll.o
 	$(COMPILER) objects/PhysicsHelper.o \
 objects/Vector2Tests.o \
@@ -40,6 +43,8 @@ objects/Vector2.o \
 objects/Vector3Tests.o \
 objects/Vector3.o \
 objects/MatricesTests.o \
+objects/TransformTests.o \
+objects/GeometryTests.o \
 objects/TestAll.o $(LINKER_FLAGS) -o TestAll
 
 
@@ -80,7 +85,14 @@ objects/Vector3Tests.o: source/Vector3Tests.cpp headers/Vector3Tests.h headers/V
 objects/MatricesTests.o: source/MatricesTests.cpp headers/MatricesTests.h headers/Matrix.h
 	$(COMPILER) $(COMPILER_FLAGS) source/MatricesTests.cpp -o objects/MatricesTests.o
 
-objects/TestAll.o: source/TestAll.cpp headers/MatricesTests.h headers/Vector2Tests.h headers/Vector3Tests.h
+objects/TransformTests.o: source/TransformTests.cpp headers/TransformTests.h
+	$(COMPILER) $(COMPILER_FLAGS) source/TransformTests.cpp -o objects/TransformTests.o
+
+objects/GeometryTests.o: source/GeometryTests.cpp headers/GeometryTests.h
+	$(COMPILER) $(COMPILER_FLAGS) source/GeometryTests.cpp -o objects/GeometryTests.o
+
+objects/TestAll.o: source/TestAll.cpp headers/MatricesTests.h headers/Vector2Tests.h headers/Vector3Tests.h \
+headers/TransformTests.h headers/GeometryTests.h
 	$(COMPILER) $(COMPILER_FLAGS) source/TestAll.cpp -o objects/TestAll.o
 
 
