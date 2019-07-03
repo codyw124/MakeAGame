@@ -6,6 +6,7 @@
 #include <iostream>
 #include <cassert>
 #include "Test.h"
+#include "Transform.h"
 
 using namespace std;
 
@@ -14,4 +15,6 @@ class TransformTests : public Test
     public:
         void runAllTests();
     private:
+        void T1_bigFive();
+        void T2_testSwitchMajors();
 };

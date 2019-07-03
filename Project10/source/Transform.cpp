@@ -3,18 +3,22 @@
 
 #include "../headers/Transform.h"
 
-Transform::Transform() : data_(TRANSFORM_DIMENSIONS, TRANSFORM_DIMENSIONS)
+Transform::Transform()
 {
+    isRowMajor_ = true;
 }
 
-Transform::Transform(const Transform& other): data_(other.data_)
+Transform::Transform(const Transform& other)
 {
-    
+    deepCopy(other);
 }
 
-Transform::Transform(Transform&& other) : data_(std::move(other.data_))
+Transform::Transform(Transform&& other)
 {
-    
+    data_ = std::move(other.data_);
+
+    isRowMajor_ = other.isRowMajor_;
+    other.isRowMajor_ = true;
 }
 
 Transform::~Transform()
@@ -28,16 +32,23 @@ Transform& Transform::operator=(const Transform& other)
     return *this;
 }
 
-Transform Transform::operator=(Transform&& other)
+Transform& Transform::operator=(Transform&& other)
 {
-    deepCopy(other);
+    data_ = std::move(other.data_);
 
-	other.data_ = Matrix<double>(0,0);
-
+    isRowMajor_ = other.isRowMajor_;
+    other.isRowMajor_ = true;
 	return *this;
 }
 
 void Transform::deepCopy(const Transform& other)
 {
     data_ = other.data_;
+    isRowMajor_ = other.isRowMajor_;
+}
+
+void Transform::toOtherMajor()
+{
+    data_.transpose();
+    isRowMajor_ = !isRowMajor_;
 }

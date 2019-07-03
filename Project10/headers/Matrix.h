@@ -12,10 +12,13 @@
 
 using namespace std;
 
+const size_t DEFAULT_MATRIX_DIMENSIONS = 4;
+
 template <class T>
 class Matrix
 {
 	public:
+		Matrix();
 		Matrix(const size_t& r, const size_t& c);
 		Matrix(const Matrix<T>& other);
 		Matrix(Matrix&& other);
@@ -55,6 +58,11 @@ class Matrix
 		bool isSquare_;
 };
 
+template <class T>
+Matrix<T>::Matrix()
+{
+	*this = Matrix(DEFAULT_MATRIX_DIMENSIONS,DEFAULT_MATRIX_DIMENSIONS);
+}
 
 template <class T>
 Matrix<T>::Matrix(const size_t& r, const size_t& c)

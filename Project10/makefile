@@ -2,26 +2,7 @@ COMPILER = g++
 COMPILER_FLAGS = -Wall -g -c -std=c++11
 LINKER_FLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
 
-all: objects \
-objects/Vector2.o \
-objects/Vector3.o \
-objects/Vector2Tests.o \
-objects/Vector3Tests.o \
-objects/MatricesTests.o \
-objects/TransformTests.o \
-objects/Transform.o \
-objects/Level1.o \
-objects/Scene.o \
-objects/GameObject.o \
-objects/SceneEditor.o \
-objects/Window.o \
-objects/tinyxml2.o \
-objects/SaveGameObject.o \
-objects/TestAll.o \
-TestAll \
-Level1 \
-SceneEditor \
-SaveGameObject 
+all: objects TestAll
 
 #make the objects directory so we can build everything else
 objects:
@@ -34,6 +15,7 @@ objects/Vector2.o \
 objects/Vector3Tests.o \
 objects/Vector3.o \
 objects/MatricesTests.o \
+objects/Transform.o \
 objects/TransformTests.o \
 objects/GeometryTests.o \
 objects/TestAll.o
@@ -43,6 +25,7 @@ objects/Vector2.o \
 objects/Vector3Tests.o \
 objects/Vector3.o \
 objects/MatricesTests.o \
+objects/Transform.o \
 objects/TransformTests.o \
 objects/GeometryTests.o \
 objects/TestAll.o $(LINKER_FLAGS) -o TestAll
@@ -70,29 +53,29 @@ objects/Vector2.o: source/Vector2.cpp headers/Vector2.h headers/PhysicsHelper.h
 objects/Vector3.o: source/Vector3.cpp headers/Vector3.h headers/PhysicsHelper.h
 	$(COMPILER) $(COMPILER_FLAGS) source/Vector3.cpp -o objects/Vector3.o
 
-objects/Transform.o: source/Transform.cpp headers/Transform.h
+objects/Transform.o: source/Transform.cpp headers/Transform.h headers/Matrix.h
 	$(COMPILER) $(COMPILER_FLAGS) source/Transform.cpp -o objects/Transform.o
 
 
 
 #test objects
-objects/Vector2Tests.o: source/Vector2Tests.cpp headers/Vector2Tests.h headers/Vector2.h
+objects/Vector2Tests.o: source/Vector2Tests.cpp headers/Vector2Tests.h headers/Vector2.h headers/Test.h
 	$(COMPILER) $(COMPILER_FLAGS) source/Vector2Tests.cpp -o objects/Vector2Tests.o
 
-objects/Vector3Tests.o: source/Vector3Tests.cpp headers/Vector3Tests.h headers/Vector3.h
+objects/Vector3Tests.o: source/Vector3Tests.cpp headers/Vector3Tests.h headers/Vector3.h headers/Test.h
 	$(COMPILER) $(COMPILER_FLAGS) source/Vector3Tests.cpp -o objects/Vector3Tests.o
 
-objects/MatricesTests.o: source/MatricesTests.cpp headers/MatricesTests.h headers/Matrix.h
+objects/MatricesTests.o: source/MatricesTests.cpp headers/MatricesTests.h headers/Matrix.h headers/Test.h
 	$(COMPILER) $(COMPILER_FLAGS) source/MatricesTests.cpp -o objects/MatricesTests.o
 
-objects/TransformTests.o: source/TransformTests.cpp headers/TransformTests.h
+objects/TransformTests.o: source/TransformTests.cpp headers/TransformTests.h headers/Transform.h headers/Test.h
 	$(COMPILER) $(COMPILER_FLAGS) source/TransformTests.cpp -o objects/TransformTests.o
 
-objects/GeometryTests.o: source/GeometryTests.cpp headers/GeometryTests.h
+objects/GeometryTests.o: source/GeometryTests.cpp headers/GeometryTests.h headers/Test.h
 	$(COMPILER) $(COMPILER_FLAGS) source/GeometryTests.cpp -o objects/GeometryTests.o
 
 objects/TestAll.o: source/TestAll.cpp headers/MatricesTests.h headers/Vector2Tests.h headers/Vector3Tests.h \
-headers/TransformTests.h headers/GeometryTests.h
+headers/TransformTests.h headers/GeometryTests.h headers/Test.h
 	$(COMPILER) $(COMPILER_FLAGS) source/TestAll.cpp -o objects/TestAll.o
 
 

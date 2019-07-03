@@ -14,11 +14,13 @@ public:
     ~Transform();
 
     Transform& operator=(const Transform& other);
-    Transform operator=(Transform&& other);
+    Transform& operator=(Transform&& other);
+
+    void toOtherMajor();
     
 private:
-    Matrix<double> data_;    
-    const int TRANSFORM_DIMENSIONS = 4;
+    Matrix<double> data_;   
+    bool isRowMajor_;
 
     void deepCopy(const Transform& other);
 };
