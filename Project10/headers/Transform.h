@@ -3,7 +3,8 @@
 
 #pragma once
 
-#include "../headers/Matrix.h"
+#include "Matrix.h"
+#include "Vector3.h"
 
 class Transform
 {
@@ -17,6 +18,9 @@ public:
     Transform& operator=(Transform&& other);
 
     void toOtherMajor();
+    bool isRowMajor();
+    Vector3 getTransform();
+    void setTransform(const Vector3& newTransform);
     
 private:
     Matrix<double> data_;   

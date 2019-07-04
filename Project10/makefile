@@ -107,4 +107,4 @@ objects/tinyxml2.o: headers/tinyxml2.h source/tinyxml2.cpp
 
 
 clean:
-	rm TestAll SceneEditor Level1 SaveGameObject; rm -r .vscode objects;
+	rm TestAll SceneEditor Level1 SaveGameObject; rm -r .vscode objects ../.vscode;
