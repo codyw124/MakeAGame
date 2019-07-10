@@ -4,7 +4,6 @@
 #pragma once
 
 #include <iostream>
-#include <cassert>
 #include "Test.h"
 #include "Transform.h"
 
@@ -15,6 +14,10 @@ class TransformTests : public Test
     public:
         void runAllTests();
     private:
-        void T1_bigFive();
+        void T1_testBigFive();
         void T2_testSwitchMajors();
+		void T3_testGetSetTranslate();
+		void T4_testGetSetScale();
+		void T5_testGetSetRotate();
+		void T6_testRotate();
 };

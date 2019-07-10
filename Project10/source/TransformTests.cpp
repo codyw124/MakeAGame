@@ -5,11 +5,12 @@
 
 void TransformTests::runAllTests()
 {
-	T1_bigFive();
+	T1_testBigFive();
+	T2_testSwitchMajors();
 	cout << "All Transform Tests Passed\n";
 }
 
-void TransformTests::T1_bigFive()
+void TransformTests::T1_testBigFive()
 {
 	//default constructor
 	Transform x;
@@ -32,3 +33,4 @@ void TransformTests::T2_testSwitchMajors()
 {
 	
 }
+

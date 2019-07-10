@@ -5,7 +5,6 @@
 
 #include <iostream>
 #include <sstream>
-#include <cassert>
 #include <cmath>
 #include <cfloat>
 #include "Vector2.h"

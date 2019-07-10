@@ -5,7 +5,6 @@
 
 #include <iostream>
 #include <vector>
-#include <cassert>
 #include <sstream>
 #include <cmath>
 #include "PhysicsHelper.h"

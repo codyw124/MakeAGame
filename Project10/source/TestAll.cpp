@@ -26,6 +26,7 @@ int main()
     {
         x->runAllTests();
     }
+
     cout << "All Tests Passed!\n";
     return 0;
 }

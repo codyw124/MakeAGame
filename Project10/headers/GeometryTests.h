@@ -4,7 +4,6 @@
 #pragma once
 
 #include <iostream>
-#include <cassert>
 #include "Test.h"
 
 using namespace std;
