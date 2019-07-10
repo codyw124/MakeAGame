@@ -32,15 +32,15 @@ void MatricesTests::T01_defaultConstructor()
 {
 	Matrix<int> a(3, 3);
 
-	assert(1.0 == a[0][0]);
-	assert(0.0 == a[0][1]);
-	assert(0.0 == a[0][2]);
-	assert(0.0 == a[1][0]);
-	assert(1.0 == a[1][1]);
-	assert(0.0 == a[1][2]);
-	assert(0.0 == a[2][0]);
-	assert(0.0 == a[2][1]);
-	assert(1.0 == a[2][2]);
+	assert(1.0 == a[0][0], "T01_defaultConstructor");
+	assert(0.0 == a[0][1], "T01_defaultConstructor");
+	assert(0.0 == a[0][2], "T01_defaultConstructor");
+	assert(0.0 == a[1][0], "T01_defaultConstructor");
+	assert(1.0 == a[1][1], "T01_defaultConstructor");
+	assert(0.0 == a[1][2], "T01_defaultConstructor");
+	assert(0.0 == a[2][0], "T01_defaultConstructor");
+	assert(0.0 == a[2][1], "T01_defaultConstructor");
+	assert(1.0 == a[2][2], "T01_defaultConstructor");
 
 	a[0][0] = 0.0;
 	a[0][1] = 1.0;
@@ -52,15 +52,15 @@ void MatricesTests::T01_defaultConstructor()
 	a[2][1] = 7.0;
 	a[2][2] = 8.0;
 
-	assert(0.0 == a[0][0]);
-	assert(1.0 == a[0][1]);
-	assert(2.0 == a[0][2]);
-	assert(3.0 == a[1][0]);
-	assert(4.0 == a[1][1]);
-	assert(5.0 == a[1][2]);
-	assert(6.0 == a[2][0]);
-	assert(7.0 == a[2][1]);
-	assert(8.0 == a[2][2]);
+	assert(0.0 == a[0][0], "T01_defaultConstructor");
+	assert(1.0 == a[0][1], "T01_defaultConstructor");
+	assert(2.0 == a[0][2], "T01_defaultConstructor");
+	assert(3.0 == a[1][0], "T01_defaultConstructor");
+	assert(4.0 == a[1][1], "T01_defaultConstructor");
+	assert(5.0 == a[1][2], "T01_defaultConstructor");
+	assert(6.0 == a[2][0], "T01_defaultConstructor");
+	assert(7.0 == a[2][1], "T01_defaultConstructor");
+	assert(8.0 == a[2][2], "T01_defaultConstructor");
 }
 
 void MatricesTests::T02_copyConstructor()
@@ -77,32 +77,32 @@ void MatricesTests::T02_copyConstructor()
 	a[2][1] = 7.0;
 	a[2][2] = 8.0;
 
-	assert(0.0 == a[0][0]);
-	assert(1.0 == a[0][1]);
-	assert(2.0 == a[0][2]);
-	assert(3.0 == a[1][0]);
-	assert(4.0 == a[1][1]);
-	assert(5.0 == a[1][2]);
-	assert(6.0 == a[2][0]);
-	assert(7.0 == a[2][1]);
-	assert(8.0 == a[2][2]);
+	assert(0.0 == a[0][0], "T02_copyConstructor");
+	assert(1.0 == a[0][1], "T02_copyConstructor");
+	assert(2.0 == a[0][2], "T02_copyConstructor");
+	assert(3.0 == a[1][0], "T02_copyConstructor");
+	assert(4.0 == a[1][1], "T02_copyConstructor");
+	assert(5.0 == a[1][2], "T02_copyConstructor");
+	assert(6.0 == a[2][0], "T02_copyConstructor");
+	assert(7.0 == a[2][1], "T02_copyConstructor");
+	assert(8.0 == a[2][2], "T02_copyConstructor");
 
 	Matrix<int> b(a);
 
-	assert(0.0 == b[0][0]);
-	assert(1.0 == b[0][1]);
-	assert(2.0 == b[0][2]);
-	assert(3.0 == b[1][0]);
-	assert(4.0 == b[1][1]);
-	assert(5.0 == b[1][2]);
-	assert(6.0 == b[2][0]);
-	assert(7.0 == b[2][1]);
-	assert(8.0 == b[2][2]);
+	assert(0.0 == b[0][0], "T02_copyConstructor");
+	assert(1.0 == b[0][1], "T02_copyConstructor");
+	assert(2.0 == b[0][2], "T02_copyConstructor");
+	assert(3.0 == b[1][0], "T02_copyConstructor");
+	assert(4.0 == b[1][1], "T02_copyConstructor");
+	assert(5.0 == b[1][2], "T02_copyConstructor");
+	assert(6.0 == b[2][0], "T02_copyConstructor");
+	assert(7.0 == b[2][1], "T02_copyConstructor");
+	assert(8.0 == b[2][2], "T02_copyConstructor");
 
 	b[0][0] = 7;
 
-	assert(7.0 == b[0][0]);
-	assert(0.0 == a[0][0]);
+	assert(7.0 == b[0][0], "T02_copyConstructor");
+	assert(0.0 == a[0][0], "T02_copyConstructor");
 }
 
 void MatricesTests::T03_moveConstructor()
@@ -121,33 +121,33 @@ void MatricesTests::T03_moveConstructor()
 	a[2][2] = 8.0;
 
 	//make sure they are in the matrix
-	assert(0.0 == a[0][0]);
-	assert(1.0 == a[0][1]);
-	assert(2.0 == a[0][2]);
-	assert(3.0 == a[1][0]);
-	assert(4.0 == a[1][1]);
-	assert(5.0 == a[1][2]);
-	assert(6.0 == a[2][0]);
-	assert(7.0 == a[2][1]);
-	assert(8.0 == a[2][2]);
+	assert(0.0 == a[0][0], "T03_moveConstructor");
+	assert(1.0 == a[0][1], "T03_moveConstructor");
+	assert(2.0 == a[0][2], "T03_moveConstructor");
+	assert(3.0 == a[1][0], "T03_moveConstructor");
+	assert(4.0 == a[1][1], "T03_moveConstructor");
+	assert(5.0 == a[1][2], "T03_moveConstructor");
+	assert(6.0 == a[2][0], "T03_moveConstructor");
+	assert(7.0 == a[2][1], "T03_moveConstructor");
+	assert(8.0 == a[2][2], "T03_moveConstructor");
 
 	//make a matrix and move the memory of 'a' into this matrix
 	Matrix<int> moveHere(std::move(a));
 
 	//make sure the rows and columns reflect the dimensions of a matrix with no data
-	assert(0 == a.getRows());
-	assert(0 == a.getColumns());
+	assert(0 == a.getRows(), "T03_moveConstructor");
+	assert(0 == a.getColumns(), "T03_moveConstructor");
 
 	//make sure that everything got moved
-	assert(0.0 == moveHere[0][0]);
-	assert(1.0 == moveHere[0][1]);
-	assert(2.0 == moveHere[0][2]);
-	assert(3.0 == moveHere[1][0]);
-	assert(4.0 == moveHere[1][1]);
-	assert(5.0 == moveHere[1][2]);
-	assert(6.0 == moveHere[2][0]);
-	assert(7.0 == moveHere[2][1]);
-	assert(8.0 == moveHere[2][2]);
+	assert(0.0 == moveHere[0][0], "T03_moveConstructor");
+	assert(1.0 == moveHere[0][1], "T03_moveConstructor");
+	assert(2.0 == moveHere[0][2], "T03_moveConstructor");
+	assert(3.0 == moveHere[1][0], "T03_moveConstructor");
+	assert(4.0 == moveHere[1][1], "T03_moveConstructor");
+	assert(5.0 == moveHere[1][2], "T03_moveConstructor");
+	assert(6.0 == moveHere[2][0], "T03_moveConstructor");
+	assert(7.0 == moveHere[2][1], "T03_moveConstructor");
+	assert(8.0 == moveHere[2][2], "T03_moveConstructor");
 }
 
 void MatricesTests::T04_assignmentOperator()
@@ -166,15 +166,15 @@ void MatricesTests::T04_assignmentOperator()
 	a[2][2] = 8.0;
 
 	//make sure they are in the matrix
-	assert(0.0 == a[0][0]);
-	assert(1.0 == a[0][1]);
-	assert(2.0 == a[0][2]);
-	assert(3.0 == a[1][0]);
-	assert(4.0 == a[1][1]);
-	assert(5.0 == a[1][2]);
-	assert(6.0 == a[2][0]);
-	assert(7.0 == a[2][1]);
-	assert(8.0 == a[2][2]);
+	assert(0.0 == a[0][0], "T04_assignmentOperator");
+	assert(1.0 == a[0][1], "T04_assignmentOperator");
+	assert(2.0 == a[0][2], "T04_assignmentOperator");
+	assert(3.0 == a[1][0], "T04_assignmentOperator");
+	assert(4.0 == a[1][1], "T04_assignmentOperator");
+	assert(5.0 == a[1][2], "T04_assignmentOperator");
+	assert(6.0 == a[2][0], "T04_assignmentOperator");
+	assert(7.0 == a[2][1], "T04_assignmentOperator");
+	assert(8.0 == a[2][2], "T04_assignmentOperator");
 
 	//make a matrix and move the memory of 'a' into this matrix
 	Matrix<int> assignment(3, 3);
@@ -182,26 +182,26 @@ void MatricesTests::T04_assignmentOperator()
 	assignment = a;
 
 	//check that 'a' still has its original values
-	assert(0.0 == a[0][0]);
-	assert(1.0 == a[0][1]);
-	assert(2.0 == a[0][2]);
-	assert(3.0 == a[1][0]);
-	assert(4.0 == a[1][1]);
-	assert(5.0 == a[1][2]);
-	assert(6.0 == a[2][0]);
-	assert(7.0 == a[2][1]);
-	assert(8.0 == a[2][2]);
+	assert(0.0 == a[0][0], "T04_assignmentOperator");
+	assert(1.0 == a[0][1], "T04_assignmentOperator");
+	assert(2.0 == a[0][2], "T04_assignmentOperator");
+	assert(3.0 == a[1][0], "T04_assignmentOperator");
+	assert(4.0 == a[1][1], "T04_assignmentOperator");
+	assert(5.0 == a[1][2], "T04_assignmentOperator");
+	assert(6.0 == a[2][0], "T04_assignmentOperator");
+	assert(7.0 == a[2][1], "T04_assignmentOperator");
+	assert(8.0 == a[2][2], "T04_assignmentOperator");
 
 	//make sure that everything got moved
-	assert(0.0 == assignment[0][0]);
-	assert(1.0 == assignment[0][1]);
-	assert(2.0 == assignment[0][2]);
-	assert(3.0 == assignment[1][0]);
-	assert(4.0 == assignment[1][1]);
-	assert(5.0 == assignment[1][2]);
-	assert(6.0 == assignment[2][0]);
-	assert(7.0 == assignment[2][1]);
-	assert(8.0 == assignment[2][2]);
+	assert(0.0 == assignment[0][0], "T04_assignmentOperator");
+	assert(1.0 == assignment[0][1], "T04_assignmentOperator");
+	assert(2.0 == assignment[0][2], "T04_assignmentOperator");
+	assert(3.0 == assignment[1][0], "T04_assignmentOperator");
+	assert(4.0 == assignment[1][1], "T04_assignmentOperator");
+	assert(5.0 == assignment[1][2], "T04_assignmentOperator");
+	assert(6.0 == assignment[2][0], "T04_assignmentOperator");
+	assert(7.0 == assignment[2][1], "T04_assignmentOperator");
+	assert(8.0 == assignment[2][2], "T04_assignmentOperator");
 }
 
 void MatricesTests::T05_moveAssignmentOperator()
@@ -220,33 +220,33 @@ void MatricesTests::T05_moveAssignmentOperator()
 	a[2][2] = 8.0;
 
 	//make sure they are in the matrix
-	assert(0.0 == a[0][0]);
-	assert(1.0 == a[0][1]);
-	assert(2.0 == a[0][2]);
-	assert(3.0 == a[1][0]);
-	assert(4.0 == a[1][1]);
-	assert(5.0 == a[1][2]);
-	assert(6.0 == a[2][0]);
-	assert(7.0 == a[2][1]);
-	assert(8.0 == a[2][2]);
+	assert(0.0 == a[0][0], "T05_moveAssignmentOperator");
+	assert(1.0 == a[0][1], "T05_moveAssignmentOperator");
+	assert(2.0 == a[0][2], "T05_moveAssignmentOperator");
+	assert(3.0 == a[1][0], "T05_moveAssignmentOperator");
+	assert(4.0 == a[1][1], "T05_moveAssignmentOperator");
+	assert(5.0 == a[1][2], "T05_moveAssignmentOperator");
+	assert(6.0 == a[2][0], "T05_moveAssignmentOperator");
+	assert(7.0 == a[2][1], "T05_moveAssignmentOperator");
+	assert(8.0 == a[2][2], "T05_moveAssignmentOperator");
 
 	//make a matrix and move the memory of 'a' into this matrix
 	Matrix<int> moveHere = std::move(a);
 
 	//make sure the rows and columns reflect the dimensions of a matrix with no data
-	assert(0 == a.getRows());
-	assert(0 == a.getColumns());
+	assert(0 == a.getRows(), "T05_moveAssignmentOperator");
+	assert(0 == a.getColumns(), "T05_moveAssignmentOperator");
 
 	//make sure that everything got moved
-	assert(0.0 == moveHere[0][0]);
-	assert(1.0 == moveHere[0][1]);
-	assert(2.0 == moveHere[0][2]);
-	assert(3.0 == moveHere[1][0]);
-	assert(4.0 == moveHere[1][1]);
-	assert(5.0 == moveHere[1][2]);
-	assert(6.0 == moveHere[2][0]);
-	assert(7.0 == moveHere[2][1]);
-	assert(8.0 == moveHere[2][2]);
+	assert(0.0 == moveHere[0][0], "T05_moveAssignmentOperator");
+	assert(1.0 == moveHere[0][1], "T05_moveAssignmentOperator");
+	assert(2.0 == moveHere[0][2], "T05_moveAssignmentOperator");
+	assert(3.0 == moveHere[1][0], "T05_moveAssignmentOperator");
+	assert(4.0 == moveHere[1][1], "T05_moveAssignmentOperator");
+	assert(5.0 == moveHere[1][2], "T05_moveAssignmentOperator");
+	assert(6.0 == moveHere[2][0], "T05_moveAssignmentOperator");
+	assert(7.0 == moveHere[2][1], "T05_moveAssignmentOperator");
+	assert(8.0 == moveHere[2][2], "T05_moveAssignmentOperator");
 }
 
 void MatricesTests::T06_accessOperator()
@@ -265,18 +265,18 @@ void MatricesTests::T06_accessOperator()
 	a[2][2] = 8.0;
 
 	//make sure they are in the matrix
-	assert(0.0 == a[0][0]);
-	assert(1.0 == a[0][1]);
-	assert(2.0 == a[0][2]);
-	assert(3.0 == a[1][0]);
-	assert(4.0 == a[1][1]);
-	assert(5.0 == a[1][2]);
-	assert(6.0 == a[2][0]);
-	assert(7.0 == a[2][1]);
-	assert(8.0 == a[2][2]);
+	assert(0.0 == a[0][0], "T06_accessOperator");
+	assert(1.0 == a[0][1], "T06_accessOperator");
+	assert(2.0 == a[0][2], "T06_accessOperator");
+	assert(3.0 == a[1][0], "T06_accessOperator");
+	assert(4.0 == a[1][1], "T06_accessOperator");
+	assert(5.0 == a[1][2], "T06_accessOperator");
+	assert(6.0 == a[2][0], "T06_accessOperator");
+	assert(7.0 == a[2][1], "T06_accessOperator");
+	assert(8.0 == a[2][2], "T06_accessOperator");
 
 	const int X = 0;
-	assert(0.0 == a[X][X]);
+	assert(0.0 == a[X][X], "T06_accessOperator");
 }
 
 void MatricesTests::T07_transpose()
@@ -295,17 +295,17 @@ void MatricesTests::T07_transpose()
 	a[2][2] = 8.0;
 
 	//make sure they are in the matrix
-	assert(0.0 == a[0][0]);assert(1.0 == a[0][1]);assert(2.0 == a[0][2]);
-	assert(3.0 == a[1][0]);assert(4.0 == a[1][1]);assert(5.0 == a[1][2]);
-	assert(6.0 == a[2][0]);assert(7.0 == a[2][1]);assert(8.0 == a[2][2]);
+	assert(0.0 == a[0][0], "T07_transpose");assert(1.0 == a[0][1], "T07_transpose");assert(2.0 == a[0][2], "T07_transpose");
+	assert(3.0 == a[1][0], "T07_transpose");assert(4.0 == a[1][1], "T07_transpose");assert(5.0 == a[1][2], "T07_transpose");
+	assert(6.0 == a[2][0], "T07_transpose");assert(7.0 == a[2][1], "T07_transpose");assert(8.0 == a[2][2], "T07_transpose");
 
 	//transpose it
 	a.transpose();
 
 	//make sure they are transposed
-	assert(0.0 == a[0][0]);assert(3.0 == a[0][1]);assert(6.0 == a[0][2]);
-	assert(1.0 == a[1][0]);assert(4.0 == a[1][1]);assert(7.0 == a[1][2]);
-	assert(2.0 == a[2][0]);assert(5.0 == a[2][1]);assert(8.0 == a[2][2]);
+	assert(0.0 == a[0][0], "T07_transpose");assert(3.0 == a[0][1], "T07_transpose");assert(6.0 == a[0][2], "T07_transpose");
+	assert(1.0 == a[1][0], "T07_transpose");assert(4.0 == a[1][1], "T07_transpose");assert(7.0 == a[1][2], "T07_transpose");
+	assert(2.0 == a[2][0], "T07_transpose");assert(5.0 == a[2][1], "T07_transpose");assert(8.0 == a[2][2], "T07_transpose");
 }
 
 void MatricesTests::T08_transposed()
@@ -325,29 +325,29 @@ void MatricesTests::T08_transposed()
 	a[2][2] = 8.0;
 
 	//make sure they are in the matrix
-	assert(0.0 == a[0][0]);
-	assert(1.0 == a[0][1]);
-	assert(2.0 == a[0][2]);
-	assert(3.0 == a[1][0]);
-	assert(4.0 == a[1][1]);
-	assert(5.0 == a[1][2]);
-	assert(6.0 == a[2][0]);
-	assert(7.0 == a[2][1]);
-	assert(8.0 == a[2][2]);
+	assert(0.0 == a[0][0], "T08_transposed");
+	assert(1.0 == a[0][1], "T08_transposed");
+	assert(2.0 == a[0][2], "T08_transposed");
+	assert(3.0 == a[1][0], "T08_transposed");
+	assert(4.0 == a[1][1], "T08_transposed");
+	assert(5.0 == a[1][2], "T08_transposed");
+	assert(6.0 == a[2][0], "T08_transposed");
+	assert(7.0 == a[2][1], "T08_transposed");
+	assert(8.0 == a[2][2], "T08_transposed");
 
 	//transpose it
 	Matrix<int> transposed = a.transposed();
 
 	//make sure they are transposed
-	assert(0.0 == transposed[0][0]);
-	assert(3.0 == transposed[0][1]);
-	assert(6.0 == transposed[0][2]);
-	assert(1.0 == transposed[1][0]);
-	assert(4.0 == transposed[1][1]);
-	assert(7.0 == transposed[1][2]);
-	assert(2.0 == transposed[2][0]);
-	assert(5.0 == transposed[2][1]);
-	assert(8.0 == transposed[2][2]);
+	assert(0.0 == transposed[0][0], "T08_transposed");
+	assert(3.0 == transposed[0][1], "T08_transposed");
+	assert(6.0 == transposed[0][2], "T08_transposed");
+	assert(1.0 == transposed[1][0], "T08_transposed");
+	assert(4.0 == transposed[1][1], "T08_transposed");
+	assert(7.0 == transposed[1][2], "T08_transposed");
+	assert(2.0 == transposed[2][0], "T08_transposed");
+	assert(5.0 == transposed[2][1], "T08_transposed");
+	assert(8.0 == transposed[2][2], "T08_transposed");
 }
 
 void MatricesTests::T09_multiplicationOperator()
@@ -366,54 +366,54 @@ void MatricesTests::T09_multiplicationOperator()
 	a[2][2] = 8.0;
 
 	//make sure they are in the matrix
-	assert(0.0 == a[0][0]);
-	assert(1.0 == a[0][1]);
-	assert(2.0 == a[0][2]);
-	assert(3.0 == a[1][0]);
-	assert(4.0 == a[1][1]);
-	assert(5.0 == a[1][2]);
-	assert(6.0 == a[2][0]);
-	assert(7.0 == a[2][1]);
-	assert(8.0 == a[2][2]);
+	assert(0.0 == a[0][0], "T09_multiplicationOperator");
+	assert(1.0 == a[0][1], "T09_multiplicationOperator");
+	assert(2.0 == a[0][2], "T09_multiplicationOperator");
+	assert(3.0 == a[1][0], "T09_multiplicationOperator");
+	assert(4.0 == a[1][1], "T09_multiplicationOperator");
+	assert(5.0 == a[1][2], "T09_multiplicationOperator");
+	assert(6.0 == a[2][0], "T09_multiplicationOperator");
+	assert(7.0 == a[2][1], "T09_multiplicationOperator");
+	assert(8.0 == a[2][2], "T09_multiplicationOperator");
 
 	//multiply by 3
 	Matrix<int> b = a * 3;
 
 	//make sure matrix a is the same
-	assert(0.0 == a[0][0]);
-	assert(1.0 == a[0][1]);
-	assert(2.0 == a[0][2]);
-	assert(3.0 == a[1][0]);
-	assert(4.0 == a[1][1]);
-	assert(5.0 == a[1][2]);
-	assert(6.0 == a[2][0]);
-	assert(7.0 == a[2][1]);
-	assert(8.0 == a[2][2]);
+	assert(0.0 == a[0][0], "T09_multiplicationOperator");
+	assert(1.0 == a[0][1], "T09_multiplicationOperator");
+	assert(2.0 == a[0][2], "T09_multiplicationOperator");
+	assert(3.0 == a[1][0], "T09_multiplicationOperator");
+	assert(4.0 == a[1][1], "T09_multiplicationOperator");
+	assert(5.0 == a[1][2], "T09_multiplicationOperator");
+	assert(6.0 == a[2][0], "T09_multiplicationOperator");
+	assert(7.0 == a[2][1], "T09_multiplicationOperator");
+	assert(8.0 == a[2][2], "T09_multiplicationOperator");
 
 	//make sure matrix b has the right values
-	assert(0.0 == b[0][0]);
-	assert(3.0 == b[0][1]);
-	assert(6.0 == b[0][2]);
-	assert(9.0 == b[1][0]);
-	assert(12.0 == b[1][1]);
-	assert(15.0 == b[1][2]);
-	assert(18.0 == b[2][0]);
-	assert(21.0 == b[2][1]);
-	assert(24.0 == b[2][2]);
+	assert(0.0 == b[0][0],  "T09_multiplicationOperator");
+	assert(3.0 == b[0][1],  "T09_multiplicationOperator");
+	assert(6.0 == b[0][2],  "T09_multiplicationOperator");
+	assert(9.0 == b[1][0],  "T09_multiplicationOperator");
+	assert(12.0 == b[1][1], "T09_multiplicationOperator");
+	assert(15.0 == b[1][2], "T09_multiplicationOperator");
+	assert(18.0 == b[2][0], "T09_multiplicationOperator");
+	assert(21.0 == b[2][1], "T09_multiplicationOperator");
+	assert(24.0 == b[2][2], "T09_multiplicationOperator");
 
 	//use shorthand
 	a *= 3;
 
 	//make sure a has right values now
-	assert(0.0 == a[0][0]);
-	assert(3.0 == a[0][1]);
-	assert(6.0 == a[0][2]);
-	assert(9.0 == a[1][0]);
-	assert(12.0 == a[1][1]);
-	assert(15.0 == a[1][2]);
-	assert(18.0 == a[2][0]);
-	assert(21.0 == a[2][1]);
-	assert(24.0 == a[2][2]);
+	assert(0.0 == a[0][0],  "T09_multiplicationOperator");
+	assert(3.0 == a[0][1],  "T09_multiplicationOperator");
+	assert(6.0 == a[0][2],  "T09_multiplicationOperator");
+	assert(9.0 == a[1][0],  "T09_multiplicationOperator");
+	assert(12.0 == a[1][1], "T09_multiplicationOperator");
+	assert(15.0 == a[1][2], "T09_multiplicationOperator");
+	assert(18.0 == a[2][0], "T09_multiplicationOperator");
+	assert(21.0 == a[2][1], "T09_multiplicationOperator");
+	assert(24.0 == a[2][2], "T09_multiplicationOperator");
 
 	//make a 2X3 matrix and a 3X2 matrix and a 2X2 to test multiplying two matrices
 	//make a 2X3 matrix with those values
@@ -445,12 +445,12 @@ void MatricesTests::T09_multiplicationOperator()
 	z[1][1] = 760;
 
 	//check the operator=(Matrix other)
-	assert(z == (x*y));
+	assert(z == (x*y), "T09_multiplicationOperator");
 
 	//check the operator*=(Matrix other)
 	x *= y;
 
-	assert(z == x);
+	assert(z == x, "T09_multiplicationOperator");
 }
 
 void MatricesTests::T10_additionOperator()
@@ -492,11 +492,11 @@ void MatricesTests::T10_additionOperator()
 	aplusb[2][1] = 14.0;
 	aplusb[2][2] = 16.0;
 
-	assert((a + b) == aplusb);
+	assert((a + b) == aplusb, "T10_additionOperator");
 
 	b += a;
 
-	assert(b == aplusb);
+	assert(b == aplusb, "T10_additionOperator");
 
 	//make a 2X2 matrix
 	Matrix<int> twobytwo(2, 2);
@@ -511,12 +511,12 @@ void MatricesTests::T10_additionOperator()
 	{
 		//if it doesnt throw it should fail
 		a + twobytwo;
-		assert(false);
+		assert(false, "T10_additionOperator");
 	}
 	catch (std::logic_error e)
 	{
 		//otherwise it passed
-		assert(true);
+		assert(true, "T10_additionOperator");
 	}
 }
 
@@ -559,11 +559,11 @@ void MatricesTests::T11_subtractionOperator()
 	aminusb[2][1] = 0.0;
 	aminusb[2][2] = 0.0;
 
-	assert((a - b) == aminusb);
+	assert((a - b) == aminusb, "T11_subtractionOperator");
 
 	b -= a;
 
-	assert(b == aminusb);
+	assert(b == aminusb, "T11_subtractionOperator");
 
 	//make a 2X2 matrix
 	Matrix<int> twobytwo(2, 2);
@@ -578,12 +578,12 @@ void MatricesTests::T11_subtractionOperator()
 	{
 		//if it doesn't throw it should fail
 		a - twobytwo;
-		assert(false);
+		assert(false, "T11_subtractionOperator");
 	}
 	catch (std::logic_error e)
 	{
 		//otherwise it passed
-		assert(true);
+		assert(true, "T11_subtractionOperator");
 	}
 }
 
@@ -625,13 +625,13 @@ void MatricesTests::T12_equivalence()
 	d[1][2] = 4.0;
 
 	//equal if same size and data
-	assert(a == b);
+	assert(a == b, "T12_equivalence");
 
 	//not equal if same size different data
-	assert(a != c);
+	assert(a != c, "T12_equivalence");
 
 	//not equal if different size similar data
-	assert(d != c);
+	assert(d != c, "T12_equivalence");
 
 }
 
@@ -655,7 +655,7 @@ void MatricesTests::T13_outputoperator()
 
 	std::string testText = "[\t0\t1\t2\t]\n[\t3\t4\t5\t]\n[\t6\t7\t8\t]\n";
 
-	assert(testText == out.str());
+	assert(testText == out.str(), "T13_outputoperator");
 }
 
 void MatricesTests::T15_cut()
@@ -681,7 +681,7 @@ void MatricesTests::T15_cut()
 	c[1][0] = 6;
 	c[1][1] = 8;
 
-	assert(b == c);
+	assert(b == c, "T15_cut");
 
 	Matrix<int> d(1, 1);
 
@@ -689,24 +689,24 @@ void MatricesTests::T15_cut()
 	try
 	{
 		d.getCut(1,1);
-		assert(false);
+		assert(false, "T15_cut");
 	}
 	catch (std::logic_error e)
 	{
 		//otherwise it passed
-		assert(true);
+		assert(true, "T15_cut");
 	}
 
 	//make sure that it throws an exception for out of range tests
 	try
 	{
 		a.getCut(5,5);
-		assert(false);
+		assert(false, "T15_cut");
 	}
 	catch (std::logic_error e)
 	{
 		//otherwise it passed
-		assert(true);
+		assert(true, "T15_cut");
 	}
 }
 
@@ -718,7 +718,7 @@ void MatricesTests::T16_testDeterminant()
 	
 	int adet = a.getDeterminant();
 
-	assert(adet == 5);
+	assert(adet == 5, "T16_testDeterminant");
 
 	Matrix<int> b(3, 3);
 
@@ -734,7 +734,7 @@ void MatricesTests::T16_testDeterminant()
 
 	int bdet = b.getDeterminant();
 
-	assert(bdet == 0);
+	assert(bdet == 0, "T16_testDeterminant");
 }
 
 void MatricesTests::T17_testMinors()
@@ -746,24 +746,24 @@ void MatricesTests::T17_testMinors()
 	try
 	{
 		a.getMinors();
-		assert(false);
+		assert(false, "T17_testMinors");
 	}
 	catch (std::logic_error e)
 	{
 		//otherwise it passed
-		assert(true);
+		assert(true, "T17_testMinors");
 	}
 
 	//make sure that it throws an exception for out of range tests
 	try
 	{
 		a.getMinor(5,5);
-		assert(false);
+		assert(false, "T17_testMinors");
 	}
 	catch (std::logic_error e)
 	{
 		//otherwise it passed
-		assert(true);
+		assert(true, "T17_testMinors");
 	}
 
 	Matrix<int> b(3, 3);
@@ -792,7 +792,7 @@ void MatricesTests::T17_testMinors()
 	bExpectedMinors[2][1] = -6;
 	bExpectedMinors[2][2] = -3;
 
-	assert(bExpectedMinors == bMinors);
+	assert(bExpectedMinors == bMinors, "T17_testMinors");
 }
 
 void MatricesTests::T18_testCofactors()
@@ -804,24 +804,24 @@ void MatricesTests::T18_testCofactors()
 	try
 	{
 		a.getCofactors();
-		assert(false);
+		assert(false, "T18_testCofactors");
 	}
 	catch (std::logic_error e)
 	{
 		//otherwise it passed
-		assert(true);
+		assert(true, "T18_testCofactors");
 	}
 
 	//make sure that it throws an exception for out of range tests
 	try
 	{
 		a.getCofactor(5,5);
-		assert(false);
+		assert(false, "T18_testCofactors");
 	}
 	catch (std::logic_error e)
 	{
 		//otherwise it passed
-		assert(true);
+		assert(true, "T18_testCofactors");
 	}
 
 	Matrix<int> b(3, 3);
@@ -850,7 +850,7 @@ void MatricesTests::T18_testCofactors()
 	bExpectedCofactors[2][1] = 6;
 	bExpectedCofactors[2][2] = -3;
 
-	assert(bExpectedCofactors == bCofactors);
+	assert(bExpectedCofactors == bCofactors, "T18_testCofactors");
 }
 
 void MatricesTests::T19_testAdjugate()
@@ -862,12 +862,12 @@ void MatricesTests::T19_testAdjugate()
 	try
 	{
 		a.getAdjugate();
-		assert(false);
+		assert(false, "T19_testAdjugate");
 	}
 	catch (std::logic_error e)
 	{
 		//otherwise it passed
-		assert(true);
+		assert(true, "T19_testAdjugate");
 	}
 
 	Matrix<int> b(3, 3);
@@ -896,7 +896,7 @@ void MatricesTests::T19_testAdjugate()
 	bExpectedAdjugates[2][1] = 6;
 	bExpectedAdjugates[2][2] = -3;
 
-	assert(bExpectedAdjugates == bAdjugate);
+	assert(bExpectedAdjugates == bAdjugate, "T19_testAdjugate");
 }
 
 void MatricesTests::T20_testInverse()
@@ -927,7 +927,7 @@ void MatricesTests::T20_testInverse()
 	bInverseExpected[2][1] = 0.0;
 	bInverseExpected[2][2] = 1.0;
 
-	assert(bInverseExpected == bInverse);
+	assert(bInverseExpected == bInverse, "T20_testInverse");
 
 	Matrix<int> c(3, 3);
 
@@ -955,5 +955,5 @@ void MatricesTests::T20_testInverse()
 	cInverseExpected[2][1] = 1.0;
 	cInverseExpected[2][2] = -2.0;
 
-	assert(cInverseExpected == cInverse);	
+	assert(cInverseExpected == cInverse, "T20_testInverse");	
 }

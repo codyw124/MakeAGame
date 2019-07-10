@@ -18,6 +18,7 @@ objects/MatricesTests.o \
 objects/Transform.o \
 objects/TransformTests.o \
 objects/GeometryTests.o \
+objects/Test.o \
 objects/TestAll.o
 	$(COMPILER) objects/PhysicsHelper.o \
 objects/Vector2Tests.o \
@@ -28,6 +29,7 @@ objects/MatricesTests.o \
 objects/Transform.o \
 objects/TransformTests.o \
 objects/GeometryTests.o \
+objects/Test.o \
 objects/TestAll.o $(LINKER_FLAGS) -o TestAll
 
 
@@ -73,6 +75,9 @@ objects/TransformTests.o: source/TransformTests.cpp headers/TransformTests.h hea
 
 objects/GeometryTests.o: source/GeometryTests.cpp headers/GeometryTests.h headers/Test.h
 	$(COMPILER) $(COMPILER_FLAGS) source/GeometryTests.cpp -o objects/GeometryTests.o
+
+objects/Test.o: source/Test.cpp headers/Test.h
+	$(COMPILER) $(COMPILER_FLAGS) source/Test.cpp -o objects/Test.o
 
 objects/TestAll.o: source/TestAll.cpp headers/MatricesTests.h headers/Vector2Tests.h headers/Vector3Tests.h \
 headers/TransformTests.h headers/GeometryTests.h headers/Test.h

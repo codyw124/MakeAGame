@@ -5,7 +5,7 @@
 
 void Test::assert(bool expression, std::string failMessage)
 {
-	if (!expression)
+	if(!expression)
 	{
 		std::cerr << failMessage << std::endl;
 	}
