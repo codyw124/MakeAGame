@@ -76,16 +76,82 @@ Vector3 Transform::getTransform()
 
 void Transform::setTransform(const Vector3& newTransform)
 {
-    if(isRowMajor_)
-    {
-        data_[3][0] = newTransform[0];
-        data_[3][1] = newTransform[1];
-        data_[3][2] = newTransform[2];
-    }
-    else
-    {
-        data_[0][3] = newTransform[0];
-        data_[1][3] = newTransform[1];
-        data_[2][3] = newTransform[2];
-    }
+	setTransform(newTransform[0], newTransform[1], newTransform[2]);
+}
+
+void Transform::setTransform(const double& x, const double& y, const double& z)
+{
+	if (isRowMajor_)
+	{
+		data_[3][0] = x;
+		data_[3][1] = y;
+		data_[3][2] = z;
+	}
+	else
+	{
+		data_[0][3] = x;
+		data_[1][3] = y;
+		data_[2][3] = z;
+	}
+}
+
+Vector3 Transform::getScale()
+{
+	return Vector3(data_[0][0], data_[1][1], data_[2][2]);
+}
+
+void Transform::setScale(const Vector3& newScale)
+{
+	setScale(newScale[0], newScale[1], newScale[2]);
+}
+void Transform::setScale(const double& x, const double& y, const double& z)
+{
+	data_[0][0] = x;
+	data_[1][1] = y;
+	data_[2][2] = z;
+}
+
+Vector3 Transform::getXAxis()
+{
+
+}
+
+void Transform::setXAxis(const Vector3& newXAxis)
+{
+
+}
+
+void Transform::setXAxis(const double& x, const double& y, const double& z)
+{
+
+}
+
+Vector3 Transform::getYAxis()
+{
+
+}
+
+void Transform::setYAxis(const Vector3& newXAxis)
+{
+
+}
+
+void Transform::setYAxis(const double& x, const double& y, const double& z)
+{
+
+}
+
+Vector3 Transform::getZAxis()
+{
+
+}
+
+void Transform::setZAxis(const Vector3& newXAxis)
+{
+
+}
+
+void Transform::setZAxis(const double& x, const double& y, const double& z)
+{
+
 }
