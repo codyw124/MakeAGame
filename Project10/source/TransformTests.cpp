@@ -54,11 +54,23 @@ void TransformTests::T3_testGetSetTranslate()
 
 	Vector3 x(1, 2, 3);
 
-	a.setTransform(x);
+	a.setTranslate(x);
+
+	assert(a.getTranslate() == x, "make sure that the transform was set when row major");
 
 	a.toOtherMajor();
 
-	assert(a.getTransform() == x, "changing majors must maintain transform");
+	assert(a.getTranslate() == x, "changing majors to column major must maintain transform");
+
+	Transform b;
+
+	b.toOtherMajor();
+
+	b.setTranslate(x);
+
+	assert(b.getTranslate() == x, "make sure that transform is set when column major");
+
+	assert(b.getTranslate() == x, "changing majors to row major must maintain transform");
 }
 
 void TransformTests::T4_testGetSetScale()
@@ -69,11 +81,26 @@ void TransformTests::T4_testGetSetScale()
 
 	a.setScale(x);
 
+	assert(a.getScale() == x, "make sure that the scale was set in row major");
+
 	a.toOtherMajor();
 
-	assert(a.getScale() == x, "changing majors must maintain scale");
+	assert(a.getScale() == x, "changing majors to column major must maintain scale");
+
+	Transform b;
+
+	b.toOtherMajor();
+
+	b.setScale(x);
+
+	assert(b.getScale() == x, "make sure that setting scale in column major works");
+
+	b.toOtherMajor();
+
+	assert(b.getScale() == x, "make sure that changing major to row major maintains the scale");
 }
 
+//TODO update so that this does bi directional testing for major change
 void TransformTests::T5_testGetSetXYZAxis()
 {
 	Transform a;

@@ -8,7 +8,7 @@
 #include "Transform.h"
 
 using namespace std;
-//TODO test forwards and backwards  for getters and setters changing majors to row and from row
+
 class TransformTests : public Test
 {
     public:

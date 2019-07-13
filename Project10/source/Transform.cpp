@@ -58,7 +58,7 @@ bool Transform::isRowMajor() const
     return isRowMajor_;
 }
 
-Vector3 Transform::getTransform() const
+Vector3 Transform::getTranslate() const
 {
     Vector3 ret;
 
@@ -78,12 +78,12 @@ Vector3 Transform::getTransform() const
     return ret;
 }
 
-void Transform::setTransform(const Vector3& newTransform)
+void Transform::setTranslate(const Vector3& newTransform)
 {
-	setTransform(newTransform[0], newTransform[1], newTransform[2]);
+	setTranslate(newTransform[0], newTransform[1], newTransform[2]);
 }
 
-void Transform::setTransform(const double& x, const double& y, const double& z)
+void Transform::setTranslate(const double& x, const double& y, const double& z)
 {
 	if (isRowMajor_)
 	{

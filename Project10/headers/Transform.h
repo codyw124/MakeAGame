@@ -19,9 +19,9 @@ public:
 
     void toOtherMajor();
     bool isRowMajor() const;
-	Vector3 getTransform() const;
-	void setTransform(const Vector3& newTransform);
-	void setTransform(const double& x, const double& y, const double& z);
+	Vector3 getTranslate() const;
+	void setTranslate(const Vector3& newTransform);
+	void setTranslate(const double& x, const double& y, const double& z);
 	Vector3 getScale() const;
 	void setScale(const Vector3& newScale);
 	void setScale(const double& x, const double& y, const double& z);
