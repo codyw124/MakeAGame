@@ -18,26 +18,30 @@ public:
     Transform& operator=(Transform&& other);
 
     void toOtherMajor();
-    bool isRowMajor();
-	Vector3 getTransform();
+    bool isRowMajor() const;
+	Vector3 getTransform() const;
 	void setTransform(const Vector3& newTransform);
 	void setTransform(const double& x, const double& y, const double& z);
-	Vector3 getScale();
+	Vector3 getScale() const;
 	void setScale(const Vector3& newScale);
 	void setScale(const double& x, const double& y, const double& z);
-	Vector3 getXAxis();
+	Vector3 getXAxis() const;
 	void setXAxis(const Vector3& newXAxis);
 	void setXAxis(const double& x, const double& y, const double& z);
-	Vector3 getYAxis();
-	void setYAxis(const Vector3& newXAxis);
+	Vector3 getYAxis() const;
+	void setYAxis(const Vector3& newYAxis);
 	void setYAxis(const double& x, const double& y, const double& z);
-	Vector3 getZAxis();
-	void setZAxis(const Vector3& newXAxis);
+	Vector3 getZAxis() const;
+	void setZAxis(const Vector3& newZAxis);
 	void setZAxis(const double& x, const double& y, const double& z);
+
+	Matrix<double> getData() const;
     
 private:
-    Matrix<double> data_;   
+    Matrix<double> data_;  
     bool isRowMajor_;
 
     void deepCopy(const Transform& other);
 };
+
+std::ostream& operator<<(std::ostream& os, const Transform& v);

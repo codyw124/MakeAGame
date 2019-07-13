@@ -9,7 +9,7 @@ void TransformTests::runAllTests()
 	T2_testSwitchMajors();
 	T3_testGetSetTranslate();
 	T4_testGetSetScale();
-	T5_testGetSetRotate();
+	T5_testGetSetXYZAxis();
 	T6_testRotate();
 	cout << "All Transform Tests Passed\n";
 }
@@ -75,7 +75,7 @@ void TransformTests::T4_testGetSetScale()
 	assert(a.getScale() == x, "changing majors must maintain scale");
 }
 
-void TransformTests::T5_testGetSetRotate()
+void TransformTests::T5_testGetSetXYZAxis()
 {
 
 }

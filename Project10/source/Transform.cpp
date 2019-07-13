@@ -53,22 +53,26 @@ void Transform::toOtherMajor()
     isRowMajor_ = !isRowMajor_;
 }
 
-bool Transform::isRowMajor()
+bool Transform::isRowMajor() const
 {
     return isRowMajor_;
 }
 
-Vector3 Transform::getTransform()
+Vector3 Transform::getTransform() const
 {
     Vector3 ret;
 
     if(isRowMajor_)
     {
-        ret = Vector3(data_[3][0], data_[3][1], data_[3][2]);
+		ret[0] = data_[3][0];
+		ret[1] = data_[3][1];
+		ret[2] = data_[3][2];
     }
     else
     {
-        ret = Vector3(data_[0][3], data_[1][3], data_[2][3]);
+		ret[0] = data_[0][3];
+		ret[1] = data_[1][3];
+		ret[2] = data_[2][3];
     }
 
     return ret;
@@ -95,7 +99,7 @@ void Transform::setTransform(const double& x, const double& y, const double& z)
 	}
 }
 
-Vector3 Transform::getScale()
+Vector3 Transform::getScale() const
 {
 	return Vector3(data_[0][0], data_[1][1], data_[2][2]);
 }
@@ -111,47 +115,125 @@ void Transform::setScale(const double& x, const double& y, const double& z)
 	data_[2][2] = z;
 }
 
-Vector3 Transform::getXAxis()
+Vector3 Transform::getXAxis() const
 {
+	Vector3 ret;
 
+	if (isRowMajor_)
+	{
+		ret = Vector3(data_[0][0], data_[0][1], data_[0][2]);
+	}
+	else
+	{
+		ret = Vector3(data_[0][0], data_[1][0], data_[2][0]);
+	}
+
+	return ret;
 }
 
 void Transform::setXAxis(const Vector3& newXAxis)
 {
-
+	setXAxis(newXAxis[0], newXAxis[1], newXAxis[2]);
 }
 
 void Transform::setXAxis(const double& x, const double& y, const double& z)
 {
-
+	if (isRowMajor_)
+	{
+		data_[0][0] = x;
+		data_[0][1] = y;
+		data_[0][2] = z;
+	}
+	else
+	{
+		data_[0][0] = x;
+		data_[1][0] = y;
+		data_[2][0] = z;
+	}
 }
 
-Vector3 Transform::getYAxis()
+Vector3 Transform::getYAxis() const
 {
+	Vector3 ret;
 
+	if (isRowMajor_)
+	{
+		ret = Vector3(data_[1][0], data_[1][1], data_[1][2]);
+	}
+	else
+	{
+		ret = Vector3(data_[0][1], data_[1][1], data_[2][1]);
+	}
+
+	return ret;
 }
 
-void Transform::setYAxis(const Vector3& newXAxis)
+void Transform::setYAxis(const Vector3& newYAxis)
 {
-
+	setXAxis(newYAxis[0], newYAxis[1], newYAxis[2]);
 }
 
 void Transform::setYAxis(const double& x, const double& y, const double& z)
 {
-
+	if (isRowMajor_)
+	{
+		data_[1][0] = x;
+		data_[1][1] = y;
+		data_[1][2] = z;
+	}
+	else
+	{
+		data_[0][1] = x;
+		data_[1][1] = y;
+		data_[2][1] = z;
+	}
 }
 
-Vector3 Transform::getZAxis()
+Vector3 Transform::getZAxis() const
 {
+	Vector3 ret;
 
+	if (isRowMajor_)
+	{
+		ret = Vector3(data_[2][0], data_[2][1], data_[2][2]);
+	}
+	else
+	{
+		ret = Vector3(data_[0][2], data_[1][2], data_[2][2]);
+	}
+
+	return ret;
 }
 
-void Transform::setZAxis(const Vector3& newXAxis)
+void Transform::setZAxis(const Vector3& newZAxis)
 {
-
+	setXAxis(newZAxis[0], newZAxis[1], newZAxis[2]);
 }
 
 void Transform::setZAxis(const double& x, const double& y, const double& z)
 {
+	if (isRowMajor_)
+	{
+		data_[2][0] = x;
+		data_[2][1] = y;
+		data_[2][2] = z;
+	}
+	else
+	{
+		data_[0][2] = x;
+		data_[1][2] = y;
+		data_[2][2] = z;
+	}
+}
 
+Matrix<double> Transform::getData() const
+{
+	return data_;
+}
+
+std::ostream& operator<<(std::ostream& os, const Transform& v)
+{
+	os << v.getData() << endl;
+
+	return os;
 }

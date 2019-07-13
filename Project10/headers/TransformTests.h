@@ -18,6 +18,6 @@ class TransformTests : public Test
         void T2_testSwitchMajors();
 		void T3_testGetSetTranslate();
 		void T4_testGetSetScale();
-		void T5_testGetSetRotate();
+		void T5_testGetSetXYZAxis();
 		void T6_testRotate();
 };
