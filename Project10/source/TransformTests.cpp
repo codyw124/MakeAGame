@@ -63,7 +63,6 @@ void TransformTests::T3_testGetSetTranslate()
 
 void TransformTests::T4_testGetSetScale()
 {
-
 	Transform a;
 
 	Vector3 x(1, 2, 3);
@@ -77,7 +76,34 @@ void TransformTests::T4_testGetSetScale()
 
 void TransformTests::T5_testGetSetXYZAxis()
 {
+	Transform a;
 
+	Vector3 x(1, 2, 3);
+	
+	//xaxis
+	a.setXAxis(x);
+
+	assert(a.getXAxis() == x, "make sure xaxis get set");
+
+	//yaxis
+	x *= 2;
+	a.setYAxis(x);
+
+	assert(a.getYAxis() == x, "make sure y axis gets set");
+
+	//zaxis
+	x *= 2;
+	a.setZAxis(x);
+
+	assert(a.getZAxis() == x, "make sure z axis gets set");
+
+	a.toOtherMajor();
+
+	assert(a.getZAxis() == x, "make sure z axis is maintained after changing majors");
+	x /= 2;
+	assert(a.getYAxis() == x, "make sure y axis is maintained after changing majors");
+	x /= 2;
+	assert(a.getXAxis() == x, "make sure x axis is maintained after changing majors");
 }
 
 void TransformTests::T6_testRotate()
