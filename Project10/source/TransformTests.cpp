@@ -100,37 +100,68 @@ void TransformTests::T4_testGetSetScale()
 	assert(b.getScale() == x, "make sure that changing major to row major maintains the scale");
 }
 
-//TODO update so that this does bi directional testing for major change
 void TransformTests::T5_testGetSetXYZAxis()
 {
-	Transform a;
+	Transform rowMajorTest;
 
-	Vector3 x(1, 2, 3);
+	Vector3 rowMajorTestVector(1, 2, 3);
 	
 	//xaxis
-	a.setXAxis(x);
+	rowMajorTest.setXAxis(rowMajorTestVector);
 
-	assert(a.getXAxis() == x, "make sure xaxis get set");
+	assert(rowMajorTest.getXAxis() == rowMajorTestVector, "make sure xaxis get set");
 
 	//yaxis
-	x *= 2;
-	a.setYAxis(x);
+	rowMajorTestVector *= 2;
+	rowMajorTest.setYAxis(rowMajorTestVector);
 
-	assert(a.getYAxis() == x, "make sure y axis gets set");
+	assert(rowMajorTest.getYAxis() == rowMajorTestVector, "make sure y axis gets set");
 
 	//zaxis
-	x *= 2;
-	a.setZAxis(x);
+	rowMajorTestVector *= 2;
+	rowMajorTest.setZAxis(rowMajorTestVector);
 
-	assert(a.getZAxis() == x, "make sure z axis gets set");
+	assert(rowMajorTest.getZAxis() == rowMajorTestVector, "make sure z axis gets set");
 
-	a.toOtherMajor();
+	rowMajorTest.toOtherMajor();
 
-	assert(a.getZAxis() == x, "make sure z axis is maintained after changing majors");
-	x /= 2;
-	assert(a.getYAxis() == x, "make sure y axis is maintained after changing majors");
-	x /= 2;
-	assert(a.getXAxis() == x, "make sure x axis is maintained after changing majors");
+	assert(rowMajorTest.getZAxis() == rowMajorTestVector, "make sure z axis is maintained after changing majors");
+	rowMajorTestVector /= 2;
+	assert(rowMajorTest.getYAxis() == rowMajorTestVector, "make sure y axis is maintained after changing majors");
+	rowMajorTestVector /= 2;
+	assert(rowMajorTest.getXAxis() == rowMajorTestVector, "make sure x axis is maintained after changing majors");
+
+	//test again but start with a column major
+	Transform columnMajorTest;
+	columnMajorTest.toOtherMajor();
+
+	Vector3 columnMajorTestVector(1, 2, 3);
+
+	//xaxis
+	columnMajorTest.setXAxis(columnMajorTestVector);
+
+	assert(columnMajorTest.getXAxis() == columnMajorTestVector, "make sure xaxis get set");
+
+	//yaxis
+	columnMajorTestVector *= 2;
+	columnMajorTest.setYAxis(columnMajorTestVector);
+
+	assert(columnMajorTest.getYAxis() == columnMajorTestVector, "make sure y axis gets set");
+
+	//zaxis
+	columnMajorTestVector *= 2;
+	columnMajorTest.setZAxis(columnMajorTestVector);
+
+	assert(columnMajorTest.getZAxis() == columnMajorTestVector, "make sure z axis gets set");
+
+	columnMajorTest.toOtherMajor();
+
+	assert(columnMajorTest.getZAxis() == columnMajorTestVector, "make sure z axis is maintained after changing majors");
+	columnMajorTestVector /= 2;
+	assert(columnMajorTest.getYAxis() == columnMajorTestVector, "make sure y axis is maintained after changing majors");
+	columnMajorTestVector /= 2;
+	assert(columnMajorTest.getXAxis() == columnMajorTestVector, "make sure x axis is maintained after changing majors");
+
 }
 
 void TransformTests::T6_testRotate()
