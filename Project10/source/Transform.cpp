@@ -237,6 +237,25 @@ void Transform::setZAxis(const double& x, const double& y, const double& z)
 	}
 }
 
+void Transform::rotate(const double& pitch, const double& yaw, const double& roll)
+{
+	rotateZ(roll);
+	rotateX(pitch);
+	rotateY(yaw);
+}
+
+void Transform::rotateZ(const double& angle)
+{
+}
+
+void Transform::rotateY(const double& angle)
+{
+}
+
+void Transform::rotateX(const double& angle)
+{
+}
+
 Matrix<double> Transform::getData() const
 {
 	return data_;

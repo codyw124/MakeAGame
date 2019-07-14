@@ -35,6 +35,11 @@ public:
 	void setZAxis(const Vector3& newZAxis);
 	void setZAxis(const double& x, const double& y, const double& z);
 
+	void rotate(const double& pitch, const double& yaw, const double& roll);
+	void rotateZ(const double& angle);
+	void rotateY(const double& angle);
+	void rotateX(const double& angle);
+
 	Matrix<double> getData() const;
     
 private:
