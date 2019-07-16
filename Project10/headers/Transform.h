@@ -5,6 +5,7 @@
 
 #include "Matrix.h"
 #include "Vector3.h"
+#include "PhysicsHelper.h"
 
 class Transform
 {
@@ -35,15 +36,15 @@ public:
 	void setZAxis(const Vector3& newZAxis);
 	void setZAxis(const double& x, const double& y, const double& z);
 
-	void rotate(const double& pitch, const double& yaw, const double& roll);
-	void rotateZ(const double& angle);
-	void rotateY(const double& angle);
-	void rotateX(const double& angle);
+	Matrix getRotationMatrix(const double& pitch, const double& yaw, const double& roll);
+	Matrix rotateZ(const double& angle);
+	Matrix rotateY(const double& angle);
+	Matrix rotateX(const double& angle);
 
-	Matrix<double> getData() const;
+	Matrix getData() const;
     
 private:
-    Matrix<double> data_;  
+    Matrix data_;  
     bool isRowMajor_;
 
     void deepCopy(const Transform& other);

@@ -237,33 +237,77 @@ void Transform::setZAxis(const double& x, const double& y, const double& z)
 	}
 }
 
-void Transform::rotate(const double& pitch, const double& yaw, const double& roll)
+Matrix Transform::getRotationMatrix(const double& pitch, const double& yaw, const double& roll)
 {
-	rotateZ(roll);
-	rotateX(pitch);
-	rotateY(yaw);
+	return rotateZ(roll) * rotateX(pitch) * rotateY(yaw);
 }
 
-void Transform::rotateZ(const double& angle)
+Matrix Transform::rotateZ(const double& angle)
 {
+	Matrix ret;
+
+	double angleConvertedToRadian = PhysicsHelper::degreesToRadians(angle);
+
+	ret[0][0] = cos(angle);
+	ret[0][1] = sin(angle);
+	//ret[0][2] = ;
+	ret[1][0] = -sin(angle);
+	ret[1][1] = cos(angle);
+	//ret[1][2] = ;
+	//ret[2][0] = ;
+	//ret[2][1] = ;
+	//ret[2][2] = ;
+
+	return ret;
 }
 
-void Transform::rotateY(const double& angle)
+Matrix Transform::rotateX(const double& angle)
 {
+	Matrix ret;
+
+	double angleConvertedToRadian = PhysicsHelper::degreesToRadians(angle);
+
+	//ret[0][0] = ;
+	//ret[0][1] = ;
+	//ret[0][2] = ;
+	//ret[1][0] = ;
+	ret[1][1] = cos(angle);
+	ret[1][2] = sin(angle);
+	//ret[2][0] = ;
+	ret[2][1] = -sin(angle);
+	ret[2][2] = cos(angle);
+
+
+	return ret;
 }
 
-void Transform::rotateX(const double& angle)
+Matrix Transform::rotateY(const double& angle)
 {
+	Matrix ret;
+
+	double angleConvertedToRadian = PhysicsHelper::degreesToRadians(angle);
+
+	ret[0][0] = cos(angle);
+	//ret[0][1] = ;
+	ret[0][2] = -sin(angle);
+	//ret[1][0] = ;
+	//ret[1][1] = ;
+	//ret[1][2] = ;
+	ret[2][0] = sin(angle);
+	//ret[2][1] = ;
+	ret[2][2] = cos(angle);
+
+	return ret;
 }
 
-Matrix<double> Transform::getData() const
+Matrix Transform::getData() const
 {
 	return data_;
 }
 
 std::ostream& operator<<(std::ostream& os, const Transform& v)
 {
-	os << v.getData() << endl;
+	os << v.getData() << std::endl;
 
 	return os;
 }

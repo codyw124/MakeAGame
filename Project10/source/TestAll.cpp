@@ -10,8 +10,6 @@
 #include "../headers/TransformTests.h"
 #include "../headers/GeometryTests.h"
 
-using namespace std;
-
 int main()
 {
     vector<Test*> tests;
@@ -27,6 +25,6 @@ int main()
         x->runAllTests();
     }
 
-    cout << "All Tests Passed!\n";
+    std::cout << "All Tests Passed!\n";
     return 0;
 }

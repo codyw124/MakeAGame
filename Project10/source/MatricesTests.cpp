@@ -30,7 +30,7 @@ void MatricesTests::runAllTests()
 
 void MatricesTests::T01_defaultConstructor()
 {
-	Matrix<int> a(3, 3);
+	Matrix a(3, 3);
 
 	assert(1.0 == a[0][0], "T01_defaultConstructor");
 	assert(0.0 == a[0][1], "T01_defaultConstructor");
@@ -65,7 +65,7 @@ void MatricesTests::T01_defaultConstructor()
 
 void MatricesTests::T02_copyConstructor()
 {
-	Matrix<int> a(3, 3);
+	Matrix a(3, 3);
 
 	a[0][0] = 0.0;
 	a[0][1] = 1.0;
@@ -87,7 +87,7 @@ void MatricesTests::T02_copyConstructor()
 	assert(7.0 == a[2][1], "T02_copyConstructor");
 	assert(8.0 == a[2][2], "T02_copyConstructor");
 
-	Matrix<int> b(a);
+	Matrix b(a);
 
 	assert(0.0 == b[0][0], "T02_copyConstructor");
 	assert(1.0 == b[0][1], "T02_copyConstructor");
@@ -108,7 +108,7 @@ void MatricesTests::T02_copyConstructor()
 void MatricesTests::T03_moveConstructor()
 {
 	//make a 3X3 matrix with those values
-	Matrix<int> a(3, 3);
+	Matrix a(3, 3);
 
 	a[0][0] = 0.0;
 	a[0][1] = 1.0;
@@ -132,7 +132,7 @@ void MatricesTests::T03_moveConstructor()
 	assert(8.0 == a[2][2], "T03_moveConstructor");
 
 	//make a matrix and move the memory of 'a' into this matrix
-	Matrix<int> moveHere(std::move(a));
+	Matrix moveHere(std::move(a));
 
 	//make sure the rows and columns reflect the dimensions of a matrix with no data
 	assert(0 == a.getRows(), "T03_moveConstructor");
@@ -153,7 +153,7 @@ void MatricesTests::T03_moveConstructor()
 void MatricesTests::T04_assignmentOperator()
 {
 	//make a 3X3 matrix with those values
-	Matrix<int> a(3, 3);
+	Matrix a(3, 3);
 
 	a[0][0] = 0.0;
 	a[0][1] = 1.0;
@@ -177,7 +177,7 @@ void MatricesTests::T04_assignmentOperator()
 	assert(8.0 == a[2][2], "T04_assignmentOperator");
 
 	//make a matrix and move the memory of 'a' into this matrix
-	Matrix<int> assignment(3, 3);
+	Matrix assignment(3, 3);
 
 	assignment = a;
 
@@ -207,7 +207,7 @@ void MatricesTests::T04_assignmentOperator()
 void MatricesTests::T05_moveAssignmentOperator()
 {
 	//make a 3X3 matrix with those values
-	Matrix<int> a(3, 3);
+	Matrix a(3, 3);
 
 	a[0][0] = 0.0;
 	a[0][1] = 1.0;
@@ -231,7 +231,7 @@ void MatricesTests::T05_moveAssignmentOperator()
 	assert(8.0 == a[2][2], "T05_moveAssignmentOperator");
 
 	//make a matrix and move the memory of 'a' into this matrix
-	Matrix<int> moveHere = std::move(a);
+	Matrix moveHere = std::move(a);
 
 	//make sure the rows and columns reflect the dimensions of a matrix with no data
 	assert(0 == a.getRows(), "T05_moveAssignmentOperator");
@@ -252,7 +252,7 @@ void MatricesTests::T05_moveAssignmentOperator()
 void MatricesTests::T06_accessOperator()
 {
 	//make a 3X3 matrix with those values
-	Matrix<int> a(3, 3);
+	Matrix a(3, 3);
 
 	a[0][0] = 0.0;
 	a[0][1] = 1.0;
@@ -282,7 +282,7 @@ void MatricesTests::T06_accessOperator()
 void MatricesTests::T07_transpose()
 {
 	//make a 3X3 matrix with those values
-	Matrix<int> a(3, 3);
+	Matrix a(3, 3);
 
 	a[0][0] = 0.0;
 	a[0][1] = 1.0;
@@ -312,7 +312,7 @@ void MatricesTests::T08_transposed()
 {
 
 	//make a 3X3 matrix with those values
-	Matrix<int> a(3, 3);
+	Matrix a(3, 3);
 
 	a[0][0] = 0.0;
 	a[0][1] = 1.0;
@@ -336,7 +336,7 @@ void MatricesTests::T08_transposed()
 	assert(8.0 == a[2][2], "T08_transposed");
 
 	//transpose it
-	Matrix<int> transposed = a.transposed();
+	Matrix transposed = a.transposed();
 
 	//make sure they are transposed
 	assert(0.0 == transposed[0][0], "T08_transposed");
@@ -353,7 +353,7 @@ void MatricesTests::T08_transposed()
 void MatricesTests::T09_multiplicationOperator()
 {
 	//make a 3X3 matrix with those values
-	Matrix<int> a(3, 3);
+	Matrix a(3, 3);
 
 	a[0][0] = 0.0;
 	a[0][1] = 1.0;
@@ -377,7 +377,7 @@ void MatricesTests::T09_multiplicationOperator()
 	assert(8.0 == a[2][2], "T09_multiplicationOperator");
 
 	//multiply by 3
-	Matrix<int> b = a * 3;
+	Matrix b = a * 3;
 
 	//make sure matrix a is the same
 	assert(0.0 == a[0][0], "T09_multiplicationOperator");
@@ -417,7 +417,7 @@ void MatricesTests::T09_multiplicationOperator()
 
 	//make a 2X3 matrix and a 3X2 matrix and a 2X2 to test multiplying two matrices
 	//make a 2X3 matrix with those values
-	Matrix<int> x(2, 3);
+	Matrix x(2, 3);
 
 	x[0][0] = 2;
 	x[0][1] = 3;
@@ -427,7 +427,7 @@ void MatricesTests::T09_multiplicationOperator()
 	x[1][2] = 7;
 
 	//make a 3X2 matrix with those values
-	Matrix<int> y(3, 2);
+	Matrix y(3, 2);
 
 	y[0][0] = 10;
 	y[0][1] = 20;
@@ -437,7 +437,7 @@ void MatricesTests::T09_multiplicationOperator()
 	y[2][1] = 60;
 
 	//make a 2X2 matrix with those values
-	Matrix<int> z(2, 2);
+	Matrix z(2, 2);
 
 	z[0][0] = 310;
 	z[0][1] = 400;
@@ -456,7 +456,7 @@ void MatricesTests::T09_multiplicationOperator()
 void MatricesTests::T10_additionOperator()
 {
 	//make a 3X3 matrix with those values
-	Matrix<int> a(3, 3);
+	Matrix a(3, 3);
 
 	a[0][0] = 0.0;
 	a[0][1] = 1.0;
@@ -468,7 +468,7 @@ void MatricesTests::T10_additionOperator()
 	a[2][1] = 7.0;
 	a[2][2] = 8.0;
 
-	Matrix<int> b(3, 3);
+	Matrix b(3, 3);
 
 	b[0][0] = 0.0;
 	b[0][1] = 1.0;
@@ -480,7 +480,7 @@ void MatricesTests::T10_additionOperator()
 	b[2][1] = 7.0;
 	b[2][2] = 8.0;
 
-	Matrix<int> aplusb(3, 3);
+	Matrix aplusb(3, 3);
 
 	aplusb[0][0] = 0.0;
 	aplusb[0][1] = 2.0;
@@ -499,7 +499,7 @@ void MatricesTests::T10_additionOperator()
 	assert(b == aplusb, "T10_additionOperator");
 
 	//make a 2X2 matrix
-	Matrix<int> twobytwo(2, 2);
+	Matrix twobytwo(2, 2);
 
 	twobytwo[0][0] = 0.0;
 	twobytwo[0][1] = 1.0;
@@ -510,7 +510,7 @@ void MatricesTests::T10_additionOperator()
 	try
 	{
 		//if it doesnt throw it should fail
-		a + twobytwo;
+		Matrix result = a + twobytwo;
 		assert(false, "T10_additionOperator");
 	}
 	catch (std::logic_error e)
@@ -523,7 +523,7 @@ void MatricesTests::T10_additionOperator()
 void MatricesTests::T11_subtractionOperator()
 {
 	//make a 3X3 matrix with those values
-	Matrix<int> a(3, 3);
+	Matrix a(3, 3);
 
 	a[0][0] = 0.0;
 	a[0][1] = 1.0;
@@ -535,7 +535,7 @@ void MatricesTests::T11_subtractionOperator()
 	a[2][1] = 7.0;
 	a[2][2] = 8.0;
 
-	Matrix<int> b(3, 3);
+	Matrix b(3, 3);
 
 	b[0][0] = 0.0;
 	b[0][1] = 1.0;
@@ -547,7 +547,7 @@ void MatricesTests::T11_subtractionOperator()
 	b[2][1] = 7.0;
 	b[2][2] = 8.0;
 
-	Matrix<int> aminusb(3, 3);
+	Matrix aminusb(3, 3);
 
 	aminusb[0][0] = 0.0;
 	aminusb[0][1] = 0.0;
@@ -566,7 +566,7 @@ void MatricesTests::T11_subtractionOperator()
 	assert(b == aminusb, "T11_subtractionOperator");
 
 	//make a 2X2 matrix
-	Matrix<int> twobytwo(2, 2);
+	Matrix twobytwo(2, 2);
 
 	twobytwo[0][0] = 0;
 	twobytwo[0][1] = 1;
@@ -577,7 +577,7 @@ void MatricesTests::T11_subtractionOperator()
 	try
 	{
 		//if it doesn't throw it should fail
-		a - twobytwo;
+		Matrix result = a - twobytwo;
 		assert(false, "T11_subtractionOperator");
 	}
 	catch (std::logic_error e)
@@ -589,7 +589,7 @@ void MatricesTests::T11_subtractionOperator()
 
 void MatricesTests::T12_equivalence()
 {
-	Matrix<int> a(3, 3);
+	Matrix a(3, 3);
 
 	a[0][0] = 0.0;
 	a[0][1] = 1.0;
@@ -601,9 +601,9 @@ void MatricesTests::T12_equivalence()
 	a[2][1] = 7.0;
 	a[2][2] = 8.0;
 
-	Matrix<int> b(a);
+	Matrix b(a);
 
-	Matrix<int> c(3, 3);
+	Matrix c(3, 3);
 
 	c[0][0] = 4.0;
 	c[0][1] = 4.0;
@@ -615,7 +615,7 @@ void MatricesTests::T12_equivalence()
 	c[2][1] = 4.0;
 	c[2][2] = 4.0;
 
-	Matrix<int> d(2, 3);
+	Matrix d(2, 3);
 
 	d[0][0] = 4.0;
 	d[0][1] = 4.0;
@@ -637,7 +637,7 @@ void MatricesTests::T12_equivalence()
 
 void MatricesTests::T13_outputoperator()
 {
-	Matrix<int> a(3,3);
+	Matrix a(3,3);
 
 	a[0][0] = 0.0;
 	a[0][1] = 1.0;
@@ -660,7 +660,7 @@ void MatricesTests::T13_outputoperator()
 
 void MatricesTests::T15_cut()
 {
-	Matrix<int> a(3, 3);
+	Matrix a(3, 3);
 
 	a[0][0] = 0.0;
 	a[0][1] = 1.0;
@@ -672,9 +672,9 @@ void MatricesTests::T15_cut()
 	a[2][1] = 7.0;
 	a[2][2] = 8.0;
 
-	Matrix<int> b = a.getCut(1,1);
+	Matrix b = a.getCut(1,1);
 
-	Matrix<int> c(2, 2);
+	Matrix c(2, 2);
 
 	c[0][0] = 0;
 	c[0][1] = 2;
@@ -683,12 +683,12 @@ void MatricesTests::T15_cut()
 
 	assert(b == c, "T15_cut");
 
-	Matrix<int> d(1, 1);
+	Matrix d(1, 1);
 
 	//make sure you cant cut a 1 dimensional matrix
 	try
 	{
-		d.getCut(1,1);
+		Matrix cut = d.getCut(1,1);
 		assert(false, "T15_cut");
 	}
 	catch (std::logic_error e)
@@ -700,7 +700,7 @@ void MatricesTests::T15_cut()
 	//make sure that it throws an exception for out of range tests
 	try
 	{
-		a.getCut(5,5);
+		Matrix cut = a.getCut(5,5);
 		assert(false, "T15_cut");
 	}
 	catch (std::logic_error e)
@@ -712,15 +712,15 @@ void MatricesTests::T15_cut()
 
 void MatricesTests::T16_testDeterminant()
 {
-	Matrix<int> a(1, 1);
+	Matrix a(1, 1);
 
 	a[0][0] = 5.0;
 	
-	int adet = a.getDeterminant();
+	double adet = a.getDeterminant();
 
 	assert(adet == 5, "T16_testDeterminant");
 
-	Matrix<int> b(3, 3);
+	Matrix b(3, 3);
 
 	b[0][0] = 1.0;
 	b[0][1] = 2.0;
@@ -732,20 +732,20 @@ void MatricesTests::T16_testDeterminant()
 	b[2][1] = 8.0;
 	b[2][2] = 9.0;
 
-	int bdet = b.getDeterminant();
+	double bdet = b.getDeterminant();
 
 	assert(bdet == 0, "T16_testDeterminant");
 }
 
 void MatricesTests::T17_testMinors()
 {
-	Matrix<int> a(1, 1);
+	Matrix a(1, 1);
 
 	a[0][0] = 5;
 
 	try
 	{
-		a.getMinors();
+		Matrix smallMatrixMinors = a.getMinors();
 		assert(false, "T17_testMinors");
 	}
 	catch (std::logic_error e)
@@ -766,7 +766,7 @@ void MatricesTests::T17_testMinors()
 		assert(true, "T17_testMinors");
 	}
 
-	Matrix<int> b(3, 3);
+	Matrix b(3, 3);
 
 	b[0][0] = 1.0;
 	b[0][1] = 2.0;
@@ -778,9 +778,9 @@ void MatricesTests::T17_testMinors()
 	b[2][1] = 8.0;
 	b[2][2] = 9.0;
 
-	Matrix<int> bMinors = b.getMinors();
+	Matrix bMinors = b.getMinors();
 
-	Matrix<int> bExpectedMinors(3, 3);
+	Matrix bExpectedMinors(3, 3);
 
 	bExpectedMinors[0][0] = -3;
 	bExpectedMinors[0][1] = -6;
@@ -797,13 +797,13 @@ void MatricesTests::T17_testMinors()
 
 void MatricesTests::T18_testCofactors()
 {
-	Matrix<int> a(1, 1);
+	Matrix smallMatrix(1, 1);
 
-	a[0][0] = 5;
+	smallMatrix[0][0] = 5;
 
 	try
 	{
-		a.getCofactors();
+		Matrix smallMatrixCofactors =  smallMatrix.getCofactors();
 		assert(false, "T18_testCofactors");
 	}
 	catch (std::logic_error e)
@@ -815,7 +815,7 @@ void MatricesTests::T18_testCofactors()
 	//make sure that it throws an exception for out of range tests
 	try
 	{
-		a.getCofactor(5,5);
+		smallMatrix.getCofactor(5,5);
 		assert(false, "T18_testCofactors");
 	}
 	catch (std::logic_error e)
@@ -824,7 +824,7 @@ void MatricesTests::T18_testCofactors()
 		assert(true, "T18_testCofactors");
 	}
 
-	Matrix<int> b(3, 3);
+	Matrix b(3, 3);
 
 	b[0][0] = 1.0;
 	b[0][1] = 2.0;
@@ -836,9 +836,9 @@ void MatricesTests::T18_testCofactors()
 	b[2][1] = 8.0;
 	b[2][2] = 9.0;
 
-	Matrix<int> bCofactors = b.getCofactors();
+	Matrix bCofactors = b.getCofactors();
 
-	Matrix<int> bExpectedCofactors(3, 3);
+	Matrix bExpectedCofactors(3, 3);
 
 	bExpectedCofactors[0][0] = -3;
 	bExpectedCofactors[0][1] = 6;
@@ -855,13 +855,13 @@ void MatricesTests::T18_testCofactors()
 
 void MatricesTests::T19_testAdjugate()
 {
-	Matrix<int> a(1, 1);
+	Matrix smallMatrix(1, 1);
 
-	a[0][0] = 5;
+	smallMatrix[0][0] = 5;
 
 	try
 	{
-		a.getAdjugate();
+		Matrix smallMatrixAdjugates = smallMatrix.getAdjugate();
 		assert(false, "T19_testAdjugate");
 	}
 	catch (std::logic_error e)
@@ -870,7 +870,7 @@ void MatricesTests::T19_testAdjugate()
 		assert(true, "T19_testAdjugate");
 	}
 
-	Matrix<int> b(3, 3);
+	Matrix b(3, 3);
 
 	b[0][0] = 1.0;
 	b[0][1] = 2.0;
@@ -882,9 +882,9 @@ void MatricesTests::T19_testAdjugate()
 	b[2][1] = 8.0;
 	b[2][2] = 9.0;
 
-	Matrix<int> bAdjugate = b.getAdjugate();
+	Matrix bAdjugate = b.getAdjugate();
 
-	Matrix<int> bExpectedAdjugates(3, 3);
+	Matrix bExpectedAdjugates(3, 3);
 
 	bExpectedAdjugates[0][0] = -3;
 	bExpectedAdjugates[0][1] = 6;
@@ -901,7 +901,7 @@ void MatricesTests::T19_testAdjugate()
 
 void MatricesTests::T20_testInverse()
 {
-	Matrix<int> b(3, 3);
+	Matrix b(3, 3);
 
 	b[0][0] = 1.0;
 	b[0][1] = 2.0;
@@ -913,9 +913,9 @@ void MatricesTests::T20_testInverse()
 	b[2][1] = 8.0;
 	b[2][2] = 9.0;
 
-	Matrix<int> bInverse = b.getInverse();
+	Matrix bInverse = b.getInverse();
 
-	Matrix<int> bInverseExpected(3, 3);
+	Matrix bInverseExpected(3, 3);
 
 	bInverseExpected[0][0] = 1.0;
 	bInverseExpected[0][1] = 0.0;
@@ -929,7 +929,7 @@ void MatricesTests::T20_testInverse()
 
 	assert(bInverseExpected == bInverse, "T20_testInverse");
 
-	Matrix<int> c(3, 3);
+	Matrix c(3, 3);
 
 	c[0][0] = 1.0;
 	c[0][1] = 0.0;
@@ -941,9 +941,9 @@ void MatricesTests::T20_testInverse()
 	c[2][1] = -1.0;
 	c[2][2] = 3.0;
 
-	Matrix<int> cInverse = c.getInverse();
+	Matrix cInverse = c.getInverse();
 
-	Matrix<int> cInverseExpected(3, 3);
+	Matrix cInverseExpected(3, 3);
 
 	cInverseExpected[0][0] = -5.0;
 	cInverseExpected[0][1] = 3.0;

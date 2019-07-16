@@ -167,4 +167,15 @@ void TransformTests::T5_testGetSetXYZAxis()
 void TransformTests::T6_testRotate()
 {
 
+	Matrix expectedAfterRotating45degrees;
+	expectedAfterRotating45degrees[0][0] = 0.52532198881772973;
+	expectedAfterRotating45degrees[0][1] = 0.85090352453411844;
+	expectedAfterRotating45degrees[1][0] = -0.85090352453411844;
+	expectedAfterRotating45degrees[1][1] = 0.52532198881772973;
+
+	Transform x;
+
+	Matrix actualAfter45DegreeZRotate = x.rotateZ(45);
+
+	assert(actualAfter45DegreeZRotate == expectedAfterRotating45degrees, "rotating Z 45 degrees doesnt work as expected");
 }
