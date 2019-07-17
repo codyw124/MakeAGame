@@ -10,7 +10,9 @@ void TransformTests::runAllTests()
 	T3_testGetSetTranslate();
 	T4_testGetSetScale();
 	T5_testGetSetXYZAxis();
-	T6_testRotate();
+	T6_testRotateZ();
+	T7_testRotateY();
+	T8_testRotateX();
 	cout << "All Transform Tests Passed\n";
 }
 
@@ -164,9 +166,8 @@ void TransformTests::T5_testGetSetXYZAxis()
 
 }
 
-void TransformTests::T6_testRotate()
+void TransformTests::T6_testRotateZ()
 {
-
 	Matrix expectedAfterRotating45degrees;
 	expectedAfterRotating45degrees[0][0] = 0.52532198881772973;
 	expectedAfterRotating45degrees[0][1] = 0.85090352453411844;
@@ -178,4 +179,34 @@ void TransformTests::T6_testRotate()
 	Matrix actualAfter45DegreeZRotate = x.rotateZ(45);
 
 	assert(actualAfter45DegreeZRotate == expectedAfterRotating45degrees, "rotating Z 45 degrees doesnt work as expected");
+}
+
+void TransformTests::T7_testRotateY()
+{
+	Matrix expectedAfterRotating45degrees;
+	expectedAfterRotating45degrees[0][0] = 0.52532198881772973;
+	expectedAfterRotating45degrees[0][2] = -0.85090352453411844;
+	expectedAfterRotating45degrees[2][0] = 0.85090352453411844;
+	expectedAfterRotating45degrees[2][2] = 0.52532198881772973;
+
+	Transform x;
+
+	Matrix actualAfter45DegreeYRotate = x.rotateY(45);
+
+	assert(actualAfter45DegreeYRotate == expectedAfterRotating45degrees, "rotating Y 45 degrees doesnt work as expected");
+}
+
+void TransformTests::T8_testRotateX()
+{
+	Matrix expectedAfterRotating45degrees;
+	expectedAfterRotating45degrees[1][1] = 0.52532198881772973;
+	expectedAfterRotating45degrees[1][2] = 0.85090352453411844;
+	expectedAfterRotating45degrees[2][1] = -0.85090352453411844;
+	expectedAfterRotating45degrees[2][2] = 0.52532198881772973;
+
+	Transform x;
+
+	Matrix actualAfter45DegreeXRotate = x.rotateX(45);
+
+	assert(actualAfter45DegreeXRotate == expectedAfterRotating45degrees, "rotating X 45 degrees doesnt work as expected");
 }

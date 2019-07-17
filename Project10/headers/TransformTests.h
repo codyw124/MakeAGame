@@ -19,5 +19,7 @@ class TransformTests : public Test
 		void T3_testGetSetTranslate();
 		void T4_testGetSetScale();
 		void T5_testGetSetXYZAxis();
-		void T6_testRotate();
+		void T6_testRotateZ();
+		void T7_testRotateY();
+		void T8_testRotateX();
 };
