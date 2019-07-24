@@ -13,6 +13,7 @@ void TransformTests::runAllTests()
 	T6_testRotateZ();
 	T7_testRotateY();
 	T8_testRotateX();
+	T9_testRotate();
 	cout << "All Transform Tests Passed\n";
 }
 
@@ -169,6 +170,7 @@ void TransformTests::T5_testGetSetXYZAxis()
 void TransformTests::T6_testRotateZ()
 {
 	Matrix expectedAfterRotating45degrees;
+	//hard coded numbers i got from doing paper math
 	expectedAfterRotating45degrees[0][0] = 0.52532198881772973;
 	expectedAfterRotating45degrees[0][1] = 0.85090352453411844;
 	expectedAfterRotating45degrees[1][0] = -0.85090352453411844;
@@ -184,6 +186,7 @@ void TransformTests::T6_testRotateZ()
 void TransformTests::T7_testRotateY()
 {
 	Matrix expectedAfterRotating45degrees;
+	//hard coded numbers i got from doing paper math
 	expectedAfterRotating45degrees[0][0] = 0.52532198881772973;
 	expectedAfterRotating45degrees[0][2] = -0.85090352453411844;
 	expectedAfterRotating45degrees[2][0] = 0.85090352453411844;
@@ -199,6 +202,7 @@ void TransformTests::T7_testRotateY()
 void TransformTests::T8_testRotateX()
 {
 	Matrix expectedAfterRotating45degrees;
+	//hard coded numbers i got from doing paper math
 	expectedAfterRotating45degrees[1][1] = 0.52532198881772973;
 	expectedAfterRotating45degrees[1][2] = 0.85090352453411844;
 	expectedAfterRotating45degrees[2][1] = -0.85090352453411844;
@@ -209,4 +213,26 @@ void TransformTests::T8_testRotateX()
 	Matrix actualAfter45DegreeXRotate = x.rotateX(45);
 
 	assert(actualAfter45DegreeXRotate == expectedAfterRotating45degrees, "rotating X 45 degrees doesnt work as expected");
+}
+
+void TransformTests::T9_testRotate()
+{
+	Matrix expectedAfterRotating;
+	//hard coded numbers i got from doing paper math
+	expectedAfterRotating[0][0] = 0.89204866381000347;
+	expectedAfterRotating[0][1] = 0.4469983318002789;
+	expectedAfterRotating[0][2] = -0.066645875810550259;
+	expectedAfterRotating[1][0] = -0.066645875810550259;
+	expectedAfterRotating[1][1] = 0.27596319193541492796;
+
+	expectedAfterRotating[1][2] = 0.95885486072411519;
+	expectedAfterRotating[2][0] = 0.44699833180027893556;
+	expectedAfterRotating[2][1] = -0.85090352453411844;
+	expectedAfterRotating[2][2] = 0.27596319193541492796;
+
+	Transform x;
+
+	Matrix actual = x.getRotationMatrix(45,45,45);
+
+	assert(actual == expectedAfterRotating, "rotation matrix is not as expected");
 }

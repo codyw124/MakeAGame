@@ -239,7 +239,7 @@ void Transform::setZAxis(const double& x, const double& y, const double& z)
 
 Matrix Transform::getRotationMatrix(const double& pitch, const double& yaw, const double& roll)
 {
-	return rotateZ(roll) * rotateX(pitch) * rotateY(yaw);
+	return (rotateZ(roll) * rotateX(pitch)) *rotateY(yaw);
 }
 
 Matrix Transform::rotateZ(const double& angle)
