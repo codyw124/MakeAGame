@@ -36,10 +36,13 @@ public:
 	void setZAxis(const Vector3& newZAxis);
 	void setZAxis(const double& x, const double& y, const double& z);
 
+	//these can cause a Gibmal lock
 	Matrix getRotationMatrix(const double& pitch, const double& yaw, const double& roll);
 	Matrix rotateZ(const double& angle);
 	Matrix rotateY(const double& angle);
 	Matrix rotateX(const double& angle);
+
+	Matrix axisAngle(const Vector3& axis, double angle);
 
 	Matrix getData() const;
     

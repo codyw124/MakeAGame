@@ -250,13 +250,8 @@ Matrix Transform::rotateZ(const double& angle)
 
 	ret[0][0] = cos(angle);
 	ret[0][1] = sin(angle);
-	//ret[0][2] = ;
 	ret[1][0] = -sin(angle);
 	ret[1][1] = cos(angle);
-	//ret[1][2] = ;
-	//ret[2][0] = ;
-	//ret[2][1] = ;
-	//ret[2][2] = ;
 
 	return ret;
 }
@@ -267,13 +262,8 @@ Matrix Transform::rotateX(const double& angle)
 
 	double angleConvertedToRadian = PhysicsHelper::degreesToRadians(angle);
 
-	//ret[0][0] = ;
-	//ret[0][1] = ;
-	//ret[0][2] = ;
-	//ret[1][0] = ;
 	ret[1][1] = cos(angle);
 	ret[1][2] = sin(angle);
-	//ret[2][0] = ;
 	ret[2][1] = -sin(angle);
 	ret[2][2] = cos(angle);
 
@@ -288,13 +278,8 @@ Matrix Transform::rotateY(const double& angle)
 	double angleConvertedToRadian = PhysicsHelper::degreesToRadians(angle);
 
 	ret[0][0] = cos(angle);
-	//ret[0][1] = ;
 	ret[0][2] = -sin(angle);
-	//ret[1][0] = ;
-	//ret[1][1] = ;
-	//ret[1][2] = ;
 	ret[2][0] = sin(angle);
-	//ret[2][1] = ;
 	ret[2][2] = cos(angle);
 
 	return ret;
@@ -311,3 +296,58 @@ std::ostream& operator<<(std::ostream& os, const Transform& v)
 
 	return os;
 }
+
+Matrix Transform::axisAngle(const Vector3& axis, double angle) {
+	angle = PhysicsHelper::degreesToRadians(angle);
+	double c = cos(angle);
+	double s = sin(angle);
+	double t = 1.0 - cos(angle);
+
+	double x = axis[0];
+	double y = axis[1];
+	double z = axis[2];
+	if (!PhysicsHelper::epsilonCompare(axis.magnitude(), 1.0f)) {
+		double inv_len = 1.0f / axis.magnitude();
+		x *= inv_len;
+		y *= inv_len;
+		z *= inv_len;
+	}
+
+	Matrix ret(4,4);
+	ret[0][0] = t * (x * x) + c; 
+	ret[0][1] = t * x * y + s * z;
+	ret[0][2] = t * x * z - s * y;
+	ret[0][3] = 0.0f;
+	ret[1][0] = t * x * y - s * z;
+	ret[1][1] = t * (y * y) + c;
+	ret[1][2] = t * y * z + s * x;
+	ret[1][3] = 0.0f;
+	ret[2][0] = t * x * z + s * y;
+	ret[2][1] = t * y * z - s * x;
+	ret[2][2] = t * (z * z) + c;
+	ret[2][3] = 0.0f;
+	ret[3][0] = 0.0f;
+	ret[3][1] = 0.0f;
+	ret[3][2] = 0.0f;
+	ret[3][3] = 1.0f;
+
+	return ret;
+}
+
+
+//mat4 Orthogonalize(const mat4& mat) {
+//	vec3 xAxis(mat._11, mat._12, mat._13);
+//	vec3 yAxis(mat._21, mat._22, mat._23);
+//	vec3 zAxis = Cross(xAxis, yAxis);
+//
+//	xAxis = Cross(yAxis, zAxis);
+//	yAxis = Cross(zAxis, xAxis);
+//	zAxis = Cross(xAxis, yAxis);
+//
+//	return mat4(
+//		xAxis.x, xAxis.y, xAxis.z, mat._14,
+//		yAxis.x, yAxis.y, yAxis.z, mat._24,
+//		zAxis.x, zAxis.y, zAxis.z, mat._34,
+//		mat._41, mat._42, mat._43, mat._44
+//	);
+//}

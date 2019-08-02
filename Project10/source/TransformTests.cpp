@@ -14,6 +14,7 @@ void TransformTests::runAllTests()
 	T7_testRotateY();
 	T8_testRotateX();
 	T9_testRotate();
+	T10_testAxisAngleRotate();
 	cout << "All Transform Tests Passed\n";
 }
 
@@ -235,4 +236,8 @@ void TransformTests::T9_testRotate()
 	Matrix actual = x.getRotationMatrix(45,45,45);
 
 	assert(actual == expectedAfterRotating, "rotation matrix is not as expected");
+}
+
+void TransformTests::T10_testAxisAngleRotate()
+{
 }

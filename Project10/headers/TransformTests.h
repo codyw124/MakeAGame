@@ -23,4 +23,5 @@ class TransformTests : public Test
 		void T7_testRotateY();
 		void T8_testRotateX(); 
 		void T9_testRotate();
+		void T10_testAxisAngleRotate();
 };
