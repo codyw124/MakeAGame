@@ -1,0 +1,18 @@
+<spritesheet>
+    <sprite>
+        <name>standing</name>
+        <direction>down</direction>
+        <x>1</x>
+        <y>2</y>
+        <w>24</w>
+        <h>30</h>
+    </sprite>
+    <sprite>
+        <name>standing_blinking</name>
+        <direction>down</direction>
+        <x>10</x>
+        <y>20</y>
+        <w>24</w>
+        <h>30</h>
+    </sprite>
+</spritesheet>
