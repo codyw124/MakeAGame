@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29318.209
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LeagueOfLegendsPracticeTool", "LeagueOfLegendsPracticeTool\LeagueOfLegendsPracticeTool.vcxproj", "{C670799E-8330-4A35-836D-68D65E69364B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C670799E-8330-4A35-836D-68D65E69364B}.Debug|x64.ActiveCfg = Debug|x64
+		{C670799E-8330-4A35-836D-68D65E69364B}.Debug|x64.Build.0 = Debug|x64
+		{C670799E-8330-4A35-836D-68D65E69364B}.Debug|x86.ActiveCfg = Debug|Win32
+		{C670799E-8330-4A35-836D-68D65E69364B}.Debug|x86.Build.0 = Debug|Win32
+		{C670799E-8330-4A35-836D-68D65E69364B}.Release|x64.ActiveCfg = Release|x64
+		{C670799E-8330-4A35-836D-68D65E69364B}.Release|x64.Build.0 = Release|x64
+		{C670799E-8330-4A35-836D-68D65E69364B}.Release|x86.ActiveCfg = Release|Win32
+		{C670799E-8330-4A35-836D-68D65E69364B}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD7A371D-27FE-49EF-90DF-0F131CB8FDE1}
+	EndGlobalSection
+EndGlobal
