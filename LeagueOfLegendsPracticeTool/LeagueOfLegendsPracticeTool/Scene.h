@@ -8,20 +8,16 @@
 #include <SDL.h>
 #include "Renderable.h"
 
-class Scene
+class Scene : public Renderable
 {
 private:
 	std::list<Renderable*> renderables_;
-
-protected:
-	SDL_Renderer* renderer_;
 
 public:
 	Scene();
 	~Scene();
 	void addRenderable(Renderable* toBeAdded);
 	void removeRenderable(Renderable* toBeRemoved);
-	void setRenderer(SDL_Renderer* renderer);
 	const std::list<Renderable*>& getRenderables() const;
-	void render() const;
+	void render(SDL_Renderer* renderer) const;
 };

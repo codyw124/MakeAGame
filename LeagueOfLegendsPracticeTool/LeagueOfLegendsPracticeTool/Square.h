@@ -11,7 +11,7 @@ class Square : public Renderable
 public:
 	Square(const int& x, const int& y, const int& w, const int& h);
 	~Square();
-	void render(SDL_Renderer* renderer);
+	void render(SDL_Renderer* renderer) const;
 
 private:
 
