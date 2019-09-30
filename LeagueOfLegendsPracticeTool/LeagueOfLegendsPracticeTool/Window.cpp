@@ -115,7 +115,7 @@ void Window::runMainLoop()
 			SDL_SetRenderDrawColor(renderer_, 255, 255, 255, 255);
 			SDL_RenderClear(renderer_);
 
-			scene_->render();
+			scene_->render(renderer_);
 
 			//Update screen
 			SDL_RenderPresent(renderer_);
@@ -131,5 +131,4 @@ SDL_Renderer* Window::getRenderer()
 void Window::setScene(Scene* scene)
 {
 	scene_ = scene;
-	scene_->setRenderer(renderer_);
 }

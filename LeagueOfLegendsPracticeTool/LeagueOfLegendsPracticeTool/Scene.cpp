@@ -6,7 +6,6 @@
 Scene::Scene()
 {
 	renderables_ = std::list<Renderable*>();
-	renderer_ = NULL;
 }
 
 Scene::~Scene()
@@ -23,20 +22,15 @@ void Scene::removeRenderable(Renderable* toBeRemoved)
 	renderables_.remove(toBeRemoved);
 }
 
-void Scene::setRenderer(SDL_Renderer* renderer)
-{
-	renderer_ = renderer;
-}
-
 const std::list<Renderable*>& Scene::getRenderables() const
 {
 	return renderables_;
 }
 
-void Scene::render() const
+void Scene::render(SDL_Renderer* renderer) const
 {
 	for (Renderable* renderables : renderables_) 
 	{
-		renderables->render(renderer_);
+		renderables->render(renderer);
 	}
 }
