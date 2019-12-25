@@ -1,0 +1,128 @@
+﻿  CH15Demo.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\particle.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\ch15demo.cpp(53): warning C4018: '<': signed/unsigned mismatch
+  Camera.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+  CH14Demo.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\particle.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\ch14demo.cpp(19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\ch14demo.cpp(131): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\ch14demo.cpp(138): warning C4018: '<': signed/unsigned mismatch
+  CH16Demo.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\particle.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\ch16demo.cpp(120): warning C4018: '<': signed/unsigned mismatch
+  Cloth.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\particle.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\cloth.cpp(8): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\cloth.cpp(238): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\cloth.cpp(239): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\cloth.cpp(240): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\cloth.cpp(241): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  ConservationOfMomentum.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\particle.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\conservationofmomentum.cpp(43): warning C4305: 'argument': truncation from 'double' to 'float'
+  DemoBase.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\demobase.cpp(22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  DemoWindow.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\demowindow.h(22): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\demowindow.h(23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\particle.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\demowindow.cpp(72): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  DistanceJoint.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\particle.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+  FixedFunctionPrimitives.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\fixedfunctionprimitives.cpp(48): warning C4018: '<': signed/unsigned mismatch
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\fixedfunctionprimitives.cpp(56): warning C4018: '<': signed/unsigned mismatch
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\fixedfunctionprimitives.cpp(265): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\fixedfunctionprimitives.cpp(287): warning C4018: '<': signed/unsigned mismatch
+  CollisionFeature.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\collisionfeature.cpp(189): warning C4018: '<': signed/unsigned mismatch
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\collisionfeature.cpp(194): warning C4018: '<': signed/unsigned mismatch
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\collisionfeature.cpp(199): warning C4018: '<': signed/unsigned mismatch
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\collisionfeature.cpp(204): warning C4018: '<': signed/unsigned mismatch
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\collisionfeature.cpp(229): warning C4018: '<': signed/unsigned mismatch
+  Geometry2D.cpp
+  Geometry3D.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.cpp(2160): warning C4018: '<': signed/unsigned mismatch
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.cpp(2161): warning C4018: '<': signed/unsigned mismatch
+  GLWindow.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\glwindow.cpp(52): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\glwindow.cpp(53): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  imgui.cpp
+  ImGuizmo.cpp
+  imgui_draw.cpp
+  imgui_implementation.cpp
+  IWindow.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\iwindow.cpp(76): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+  JointDemo.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\particle.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\jointdemo.cpp(19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\jointdemo.cpp(141): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\jointdemo.cpp(148): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  Compiling...
+  LinearImpulse.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\particle.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\linearimpulse.cpp(65): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\linearimpulse.cpp(67): warning C4305: 'argument': truncation from 'double' to 'float'
+  main-win32.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\main-win32.cpp(7): warning C4996: '_controlfp': This function or variable may be unsafe. Consider using _controlfp_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\float.h(233): note: see declaration of '_controlfp'
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\main-win32.cpp(76): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\conio.h(453): note: see declaration of 'getch'
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\main-win32.cpp(80): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\conio.h(453): note: see declaration of 'getch'
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\main-win32.cpp(237): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  RigidbodyVolume.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+  matrices.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\matrices.cpp(242): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  ObjLoader.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\objloader.cpp(23): warning C4018: '<': signed/unsigned mismatch
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\objloader.cpp(25): warning C4018: '<': signed/unsigned mismatch
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\objloader.cpp(37): warning C4018: '<': signed/unsigned mismatch
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\objloader.cpp(39): warning C4018: '<': signed/unsigned mismatch
+  Particle.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\particle.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+  PhysicsSystem.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\particle.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\physicssystem.cpp(230): warning C4018: '<': signed/unsigned mismatch
+  QuadTree.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\quadtree.cpp(51): warning C4018: '>': signed/unsigned mismatch
+  RaycastDemo.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+  Scene.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+  SimpleSprings.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\particle.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\simplesprings.cpp(19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\simplesprings.cpp(108): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\simplesprings.cpp(115): warning C4018: '<': signed/unsigned mismatch
+  Spring.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\particle.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter01\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+  vectors.cpp
+  Generating Code...
+  glad.c
+main-win32.obj : error LNK2019: unresolved external symbol __imp__wglCreateContext@4 referenced in function "struct HGLRC__ * __cdecl OpenGLBindContext(struct HDC__ *)" (?OpenGLBindContext@@YAPAUHGLRC__@@PAUHDC__@@@Z)
+main-win32.obj : error LNK2019: unresolved external symbol __imp__wglDeleteContext@4 referenced in function "void __cdecl OpenGLUnbindContext(struct HWND__ *,struct HDC__ *,struct HGLRC__ *)" (?OpenGLUnbindContext@@YAXPAUHWND__@@PAUHDC__@@PAUHGLRC__@@@Z)
+main-win32.obj : error LNK2019: unresolved external symbol __imp__wglMakeCurrent@8 referenced in function "struct HGLRC__ * __cdecl OpenGLBindContext(struct HDC__ *)" (?OpenGLBindContext@@YAPAUHGLRC__@@PAUHDC__@@@Z)
+C:\Users\CodysTower3\Dropbox\gamePhysicsCookbook\Chapter01\Projects\Debug\VisualStudio2015.exe : fatal error LNK1120: 3 unresolved externals

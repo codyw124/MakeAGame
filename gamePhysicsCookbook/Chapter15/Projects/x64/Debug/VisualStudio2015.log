@@ -1,0 +1,111 @@
+﻿  CH15Demo.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+  Camera.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+  CH14Demo.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\particle.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\ch14demo.cpp(19): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\ch14demo.cpp(131): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  ConservationOfMomentum.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\conservationofmomentum.cpp(43): warning C4305: 'argument': truncation from 'double' to 'float'
+  DemoBase.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\demobase.cpp(22): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  DemoWindow.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\demowindow.h(22): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\demowindow.h(23): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\particle.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\demowindow.cpp(69): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  FixedFunctionPrimitives.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\fixedfunctionprimitives.cpp(253): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  CollisionFeature.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+  Geometry2D.cpp
+  Geometry3D.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.cpp(2259): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.cpp(2264): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  GLWindow.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\glwindow.cpp(52): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\glwindow.cpp(53): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  imgui.cpp
+  ImGuizmo.cpp
+  imgui_draw.cpp
+  imgui_implementation.cpp
+  IWindow.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\iwindow.cpp(74): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\iwindow.cpp(76): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+  LinearImpulse.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\linearimpulse.cpp(65): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\linearimpulse.cpp(67): warning C4305: 'argument': truncation from 'double' to 'float'
+  main-win32.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\main-win32.cpp(7): warning C4996: '_controlfp': This function or variable may be unsafe. Consider using _controlfp_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\float.h(233): note: see declaration of '_controlfp'
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\main-win32.cpp(76): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\conio.h(453): note: see declaration of 'getch'
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\main-win32.cpp(80): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\conio.h(453): note: see declaration of 'getch'
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\main-win32.cpp(237): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  RigidbodyVolume.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+  matrices.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\matrices.cpp(242): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  Compiling...
+  ObjLoader.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+  Particle.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\particle.h(4): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\particle.cpp(46): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  PhysicsSystem.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\physicssystem.cpp(29): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\physicssystem.cpp(76): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\physicssystem.cpp(82): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\physicssystem.cpp(83): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\physicssystem.cpp(94): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\physicssystem.cpp(100): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\physicssystem.cpp(126): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\physicssystem.cpp(161): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\physicssystem.cpp(195): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  QuadTree.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\quadtree.cpp(14): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\quadtree.cpp(15): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\quadtree.cpp(26): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\quadtree.cpp(31): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\quadtree.cpp(59): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\quadtree.cpp(68): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\quadtree.cpp(80): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\quadtree.cpp(112): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\quadtree.cpp(131): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\quadtree.cpp(136): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\quadtree.cpp(162): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\quadtree.cpp(176): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\quadtree.cpp(183): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  RaycastDemo.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+  Scene.cpp
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\geometry3d.h(382): warning C4091: 'typedef ': ignored on left of 'CollisionManifold' when no variable is declared
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\scene.cpp(24): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\scene.cpp(51): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\scene.cpp(73): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\scene.cpp(89): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\scene.cpp(121): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\scene.cpp(178): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\scene.cpp(223): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\scene.cpp(248): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\scene.cpp(280): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\scene.cpp(292): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\scene.cpp(297): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\codystower3\dropbox\gamephysicscookbook\chapter02\code\scene.cpp(322): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  vectors.cpp
+  Generating Code...
+  glad.c
+  VisualStudio2015.vcxproj -> C:\Users\CodysTower3\Dropbox\gamePhysicsCookbook\Chapter02\Projects\x64\Debug\VisualStudio2015.exe
