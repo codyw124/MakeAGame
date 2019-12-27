@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include "PhysicsHelper.h"
+#include "Matrix.h"
 
 enum Axis { X, Y, Z };
 
@@ -26,13 +27,13 @@ public:
 	PhysicsVector operator-(const PhysicsVector& r) const;
 	PhysicsVector operator*(const PhysicsVector& r) const;
 	PhysicsVector operator*(const double& r) const;
-	//do i need this??
-	//PhysicsVector operator*(const double& r) const;
+	PhysicsVector operator*(const Matrix& mat) const;
 	PhysicsVector operator/(const PhysicsVector& r) const;
 	PhysicsVector operator/(const double& r) const;
 	PhysicsVector& operator+=(const PhysicsVector& r);
 	PhysicsVector& operator-=(const PhysicsVector& r);
 	PhysicsVector& operator*=(const PhysicsVector& r);
+	PhysicsVector& operator*=(const Matrix& mat);
 	PhysicsVector& operator*=(const double& r);
 	PhysicsVector& operator/=(const PhysicsVector& r);
 	PhysicsVector& operator/=(const double& r);

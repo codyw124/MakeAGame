@@ -167,6 +167,33 @@ PhysicsVector PhysicsVector::operator*(const double& r) const
 	return PhysicsVector(newDimensionValues, numberOfDimensions_);
 }
 
+PhysicsVector PhysicsVector::operator*(const Matrix& mat) const
+{
+	const size_t REQUIRED_MINIMUM_DIMENSIONS = 3;
+	const size_t REQUIRED_MAXIMUM_DIMENSIONS = 4;
+
+	if (numberOfDimensions_ != REQUIRED_MINIMUM_DIMENSIONS)
+	{
+		throw std::range_error("Out of range. Must be a 3D Vector\n");
+	}
+
+	if (mat.getColumns() < REQUIRED_MINIMUM_DIMENSIONS || mat.getColumns() > REQUIRED_MAXIMUM_DIMENSIONS) 
+	{
+		throw std::range_error("Out of range. Matrix needs atleast 3 columns and no more than 4.\n");
+	}
+
+	PhysicsVector ret;
+	ret.addDimension(dimensionValues_[0] * mat[0][0] + dimensionValues_[1] * mat[1][0] + dimensionValues_[2] * mat[2][0]);
+	ret.addDimension(dimensionValues_[0] * mat[0][1] + dimensionValues_[1] * mat[1][1] + dimensionValues_[2] * mat[2][1]);
+	ret.addDimension(dimensionValues_[0] * mat[0][2] + dimensionValues_[1] * mat[1][2] + dimensionValues_[2] * mat[2][2]);
+
+	ret[0] + 1 * mat[3][0];
+	ret[1] + 1 * mat[3][1];
+	ret[2] + 1 * mat[3][2];
+
+	return ret;
+}
+
 //division operator with another vector 2
 PhysicsVector PhysicsVector::operator/(const PhysicsVector& r) const
 {
@@ -281,6 +308,30 @@ PhysicsVector& PhysicsVector::operator*=(const PhysicsVector& r)
 	delete dimensionValues_;
 	dimensionValues_ = newDimensionValues;
 	return *this;
+}
+
+PhysicsVector& PhysicsVector::operator*=(const Matrix& mat)
+{
+	const size_t REQUIRED_MINIMUM_DIMENSIONS = 3;
+	const size_t REQUIRED_MAXIMUM_DIMENSIONS = 4;
+
+	if (numberOfDimensions_ != REQUIRED_MINIMUM_DIMENSIONS)
+	{
+		throw std::range_error("Out of range. Must be a 3D Vector\n");
+	}
+
+	if (mat.getColumns() < REQUIRED_MINIMUM_DIMENSIONS || mat.getColumns() > REQUIRED_MAXIMUM_DIMENSIONS)
+	{
+		throw std::range_error("Out of range. Matrix needs atleast 3 columns and no more than 4.\n");
+	}
+
+	dimensionValues_[0] = dimensionValues_[0] * mat[0][0] + dimensionValues_[1] * mat[1][0] + dimensionValues_[2] * mat[2][0];
+	dimensionValues_[1] = dimensionValues_[0] * mat[0][1] + dimensionValues_[1] * mat[1][1] + dimensionValues_[2] * mat[2][1];
+	dimensionValues_[2] = dimensionValues_[0] * mat[0][2] + dimensionValues_[1] * mat[1][2] + dimensionValues_[2] * mat[2][2];
+
+	dimensionValues_[0] += 1 * mat[3][0];
+	dimensionValues_[1] += 1 * mat[3][1];
+	dimensionValues_[2] += 1 * mat[3][2];
 }
 
 //shorthand multiplication operator with a double
@@ -407,16 +458,17 @@ PhysicsVector PhysicsVector::rotate2D(const double& degrees) const
 	return PhysicsVector(newDimensionValues, REQUIRED_DIMENSIONS);
 }
 
+//TODO
 //rotates this vector by the given degrees on the given axis
 PhysicsVector PhysicsVector::rotate3D(const double& degrees, Axis axis) const
 {
-	/*const size_t REQUIRED_DIMENSIONS = 3;
+	const size_t REQUIRED_DIMENSIONS = 3;
 	if(numberOfDimensions_ != REQUIRED_DIMENSIONS)
 	{
 		throw std::range_error("Out of range. Must be a 3D Vector\n");
 	}
 
-	if(axis == AXIS.X)
+	/*if(axis == AXIS.X)
 	{
 
 	}
@@ -432,7 +484,7 @@ PhysicsVector PhysicsVector::rotate3D(const double& degrees, Axis axis) const
 	return PhysicsVector();
 }
 
-//ctoss product for Physics vectors that are 3d
+//cross product for Physics vectors that are 3d
 //TLDR; "doesnt" exist for 2d vectors but kind of does see explanation below
 /**
 You can't do a cross product with vectors in 2D space. The operation is not defined there.
