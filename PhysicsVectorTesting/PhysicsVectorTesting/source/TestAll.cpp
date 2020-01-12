@@ -7,16 +7,16 @@
 #include "../headers/PhysicsVectorTests.h"
 #include "../headers/MatricesTests.h"
 #include "../headers/TransformTests.h"
-#include "../headers/GeometryTests.h"
+#include "../headers/PointTests.h"
 
 int main()
 {
     vector<Test*> tests;
 
 	tests.push_back(new PhysicsVectorTests());
+	tests.push_back(new PointTests());
     tests.push_back(new MatricesTests());
     tests.push_back(new TransformTests());
-    tests.push_back(new GeometryTests());
 
     for(Test* x : tests)
     {

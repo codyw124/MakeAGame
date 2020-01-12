@@ -187,9 +187,12 @@ PhysicsVector PhysicsVector::operator*(const Matrix& mat) const
 	ret.addDimension(dimensionValues_[0] * mat[0][1] + dimensionValues_[1] * mat[1][1] + dimensionValues_[2] * mat[2][1]);
 	ret.addDimension(dimensionValues_[0] * mat[0][2] + dimensionValues_[1] * mat[1][2] + dimensionValues_[2] * mat[2][2]);
 
-	ret[0] + 1 * mat[3][0];
-	ret[1] + 1 * mat[3][1];
-	ret[2] + 1 * mat[3][2];
+	if (mat.getColumns() == REQUIRED_MAXIMUM_DIMENSIONS)
+	{
+		ret[0] += 1 * mat[3][0];
+		ret[1] += 1 * mat[3][1];
+		ret[2] += 1 * mat[3][2];
+	}
 
 	return ret;
 }
@@ -329,9 +332,14 @@ PhysicsVector& PhysicsVector::operator*=(const Matrix& mat)
 	dimensionValues_[1] = dimensionValues_[0] * mat[0][1] + dimensionValues_[1] * mat[1][1] + dimensionValues_[2] * mat[2][1];
 	dimensionValues_[2] = dimensionValues_[0] * mat[0][2] + dimensionValues_[1] * mat[1][2] + dimensionValues_[2] * mat[2][2];
 
-	dimensionValues_[0] += 1 * mat[3][0];
-	dimensionValues_[1] += 1 * mat[3][1];
-	dimensionValues_[2] += 1 * mat[3][2];
+	if (mat.getColumns() == REQUIRED_MAXIMUM_DIMENSIONS)
+	{
+		dimensionValues_[0] += 1 * mat[3][0];
+		dimensionValues_[1] += 1 * mat[3][1];
+		dimensionValues_[2] += 1 * mat[3][2];
+	}
+
+	return *this;
 }
 
 //shorthand multiplication operator with a double

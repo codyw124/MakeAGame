@@ -1510,7 +1510,7 @@ void PhysicsVectorTests::T58_normalized3D()
 	
 		try
 		{
-			test5.normalized();
+			PhysicsVector throwaway = test5.normalized();
 			assert(false, "T58_normalized3D");
 		}
 		catch (std::logic_error e)

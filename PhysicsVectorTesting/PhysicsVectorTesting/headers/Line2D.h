@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "Point2D.h";
+#include "Point.h";
 //TODO BIG5(6)
 class Line2D
 {
@@ -15,8 +15,8 @@ public:
 	double magnitudeSquared() const;
 
 private:
-	Point2D start;
-	Point2D end;
+	Point start;
+	Point end;
 
 };
 

@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headers\GeometryTests.h" />
+    <ClInclude Include="headers\PointTests.h" />
     <ClInclude Include="headers\Line2D.h" />
     <ClInclude Include="headers\Line3D.h" />
     <ClInclude Include="headers\MatricesTests.h" />
@@ -27,14 +27,13 @@
     <ClInclude Include="headers\PhysicsHelper.h" />
     <ClInclude Include="headers\PhysicsVector.h" />
     <ClInclude Include="headers\PhysicsVectorTests.h" />
-    <ClInclude Include="headers\Point2D.h" />
-    <ClInclude Include="headers\Point3D.h" />
+    <ClInclude Include="headers\Point.h" />
     <ClInclude Include="headers\Test.h" />
     <ClInclude Include="headers\Transform.h" />
     <ClInclude Include="headers\TransformTests.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="source\GeometryTests.cpp" />
+    <ClCompile Include="source\PointTests.cpp" />
     <ClCompile Include="source\MatricesTests.cpp" />
     <ClCompile Include="source\Matrix.cpp" />
     <ClCompile Include="source\PhysicsHelper.cpp" />
