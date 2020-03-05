@@ -28,7 +28,7 @@ PhysicsVector::PhysicsVector(const PhysicsVector& other)
 }
 
 //move constructor
-PhysicsVector::PhysicsVector(PhysicsVector&& other)
+PhysicsVector::PhysicsVector(PhysicsVector&& other) noexcept
 {
 	//get the dimension values
 	dimensionValues_ = other.dimensionValues_;
@@ -51,7 +51,7 @@ PhysicsVector& PhysicsVector::operator=(const PhysicsVector& other)
 }
 
 //move assignment operator
-PhysicsVector& PhysicsVector::operator=(PhysicsVector&& other)
+PhysicsVector& PhysicsVector::operator=(PhysicsVector&& other) noexcept
 {
 	if (this !=&other)
 	{
@@ -74,8 +74,17 @@ PhysicsVector::~PhysicsVector()
     delete[] dimensionValues_;
 }
 
+double& PhysicsVector::operator[](const size_t& i)
+{
+	if (i >= numberOfDimensions_)
+	{
+		throw std::range_error("operator[] out of range of this " + std::to_string(numberOfDimensions_) + "D vector\n");
+	}
+	return dimensionValues_[i];
+}
+
 //random access operator
-double& PhysicsVector::operator[](const size_t& i) const
+const double& PhysicsVector::operator[](const size_t& i) const
 {
 	if (i >= numberOfDimensions_)
 	{
@@ -169,15 +178,15 @@ PhysicsVector PhysicsVector::operator*(const double& r) const
 
 PhysicsVector PhysicsVector::operator*(const Matrix& mat) const
 {
-	const size_t REQUIRED_MINIMUM_DIMENSIONS = 3;
-	const size_t REQUIRED_MAXIMUM_DIMENSIONS = 4;
+	const size_t MINIMUM_DIMENSIONS = 3;
+	const size_t  MAXIMUM_DIMENSIONS = 4;
 
-	if (numberOfDimensions_ != REQUIRED_MINIMUM_DIMENSIONS)
+	if (numberOfDimensions_ != MINIMUM_DIMENSIONS)
 	{
 		throw std::range_error("Out of range. Must be a 3D Vector\n");
 	}
 
-	if (mat.getColumns() < REQUIRED_MINIMUM_DIMENSIONS || mat.getColumns() > REQUIRED_MAXIMUM_DIMENSIONS) 
+	if (mat.getColumns() < MINIMUM_DIMENSIONS || mat.getColumns() > MAXIMUM_DIMENSIONS) 
 	{
 		throw std::range_error("Out of range. Matrix needs atleast 3 columns and no more than 4.\n");
 	}
@@ -187,7 +196,7 @@ PhysicsVector PhysicsVector::operator*(const Matrix& mat) const
 	ret.addDimension(dimensionValues_[0] * mat[0][1] + dimensionValues_[1] * mat[1][1] + dimensionValues_[2] * mat[2][1]);
 	ret.addDimension(dimensionValues_[0] * mat[0][2] + dimensionValues_[1] * mat[1][2] + dimensionValues_[2] * mat[2][2]);
 
-	if (mat.getColumns() == REQUIRED_MAXIMUM_DIMENSIONS)
+	if (mat.getColumns() == MAXIMUM_DIMENSIONS)
 	{
 		ret[0] += 1 * mat[3][0];
 		ret[1] += 1 * mat[3][1];
@@ -315,15 +324,15 @@ PhysicsVector& PhysicsVector::operator*=(const PhysicsVector& r)
 
 PhysicsVector& PhysicsVector::operator*=(const Matrix& mat)
 {
-	const size_t REQUIRED_MINIMUM_DIMENSIONS = 3;
-	const size_t REQUIRED_MAXIMUM_DIMENSIONS = 4;
+	const size_t MINIMUM_DIMENSIONS = 3;
+	const size_t MAXIMUM_DIMENSIONS = 4;
 
-	if (numberOfDimensions_ != REQUIRED_MINIMUM_DIMENSIONS)
+	if (numberOfDimensions_ != MINIMUM_DIMENSIONS)
 	{
 		throw std::range_error("Out of range. Must be a 3D Vector\n");
 	}
 
-	if (mat.getColumns() < REQUIRED_MINIMUM_DIMENSIONS || mat.getColumns() > REQUIRED_MAXIMUM_DIMENSIONS)
+	if (mat.getColumns() < MINIMUM_DIMENSIONS || mat.getColumns() > MAXIMUM_DIMENSIONS)
 	{
 		throw std::range_error("Out of range. Matrix needs atleast 3 columns and no more than 4.\n");
 	}
@@ -332,7 +341,7 @@ PhysicsVector& PhysicsVector::operator*=(const Matrix& mat)
 	dimensionValues_[1] = dimensionValues_[0] * mat[0][1] + dimensionValues_[1] * mat[1][1] + dimensionValues_[2] * mat[2][1];
 	dimensionValues_[2] = dimensionValues_[0] * mat[0][2] + dimensionValues_[1] * mat[1][2] + dimensionValues_[2] * mat[2][2];
 
-	if (mat.getColumns() == REQUIRED_MAXIMUM_DIMENSIONS)
+	if (mat.getColumns() == MAXIMUM_DIMENSIONS)
 	{
 		dimensionValues_[0] += 1 * mat[3][0];
 		dimensionValues_[1] += 1 * mat[3][1];
@@ -466,7 +475,6 @@ PhysicsVector PhysicsVector::rotate2D(const double& degrees) const
 	return PhysicsVector(newDimensionValues, REQUIRED_DIMENSIONS);
 }
 
-//TODO
 //rotates this vector by the given degrees on the given axis
 PhysicsVector PhysicsVector::rotate3D(const double& degrees, Axis axis) const
 {
@@ -615,7 +623,7 @@ void PhysicsVector::deepCopy(const PhysicsVector& other)
 }
 
 //output operator 
-std::ostream& operator<<(std::ostream& os, const PhysicsVector& v)
+PHYSICSENGINE std::ostream& operator<<(std::ostream& os, const PhysicsVector& v)
 {
 	os << "(";
 	for(size_t i = 0; i < v.getNumberOfDimensions(); i++)

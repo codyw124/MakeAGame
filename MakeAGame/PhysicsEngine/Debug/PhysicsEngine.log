@@ -1,6 +1,5 @@
-﻿  Matrix.cpp
-  PhysicsHelper.cpp
-  PhysicsVector.cpp
+﻿  PhysicsVector.cpp
   Transform.cpp
   Generating Code...
+     Creating library C:\Users\CodysTower5\Documents\GitHub\MakeAGame\MakeAGame\Debug\PhysicsEngine.lib and object C:\Users\CodysTower5\Documents\GitHub\MakeAGame\MakeAGame\Debug\PhysicsEngine.exp
   PhysicsEngine.vcxproj -> C:\Users\CodysTower5\Documents\GitHub\MakeAGame\MakeAGame\Debug\PhysicsEngine.dll

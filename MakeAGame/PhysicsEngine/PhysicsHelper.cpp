@@ -8,6 +8,9 @@
 #include <math.h>
 #include "PhysicsHelper.h"
 
+PhysicsHelper::PhysicsHelper() 
+{
+}
 
 //converts degrees to radians
 double PhysicsHelper::radiansToDegrees(double radians)

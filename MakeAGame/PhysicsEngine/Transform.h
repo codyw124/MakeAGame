@@ -3,11 +3,17 @@
 
 #pragma once
 
+//#ifndef PHYSICSENGINE_EXPORTS
+//#define PHYSICSENGINE __declspec(dllexport)
+//#else
+//#define PHYSICSENGINE __declspec(dllimport)
+//#endif
+
 #include "Matrix.h"
 #include "PhysicsVector.h"
 #include "PhysicsHelper.h"
 
-class Transform
+class /*PHYSICSENGINE*/ Transform
 {
 public:
     Transform();
@@ -53,4 +59,4 @@ private:
     void deepCopy(const Transform& other);
 };
 
-std::ostream& operator<<(std::ostream& os, const Transform& v);
+/*PHYSICSENGINE*/ std::ostream& operator<<(std::ostream& os, const Transform& v);

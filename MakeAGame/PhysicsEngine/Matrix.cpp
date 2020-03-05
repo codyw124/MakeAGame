@@ -10,28 +10,26 @@ Matrix::Matrix()
 
 Matrix::Matrix(const size_t& r, const size_t& c)
 {
-	data_ = std::vector<std::vector<double>>();
-
-	isSquare_ = r == c;
-
-	for (size_t _r = 0; _r < r; _r++)
+	rows_ = r;
+	columns_ = c;
+	data_ = new double*[rows_];
+	for(size_t rowInitIndex = 0; rowInitIndex < rows_; rowInitIndex++)
 	{
-		std::vector<double> v;
-
-		for (size_t _c = 0; _c < c; _c++)
+		data_[rowInitIndex] = new double[columns_];
+		for (size_t columnInitIndex = 0; columnInitIndex < columns_; columnInitIndex++)
 		{
-			if (_r == _c)
+			if (rowInitIndex == columnInitIndex)
 			{
-				v.push_back(1);
+				data_[rowInitIndex][columnInitIndex] = 1;
 			}
 			else
 			{
-				v.push_back(0);
+				data_[rowInitIndex][columnInitIndex] = 0;
 			}
 		}
-
-		data_.push_back(v);
 	}
+
+	isSquare_ = rows_ == columns_;
 }
 
 Matrix::Matrix(const Matrix& other)
@@ -43,14 +41,17 @@ Matrix::Matrix(Matrix&& other) noexcept
 {
 	deepCopy(other);
 
-	other.data_.clear();
+	other.free();
+
+	other.rows_ = 0;
+	other.columns_ = 0;
 
 	other.isSquare_ = true;
 }
 
 Matrix::~Matrix()
 {
-
+	free();
 }
 
 Matrix& Matrix::operator=(const Matrix& other)
@@ -64,19 +65,22 @@ Matrix& Matrix::operator=(Matrix&& other) noexcept
 {
 	deepCopy(other);
 
-	other.data_.clear();
+	other.free();
+
+	other.rows_ = 0;
+	other.columns_ = 0;
 
 	other.isSquare_ = true;
 
 	return *this;
 }
 
-std::vector<double>& Matrix::operator[](const size_t& i)
+double* Matrix::operator[](const size_t& i)
 {
 	return data_[i];
 }
 
-const std::vector<double>& Matrix::operator[](const size_t& i) const
+const double* Matrix::operator[](const size_t& i) const
 {
 	return data_[i];
 }
@@ -148,14 +152,11 @@ Matrix Matrix::operator*(const double& scalar) const
 	//make a deep copy of myself
 	Matrix returnMatrix(*this);
 
-	int r = data_.size();
-	int c = data_[0].size();
-
 	//for each row 
-	for (int row = 0; row < r; row++)
+	for (int row = 0; row < rows_; row++)
 	{
 		//for each column
-		for (int column = 0; column < c; column++)
+		for (int column = 0; column < columns_; column++)
 		{
 			//for each spot multiply by scalar
 			returnMatrix[row][column] *= scalar;
@@ -171,7 +172,7 @@ Matrix Matrix::operator*(const Matrix& other) const
 
 	if (innerDimension != other.getRows())
 	{
-		throw std::logic_error("Matrix.h - operator*:Matrix inner dimensions must match.");
+		throw std::logic_error("operator*:Matrix inner dimensions must match.");
 	}
 
 	size_t newRows = getRows();
@@ -223,7 +224,7 @@ Matrix Matrix::operator+(const Matrix& other) const
 	}
 	else
 	{
-		throw std::logic_error("Matrix.h - operator+:Matrix dimensions must match.");
+		throw std::logic_error("operator+:Matrix dimensions must match.");
 	}
 
 	return returnMatrix;
@@ -231,22 +232,19 @@ Matrix Matrix::operator+(const Matrix& other) const
 
 Matrix Matrix::operator-(const Matrix& other) const
 {
-	size_t r = data_.size();
-	size_t c = data_[0].size();
-
-	Matrix returnMatrix(r, c);
+	Matrix returnMatrix(rows_, columns_);
 
 	//if both matrix sizes match
-	if (r == other.data_.size() && c == other.data_[0].size())
+	if (rows_ == other.rows_ && columns_ == other.columns_)
 	{
 		//make a deep copy of other
 		returnMatrix = Matrix(other);
 
 		//for each row 
-		for (size_t row = 0; row < r; row++)
+		for (size_t row = 0; row < rows_; row++)
 		{
 			//for each column
-			for (size_t column = 0; column < c; column++)
+			for (size_t column = 0; column < columns_; column++)
 			{
 				//for each spot subtract my values to the copy
 				returnMatrix[row][column] -= data_[row][column];
@@ -255,7 +253,7 @@ Matrix Matrix::operator-(const Matrix& other) const
 	}
 	else
 	{
-		throw std::logic_error("Matrix.h - operator-:Matrix dimensions must match.");
+		throw std::logic_error("operator-:Matrix dimensions must match.");
 	}
 
 	return returnMatrix;
@@ -263,25 +261,20 @@ Matrix Matrix::operator-(const Matrix& other) const
 
 void Matrix::transpose()
 {
-	std::vector<std::vector<double>> newData;
-
-	//r and c are flipped here because we are transposing the matrix
-	int c = data_.size();
-	int r = data_[0].size();
-
-	for (int _r = 0; _r < r; _r++)
+	double** newData = new double* [rows_];
+	for (size_t rowInitIndex = 0; rowInitIndex < rows_; rowInitIndex++)
 	{
-		std::vector<double> v;
-
-		for (int _c = 0; _c < c; _c++)
+		newData[rowInitIndex] = new double[columns_];
+		for (size_t columnInitIndex = 0; columnInitIndex < columns_; columnInitIndex++)
 		{
-			v.push_back(data_[_c][_r]);
+			//rows_ and columns_ are flipped here because we are transposing the matrix
+			newData[rowInitIndex][columnInitIndex] = data_[columnInitIndex][rowInitIndex];
 		}
-
-		newData.push_back(v);
 	}
 
-	data_ = move(newData);
+	free();
+
+	data_ = newData;
 }
 
 Matrix Matrix::transposed() const
@@ -295,97 +288,78 @@ Matrix Matrix::transposed() const
 
 size_t Matrix::getRows() const
 {
-	return data_.size();
+	return rows_;
 }
 
 size_t Matrix::getColumns() const
 {
-	size_t retVal = 0;
-
-	if (!data_.empty())
-	{
-		retVal = data_[0].size();
-	}
-
-	return retVal;
+	return columns_;
 }
 
 void Matrix::deepCopy(const Matrix& other)
 {
-	data_ = std::vector<std::vector<double>>();
-
-	int r = other.data_.size();
-	int c = other.data_[0].size();
-
-	for (int _r = 0; _r < r; _r++)
+	rows_ = other.rows_;
+	columns_ = other.columns_;
+	data_ = new double* [rows_];
+	for (size_t rowInitIndex = 0; rowInitIndex < rows_; rowInitIndex++)
 	{
-		std::vector<double> v;
-
-		for (int _c = 0; _c < c; _c++)
+		data_[rowInitIndex] = new double[columns_];
+		for (size_t columnInitIndex = 0; columnInitIndex < columns_; columnInitIndex++)
 		{
-			v.push_back(other.data_[_r][_c]);
+			data_[rowInitIndex][columnInitIndex] = other.data_[rowInitIndex][columnInitIndex];
 		}
-
-		data_.push_back(v);
 	}
 
 	isSquare_ = other.isSquare_;
 }
 
-std::ostream& operator<<(std::ostream& os, const Matrix& v)
+void Matrix::free()
 {
-	for (size_t r = 0; r < v.getRows(); r++)
+	for (size_t rowIndex = 0; rowIndex < rows_; rowIndex++)
 	{
-		os << "[\t";
-
-		for (size_t c = 0; c < v.getColumns(); c++)
-		{
-			os << v[r][c] << '\t';
-		}
-
-		os << "]\n";
+		delete[] data_[rowIndex];
 	}
 
-	return os;
+	delete[] data_;
+
+	data_ = NULL;
 }
 
 Matrix Matrix::getCut(const size_t& row, const size_t& column)
 {
 	if (!isSquare_)
 	{
-		throw std::logic_error("Matrix.h - getCut:Matrix must be square\n");
+		throw std::logic_error("getCut:Matrix must be square\n");
 	}
 
-	size_t originalDimension = data_.size();
-
-	Matrix returnMatrix(originalDimension - 1, originalDimension - 1);
+	Matrix returnMatrix(rows_ - 1, columns_ - 1);
 
 	const size_t MIN_SIZE = 2;
 
-	if (originalDimension < MIN_SIZE)
+	if (rows_ < MIN_SIZE)
 	{
-		throw std::logic_error("Matrix.h - getCut:Matrix does not meet minimum size requirement\n");
+		throw std::logic_error("getCut:Matrix does not meet minimum size requirement\n");
 	}
-	else if (row >= originalDimension)
+	else if (row >= rows_)
 	{
-		throw std::logic_error("Matrix.h - getCut:row is out of bounds of the original Matrix\n");
+		throw std::logic_error("getCut:row is out of bounds of the original Matrix\n");
 	}
-	else if (column >= originalDimension)
+	else if (column >= columns_)
 	{
-		throw std::logic_error("Matrix.h - getCut:column is out of bounds of the original Matrix\n");
+		throw std::logic_error("getCut:column is out of bounds of the original Matrix\n");
 	}
 	else
 	{
 		size_t newMatrixRowIndex = 0;
 		size_t newMatrixColumnIndex;
 
-		for (size_t currentRowInOrig = 0; currentRowInOrig < originalDimension; currentRowInOrig++)
+		for (size_t currentRowInOrig = 0; currentRowInOrig < rows_; currentRowInOrig++)
 		{
 			newMatrixColumnIndex = 0;
 
 			if (currentRowInOrig != row)
 			{
-				for (size_t currentColumnInOrig = 0; currentColumnInOrig < originalDimension; currentColumnInOrig++)
+				for (size_t currentColumnInOrig = 0; currentColumnInOrig < columns_; currentColumnInOrig++)
 				{
 					if (currentColumnInOrig != column)
 					{
@@ -406,18 +380,16 @@ double Matrix::getDeterminant()
 {
 	if (!isSquare_)
 	{
-		throw std::logic_error("Matrix.h - getDeterminant:Matrix must be square\n");
+		throw std::logic_error("getDeterminant:Matrix must be square\n");
 	}
 
 	const size_t MIN_DIMENSIONS = 2;
 
-	size_t dimensions = data_.size();
-
 	double sum = 0;
-	if (dimensions >= MIN_DIMENSIONS)
+	if (rows_ >= MIN_DIMENSIONS)
 	{
 		//loop through any row of the matrix 
-		for (size_t columnElement = 0; columnElement < data_.size(); columnElement++)
+		for (size_t columnElement = 0; columnElement < columns_; columnElement++)
 		{
 			//sum up the result of multiplying each of the elements in the row by their respective cofactor.
 			sum += this->data_[0][columnElement] * getCofactor(0, columnElement);
@@ -433,13 +405,16 @@ double Matrix::getDeterminant()
 
 Matrix Matrix::getMinors()
 {
-	size_t dimensions = data_.size();
-
-	Matrix returnMatrix(dimensions, dimensions);
-
-	for (size_t row = 0; row < dimensions; row++)
+	if (!isSquare_)
 	{
-		for (size_t column = 0; column < dimensions; column++)
+		throw std::logic_error("getMinors:Matrix must be square\n");
+	}
+
+	Matrix returnMatrix(rows_, columns_);
+
+	for (size_t row = 0; row < rows_; row++)
+	{
+		for (size_t column = 0; column < columns_; column++)
 		{
 			returnMatrix[row][column] = getMinor(row, column);
 		}
@@ -452,26 +427,24 @@ double Matrix::getMinor(const size_t& row, const size_t& column)
 {
 	if (!isSquare_)
 	{
-		throw std::logic_error("Matrix.h - getMinor:Matrix must be square\n");
+		throw std::logic_error("getMinor:Matrix must be square\n");
 	}
 
-	size_t originalDimension = data_.size();
-
-	Matrix smallerMatrix(originalDimension - 1, originalDimension - 1);
+	Matrix smallerMatrix(rows_ - 1, columns_- 1);
 
 	const size_t MIN_SIZE = 2;
 
-	if (originalDimension < MIN_SIZE)
+	if (rows_ < MIN_SIZE)
 	{
-		throw std::logic_error("Matrix.h - getMinor:Matrix does not meet minimum size requirement\n");
+		throw std::logic_error("getMinor:Matrix does not meet minimum size requirement\n");
 	}
-	else if (row >= originalDimension)
+	else if (row >= rows_)
 	{
-		throw std::logic_error("Matrix.h - getMinor:row is out of bounds of the original Matrix\n");
+		throw std::logic_error("getMinor:row is out of bounds of the original Matrix\n");
 	}
-	else if (column >= originalDimension)
+	else if (column >= columns_)
 	{
-		throw std::logic_error("Matrix.h - getMinor:column is out of bounds of the original Matrix\n");
+		throw std::logic_error("getMinor:column is out of bounds of the original Matrix\n");
 	}
 	else
 	{
@@ -483,13 +456,16 @@ double Matrix::getMinor(const size_t& row, const size_t& column)
 
 Matrix Matrix::getCofactors()
 {
-	size_t dimensions = data_.size();
-
-	Matrix returnMatrix(dimensions, dimensions);
-
-	for (size_t row = 0; row < dimensions; row++)
+	if (!isSquare_)
 	{
-		for (size_t column = 0; column < dimensions; column++)
+		throw std::logic_error("getCofactors:Matrix must be square\n");
+	}
+
+	Matrix returnMatrix(rows_, columns_);
+
+	for (size_t row = 0; row < rows_; row++)
+	{
+		for (size_t column = 0; column < columns_; column++)
 		{
 			returnMatrix[row][column] = getCofactor(row, column);
 		}
@@ -502,24 +478,22 @@ double Matrix::getCofactor(const size_t& row, const size_t& column)
 {
 	if (!isSquare_)
 	{
-		throw std::logic_error("Matrix.h - getCofactor:Matrix must be square\n");
+		throw std::logic_error("getCofactor:Matrix must be square\n");
 	}
-
-	size_t originalDimension = data_.size();
 
 	const size_t MIN_SIZE = 2;
 
-	if (originalDimension < MIN_SIZE)
+	if (rows_ < MIN_SIZE)
 	{
-		throw std::logic_error("Matrix.h - getCofactor:Matrix does not meet minimum size requirement\n");
+		throw std::logic_error("getCofactor:Matrix does not meet minimum size requirement\n");
 	}
-	else if (row >= originalDimension)
+	else if (row >= rows_)
 	{
-		throw std::logic_error("Matrix.h - getCofactor:row is out of bounds of the original Matrix\n");
+		throw std::logic_error("getCofactor:row is out of bounds of the original Matrix\n");
 	}
-	else if (column >= originalDimension)
+	else if (column >= columns_)
 	{
-		throw std::logic_error("Matrix.h - getCofactor:column is out of bounds of the original Matrix\n");
+		throw std::logic_error("getCofactor:column is out of bounds of the original Matrix\n");
 	}
 
 	return getMinor(row, column) * pow(-1, (row + column));
@@ -527,6 +501,11 @@ double Matrix::getCofactor(const size_t& row, const size_t& column)
 
 Matrix Matrix::getAdjugate()
 {
+	if (!isSquare_)
+	{
+		throw std::logic_error("getAdjugate:Matrix must be square\n");
+	}
+
 	Matrix ret = getCofactors();
 
 	ret.transpose();
@@ -536,7 +515,12 @@ Matrix Matrix::getAdjugate()
 
 Matrix Matrix::getInverse()
 {
-	Matrix ret = Matrix(data_.size(), data_.size());
+	if (!isSquare_)
+	{
+		throw std::logic_error("getInverse:Matrix must be square\n");
+	}
+
+	Matrix ret = Matrix(rows_, columns_);
 
 	double determinant = getDeterminant();
 
@@ -546,4 +530,21 @@ Matrix Matrix::getInverse()
 	}
 
 	return ret;
+}
+
+PHYSICSENGINE std::ostream& operator<<(std::ostream& os, const Matrix& v)
+{
+	for (size_t r = 0; r < v.getRows(); r++)
+	{
+		os << "[\t";
+
+		for (size_t c = 0; c < v.getColumns(); c++)
+		{
+			os << v[r][c] << '\t';
+		}
+
+		os << "]\n";
+	}
+
+	return os;
 }

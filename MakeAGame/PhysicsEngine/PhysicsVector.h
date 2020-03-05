@@ -1,28 +1,35 @@
 //Cody Ware
 //9/24/18
 
-#pragma once  
+#pragma once
+
+#ifndef PHYSICSENGINE_EXPORTS
+#define PHYSICSENGINE __declspec(dllexport)
+#else
+#define PHYSICSENGINE __declspec(dllimport)
+#endif
 
 #include <iostream>
 #include <string>
 #include "PhysicsHelper.h"
 #include "Matrix.h"
 
-enum Axis { X, Y, Z };
+enum class Axis { X, Y, Z };
 
-class  PhysicsVector
+class PHYSICSENGINE PhysicsVector
 {
 public:
 
 	PhysicsVector();
 	PhysicsVector(double* dimensionValues, const size_t& numberOfDimensions);
 	PhysicsVector(const PhysicsVector& other);
-	PhysicsVector(PhysicsVector&& other);
+	PhysicsVector(PhysicsVector&& other) noexcept;
 	PhysicsVector& operator=(const PhysicsVector& other);
-	PhysicsVector& operator=(PhysicsVector&& other);
+	PhysicsVector& operator=(PhysicsVector&& other) noexcept;
 	~PhysicsVector();
 
-	double& operator[](const size_t& i) const;
+	double& operator[](const size_t& i);
+	const double& operator[](const size_t& i) const;
 	PhysicsVector operator+(const PhysicsVector& r) const;
 	PhysicsVector operator-(const PhysicsVector& r) const;
 	PhysicsVector operator*(const PhysicsVector& r) const;
@@ -33,8 +40,8 @@ public:
 	PhysicsVector& operator+=(const PhysicsVector& r);
 	PhysicsVector& operator-=(const PhysicsVector& r);
 	PhysicsVector& operator*=(const PhysicsVector& r);
-	PhysicsVector& operator*=(const Matrix& mat);
 	PhysicsVector& operator*=(const double& r);
+	PhysicsVector& operator*=(const Matrix& mat);
 	PhysicsVector& operator/=(const PhysicsVector& r);
 	PhysicsVector& operator/=(const double& r);
 	bool operator==(const PhysicsVector& r) const;
@@ -67,4 +74,4 @@ private:
 	size_t numberOfDimensions_;
 };
 
-std::ostream& operator<<(std::ostream& os, const PhysicsVector & v);
+PHYSICSENGINE std::ostream& operator<<(std::ostream& os, const PhysicsVector & v);

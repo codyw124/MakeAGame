@@ -3,15 +3,20 @@
 
 #pragma once
 
+#ifndef PHYSICSENGINE_EXPORTS
+#define PHYSICSENGINE __declspec(dllexport)
+#else
+#define PHYSICSENGINE __declspec(dllimport)
+#endif
+
 #include <iostream>
-#include <vector>
 #include <sstream>
 #include <cmath>
 #include "PhysicsHelper.h"
 
 const size_t DEFAULT_MATRIX_DIMENSIONS = 4;
 
-class Matrix
+class PHYSICSENGINE Matrix
 {
 	public:
 		Matrix();
@@ -21,8 +26,8 @@ class Matrix
 		~Matrix();		
 		Matrix& operator=(const Matrix& other);
 		Matrix& operator=(Matrix&& other) noexcept;
-		std::vector<double>& operator[](const size_t& i);
-		const std::vector<double>& operator[](const size_t& i) const;
+		double* operator[](const size_t& i);
+		const double* operator[](const size_t& i) const;
 		bool operator==(const Matrix& rhs) const;
 		bool operator!=(const Matrix& rhs) const;
 		Matrix& operator*=(const double& other);
@@ -50,8 +55,11 @@ class Matrix
 		
 	private:
 		void deepCopy(const Matrix& other);
-		std::vector<std::vector<double>> data_;
+		void free();
+		double** data_;
+		size_t rows_;
+		size_t columns_;
 		bool isSquare_;
 };
 
-std::ostream& operator<<(std::ostream& os, const Matrix& v);
+PHYSICSENGINE std::ostream& operator<<(std::ostream& os, const Matrix& v);

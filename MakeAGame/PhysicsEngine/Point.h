@@ -3,6 +3,12 @@
 
 #pragma once
 
-#include "PhysicsVector.h";
+#ifndef PHYSICSENGINE_EXPORTS
+#define PHYSICSENGINE __declspec(dllexport)
+#else
+#define PHYSICSENGINE __declspec(dllimport)
+#endif
 
-typedef PhysicsVector Point;
+#include "PhysicsVector.h"
+
+typedef PhysicsVector PHYSICSENGINE Point;

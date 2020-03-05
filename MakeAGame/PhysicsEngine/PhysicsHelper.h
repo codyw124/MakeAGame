@@ -3,11 +3,15 @@
 
 #pragma once  
 
-class  PhysicsHelper
+#ifndef PHYSICSENGINE_EXPORTS
+#define PHYSICSENGINE __declspec(dllexport)
+#else
+#define PHYSICSENGINE __declspec(dllimport)
+#endif
+
+class PHYSICSENGINE PhysicsHelper
 {
 public:
-	virtual ~PhysicsHelper() = 0;
-
 	//helper functions
 	static double radiansToDegrees(double radians);
 	static double degreesToRadians(double degrees);
@@ -15,5 +19,6 @@ public:
 	static bool epsilonCompare(double a, double b);
 
 private:
+	PhysicsHelper();
 	static const int HALF_CIRCLE_IN_DEGREES = 180;
 };
