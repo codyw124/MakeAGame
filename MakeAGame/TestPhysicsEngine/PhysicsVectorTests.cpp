@@ -1633,3 +1633,44 @@ void PhysicsVectorTests::getAndAddDimensions()
 
 	Assert::IsTrue(test.getNumberOfDimensions() == 3, L"getAndAddDimensions");
 }
+
+void PhysicsVectorTests::rotate3D()
+{
+	PhysicsVector test = PhysicsVector();
+	test.addDimension(5);
+	test.addDimension(5);
+	test.addDimension(5);
+
+	//test z
+	PhysicsVector rotatedRightZ = test.rotate3D(45.0, PhysicsVector::Z);
+	Assert::IsTrue(rotatedRightZ[0] == 4.4408920985006262e-16, L"rotate3D Z");
+	Assert::IsTrue(rotatedRightZ[1] == 7.0710678118654755, L"rotate3D Z");
+	Assert::IsTrue(rotatedRightZ[2] == 5, L"rotate3D Z");
+
+	PhysicsVector rotatedLeftZ = test.rotate3D(-45.0, PhysicsVector::Z);
+	Assert::IsTrue(rotatedLeftZ[0] == 7.0710678118654755, L"rotate3D Z");
+	Assert::IsTrue(rotatedLeftZ[1] == 4.4408920985006262e-16, L"rotate3D Z");
+	Assert::IsTrue(rotatedLeftZ[2] == 5, L"rotate3D Z");
+
+	//test x
+	PhysicsVector rotatedRightX = test.rotate3D(45.0, PhysicsVector::X);
+	Assert::IsTrue(rotatedRightX[0] == 5, L"rotate3D X");
+	Assert::IsTrue(rotatedRightX[1] == 4.4408920985006262e-16, L"rotate3D X");
+	Assert::IsTrue(rotatedRightX[2] == 7.0710678118654755, L"rotate3D X");
+
+	PhysicsVector rotatedLeftX = test.rotate3D(-45.0, PhysicsVector::X);
+	Assert::IsTrue(rotatedLeftX[0] == 5, L"rotate3D X");
+	Assert::IsTrue(rotatedLeftX[1] == 7.0710678118654755, L"rotate3D X");
+	Assert::IsTrue(rotatedLeftX[2] == 4.4408920985006262e-16, L"rotate3D X");
+
+	//test y
+	PhysicsVector rotatedRightY = test.rotate3D(45.0, PhysicsVector::Y);
+	Assert::IsTrue(rotatedRightY[0] == 7.0710678118654755, L"rotate3D Y");
+	Assert::IsTrue(rotatedRightY[1] == 5, L"rotate3D Y");
+	Assert::IsTrue(rotatedRightY[2] == 4.4408920985006262e-16, L"rotate3D Y");
+
+	PhysicsVector rotatedLeftY = test.rotate3D(-45.0, PhysicsVector::Y);
+	Assert::IsTrue(rotatedLeftY[0] == 4.4408920985006262e-16, L"rotate3D Y");
+	Assert::IsTrue(rotatedLeftY[1] == 5, L"rotate3D Y");
+	Assert::IsTrue(rotatedLeftY[2] == 7.0710678118654755, L"rotate3D Y");
+}

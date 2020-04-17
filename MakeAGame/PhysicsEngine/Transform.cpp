@@ -13,7 +13,7 @@ Transform::Transform(const Transform& other)
     deepCopy(other);
 }
 
-Transform::Transform(Transform&& other)
+Transform::Transform(Transform&& other) noexcept
 {
     data_ = std::move(other.data_);
 
@@ -32,7 +32,7 @@ Transform& Transform::operator=(const Transform& other)
     return *this;
 }
 
-Transform& Transform::operator=(Transform&& other)
+Transform& Transform::operator=(Transform&& other) noexcept
 {
     data_ = std::move(other.data_);
 

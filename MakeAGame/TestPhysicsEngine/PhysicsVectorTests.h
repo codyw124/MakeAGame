@@ -79,5 +79,6 @@ public:
 
 	void accessOperator();
 	void getAndAddDimensions();
+	void rotate3D();
 
 };

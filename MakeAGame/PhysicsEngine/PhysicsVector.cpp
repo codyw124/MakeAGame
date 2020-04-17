@@ -484,20 +484,42 @@ PhysicsVector PhysicsVector::rotate3D(const double& degrees, Axis axis) const
 		throw std::range_error("Out of range. Must be a 3D Vector\n");
 	}
 
-	/*if(axis == AXIS.X)
-	{
+	PhysicsVector ret;
 
+	if(axis == X)
+	{
+		PhysicsVector newYZ;
+		newYZ.addDimension(dimensionValues_[1]);
+		newYZ.addDimension(dimensionValues_[2]);
+		newYZ = newYZ.rotate2D(degrees);
+		ret.addDimension(dimensionValues_[0]);
+		ret.addDimension(newYZ[0]);
+		ret.addDimension(newYZ[1]);
 	}
-	else if(axis == AXIS.Y)
+	else if(axis == Y)
 	{
-
+		PhysicsVector newXZ;
+		newXZ.addDimension(dimensionValues_[0]);
+		newXZ.addDimension(dimensionValues_[2]);
+		/*i think this needs to be negative degrees for this to work right otherwise it hink y rotations happen backwards
+		not positive why but it works the same was as this calculator now https://www.vcalc.com/wiki/vCalc/V3+-+Vector+Rotation*/
+		newXZ = newXZ.rotate2D(-degrees);
+		ret.addDimension(newXZ[0]);
+		ret.addDimension(dimensionValues_[1]);
+		ret.addDimension(newXZ[1]);
 	}
-	else if(axis == AXIS.Z)
+	else if(axis == Z)
 	{
+		PhysicsVector newXY;
+		newXY.addDimension(dimensionValues_[0]);
+		newXY.addDimension(dimensionValues_[1]);
+		newXY = newXY.rotate2D(degrees);
+		ret.addDimension(newXY[0]);
+		ret.addDimension(newXY[1]);
+		ret.addDimension(dimensionValues_[2]);
+	}
 
-	}*/
-
-	return PhysicsVector();
+	return ret;
 }
 
 //cross product for Physics vectors that are 3d

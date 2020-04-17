@@ -14,11 +14,11 @@
 #include "PhysicsHelper.h"
 #include "Matrix.h"
 
-enum class Axis { X, Y, Z };
-
 class PHYSICSENGINE PhysicsVector
 {
 public:
+
+	enum Axis { X, Y, Z };
 
 	PhysicsVector();
 	PhysicsVector(double* dimensionValues, const size_t& numberOfDimensions);

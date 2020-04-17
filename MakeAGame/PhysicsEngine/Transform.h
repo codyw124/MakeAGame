@@ -18,11 +18,11 @@ class /*PHYSICSENGINE*/ Transform
 public:
     Transform();
     Transform(const Transform& other);
-	Transform(Transform&& other);
+	Transform(Transform&& other) noexcept;
     ~Transform();
 
     Transform& operator=(const Transform& other);
-    Transform& operator=(Transform&& other);
+    Transform& operator=(Transform&& other) noexcept;
 
     void toOtherMajor();
     bool isRowMajor() const;
