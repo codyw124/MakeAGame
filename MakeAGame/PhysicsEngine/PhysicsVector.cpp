@@ -337,16 +337,21 @@ PhysicsVector& PhysicsVector::operator*=(const Matrix& mat)
 		throw std::range_error("Out of range. Matrix needs atleast 3 columns and no more than 4.\n");
 	}
 
-	dimensionValues_[0] = dimensionValues_[0] * mat[0][0] + dimensionValues_[1] * mat[1][0] + dimensionValues_[2] * mat[2][0];
-	dimensionValues_[1] = dimensionValues_[0] * mat[0][1] + dimensionValues_[1] * mat[1][1] + dimensionValues_[2] * mat[2][1];
-	dimensionValues_[2] = dimensionValues_[0] * mat[0][2] + dimensionValues_[1] * mat[1][2] + dimensionValues_[2] * mat[2][2];
+	//have to store elsewhere because was updating dimensionValues_[0] and then trying to use old value again
+	double returnValue0 = dimensionValues_[0] * mat[0][0] + dimensionValues_[1] * mat[1][0] + dimensionValues_[2] * mat[2][0];
+	double returnValue1 = dimensionValues_[0] * mat[0][1] + dimensionValues_[1] * mat[1][1] + dimensionValues_[2] * mat[2][1];
+	double returnValue2 = dimensionValues_[0] * mat[0][2] + dimensionValues_[1] * mat[1][2] + dimensionValues_[2] * mat[2][2];
 
 	if (mat.getColumns() == MAXIMUM_DIMENSIONS)
 	{
-		dimensionValues_[0] += 1 * mat[3][0];
-		dimensionValues_[1] += 1 * mat[3][1];
-		dimensionValues_[2] += 1 * mat[3][2];
+		returnValue0 += 1 * mat[3][0];
+		returnValue1 += 1 * mat[3][1];
+		returnValue2 += 1 * mat[3][2];
 	}
+
+	dimensionValues_[0] = returnValue0;
+	dimensionValues_[1] = returnValue1;
+	dimensionValues_[2] = returnValue2;
 
 	return *this;
 }

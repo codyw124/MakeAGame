@@ -224,14 +224,12 @@ namespace TestPhysicsEngine
 
 		TEST_METHOD(multiplyMatrix)
 		{
-			Assert::Fail();
-			//test.multiplyMatrix();
+			test.multiplyMatrix();
 		}
 
 		TEST_METHOD(multiplyMatrixShorthand)
 		{
-			Assert::Fail();
-			//test.multiplyMatrixShorthand();
+			test.multiplyMatrixShorthand();
 		}
 	};/*
 

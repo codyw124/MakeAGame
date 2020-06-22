@@ -1674,3 +1674,62 @@ void PhysicsVectorTests::rotate3D()
 	Assert::IsTrue(rotatedLeftY[1] == 5, L"rotate3D Y");
 	Assert::IsTrue(rotatedLeftY[2] == 7.0710678118654755, L"rotate3D Y");
 }
+
+void PhysicsVectorTests::multiplyMatrix()
+{
+	PhysicsVector a;
+	a.addDimension(1);
+	a.addDimension(2);
+	a.addDimension(3);
+
+	Matrix b(3,3);
+	b[0][0] = 1;
+	b[0][1] = 2;
+	b[0][2] = 3;
+	b[1][0] = 4;
+	b[1][1] = 5;
+	b[1][2] = 6;
+	b[2][0] = 7;
+	b[2][1] = 8;
+	b[2][2] = 9;
+
+	PhysicsVector test = a * b;
+
+	PhysicsVector expected;
+	expected.addDimension(30);
+	expected.addDimension(36);
+	expected.addDimension(42);
+
+	Assert::IsTrue(expected == test, L"multiplyMatrix");
+}
+
+void PhysicsVectorTests::multiplyMatrixShorthand()
+{
+	PhysicsVector a;
+	a.addDimension(1);
+	a.addDimension(2);
+	a.addDimension(3);
+
+	Matrix b(3, 3);
+	b[0][0] = 1;
+	b[0][1] = 2;
+	b[0][2] = 3;
+	b[1][0] = 4;
+	b[1][1] = 5;
+	b[1][2] = 6;
+	b[2][0] = 7;
+	b[2][1] = 8;
+	b[2][2] = 9;
+
+	a *= b;
+	double x = a[0];
+	double y = a[1];
+	double z = a[2];
+
+	PhysicsVector expected;
+	expected.addDimension(30);
+	expected.addDimension(36);
+	expected.addDimension(42);
+
+	Assert::IsTrue(expected == a, L"multiplyMatrixShorthand");
+}
