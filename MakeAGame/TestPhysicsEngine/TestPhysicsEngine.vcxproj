@@ -25,6 +25,7 @@
     <RootNamespace>TestPhysicsEngine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
     <ProjectSubType>NativeUnitTestProject</ProjectSubType>
+    <ProjectName>PhysicsEngineTester</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -163,13 +164,7 @@
     <ClCompile Include="MatricesTests.cpp" />
     <ClCompile Include="PhysicsVectorTests.cpp" />
     <ClCompile Include="PointTests.cpp" />
-    <ClCompile Include="TestPhysicsEngine.cpp" />
     <ClCompile Include="TransformTests.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="MatricesTests.h" />
-    <ClInclude Include="PhysicsVectorTests.h" />
-    <ClInclude Include="PointTests.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

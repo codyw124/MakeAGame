@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TestPhysicsEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MatricesTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -30,16 +27,5 @@
     <ClCompile Include="TransformTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="MatricesTests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PhysicsVectorTests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PointTests.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
