@@ -7,6 +7,7 @@
 #include <cmath>
 #include <cfloat>
 #include "PhysicsVector.h"
+#include "Matrix.h"
 
 class PhysicsVectorTests
 {
@@ -17,7 +18,6 @@ public:
 	void moveConstructor2D();
 	void assignmentOperator2D();
 	void moveAssignmentOperator2D();
-	void destructor();
 	void additionOperator2D();
 	void subtractionOperator2D();
 	void multiplyOperator2D();
@@ -80,5 +80,8 @@ public:
 
 	void accessOperator();
 	void getAndAddDimensions();
+	void rotate3D();
+	void multiplyMatrix();
+	void multiplyMatrixShorthand();
 
 };

@@ -3,16 +3,11 @@
 
 #pragma once
 
-#include <iostream>
 #include "Matrix.h"
-
-using namespace std;
 
 class MatricesTests
 {
 public:
-    void runAllTests();
-
     void defaultConstructor();
     void copyConstructor();
     void moveConstructor();

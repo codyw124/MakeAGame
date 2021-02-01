@@ -1,22 +1,16 @@
 //Cody Ware
-//10/2/18
+//6/30/19
 
 #pragma once
 
-#include <iostream>
 #include <sstream>
 #include <cmath>
 #include <cfloat>
-#include "PhysicsVector.h"
-#include "Test.h"
+#include "Point.h"
 
-using namespace std;
-
-class PhysicsVectorTests : public Test
+class PointTests
 {
 public:
-	void runAllTests();
-
 	void constructor2D();
 	void constructorWithValues2D();
 	void copyConstructor2D();
@@ -46,9 +40,10 @@ public:
 	void project2D();
 	void outputOperator2D();
 	void perpendicular2D();
-	void rotate2D();
 	void angle2D();
 	void reflect2D();
+	void rotate2D();
+
 	void constructor3D();
 	void constructorWithValues3D();
 	void copyConstructor3D();
@@ -58,7 +53,7 @@ public:
 	void additionOperator3D();
 	void subtractionOperator3D();
 	void multiplyOperator3D();
-	void multiplyByDouble3D();
+	void multiplyByDoubleOperator3D();
 	void equivalenceOperators3D();
 	void dotProduct3D();
 	void magnitude3D();
@@ -67,10 +62,10 @@ public:
 	void divideByDoubleOperator3D();
 	void additionShorthandOperator3D();
 	void subtractionShorthandOperator3D();
-	void multiply2Vector3sShorthandOperator3D();
-	void multiplyVector3ByDoubleShorthandOperator3D();
-	void divide2Vector3sShorthandOperator3D();
-	void divideVector3ByDoubleShorthandOperator3D();
+	void multiplyShorthandOperator3D();
+	void multiplyByDoubleShorthandOperator3D();
+	void divideShorthandOperator3D();
+	void divideByDoubleShorthandOperator3D();
 	void distance3D();
 	void distanceSquared3D();
 	void normalize3D();
@@ -81,4 +76,8 @@ public:
 	void angle3D();
 	void reflect3D();
 	void crossProduct3D();
+
+	void accessOperator();
+	void getAndAddDimensions();
+
 };
