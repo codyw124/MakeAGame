@@ -6,8 +6,14 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PhysicsEngine", "PhysicsEngine\PhysicsEngine.vcxproj", "{223A8E6E-6714-44DF-93BE-EC4A17FDE7CC}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ARPG", "ARPG\ARPG.vcxproj", "{C27332EA-1AA9-451D-BBB8-3EA41CAB7C6E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{223A8E6E-6714-44DF-93BE-EC4A17FDE7CC} = {223A8E6E-6714-44DF-93BE-EC4A17FDE7CC}
+	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestPhysicsEngine", "TestPhysicsEngine\TestPhysicsEngine.vcxproj", "{36873215-7E2C-49D8-82EB-45DAB9676098}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PhysicsEngineTester", "TestPhysicsEngine\TestPhysicsEngine.vcxproj", "{36873215-7E2C-49D8-82EB-45DAB9676098}"
+	ProjectSection(ProjectDependencies) = postProject
+		{223A8E6E-6714-44DF-93BE-EC4A17FDE7CC} = {223A8E6E-6714-44DF-93BE-EC4A17FDE7CC}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
