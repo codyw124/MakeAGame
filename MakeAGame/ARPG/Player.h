@@ -72,25 +72,25 @@ void Player::handleEvent(SDL_Event* event, SDL_Renderer* renderer)
 		//can this replace above x and y
 		locationToMoveTo.x = x;
 		locationToMoveTo.y = y;
+	}
 
-		if (locationToMoveTo.x != position.x || locationToMoveTo.y != position.y)
+	if (locationToMoveTo.x != position.x || locationToMoveTo.y != position.y)
+	{
+		if (locationToMoveTo.x > position.x)
 		{
-			if (locationToMoveTo.x > position.x)
-			{
-				position.x += movementSpeed;
-			}
-			else if (locationToMoveTo.x < position.x)
-			{
-				position.x -= movementSpeed;
-			}
-			if (locationToMoveTo.y > position.y)
-			{
-				position.y += movementSpeed;
-			}
-			else if (locationToMoveTo.y < position.y)
-			{
-				position.y -= movementSpeed;
-			}
+			position.x += movementSpeed;
+		}
+		else if (locationToMoveTo.x < position.x)
+		{
+			position.x -= movementSpeed;
+		}
+		if (locationToMoveTo.y > position.y)
+		{
+			position.y += movementSpeed;
+		}
+		else if (locationToMoveTo.y < position.y)
+		{
+			position.y -= movementSpeed;
 		}
 	}
 }

@@ -71,6 +71,10 @@ vector<GameObject*> XMLLoader::operator()(const char* filename)
 					listOfRenderables.push_back(new Wall({ currentRenderable->FirstChildElement("XLOCATION")->IntText(), currentRenderable->FirstChildElement("YLOCATION")->IntText() },
 						currentRenderable->FirstChildElement("WIDTH")->IntText(), currentRenderable->FirstChildElement("HEIGHT")->IntText()));
 				}
+				else if (strcmp(type->Value(), "UI") == 0)
+				{
+					listOfRenderables.push_back(new UI());
+				}
 				else if (strcmp(type->Value(), "MENU") == 0)
 				{
 					listOfRenderables.push_back(new Menu());
