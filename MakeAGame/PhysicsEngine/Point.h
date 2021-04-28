@@ -10,5 +10,25 @@
 #endif
 
 #include "PhysicsVector.h"
+#include "Line.h"
+#include "Circle.h"
+#include "Rectangle.h"
+#include "OrientedRectangle.h"
 
-typedef PhysicsVector PHYSICSENGINE Point;
+class PHYSICSENGINE Point : public PhysicsVector
+{
+public:
+	Point();
+	Point(double* dimensionValues, const size_t& numberOfDimensions);
+	Point(const PhysicsVector& other);
+	Point(PhysicsVector&& other) noexcept;
+	Point& operator=(const PhysicsVector& other);
+	Point& operator=(PhysicsVector&& other) noexcept;
+	~Point();
+
+	bool onLine(const Line& line);
+	bool inCircle(const Circle& c);
+	bool inRectangle(const Rectangle& rectangle);
+	bool inOrientedRectangle(const OrientedRectangle& rectangle);
+private:
+};

@@ -161,6 +161,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="LineTests.cpp" />
     <ClCompile Include="MatricesTests.cpp" />
     <ClCompile Include="PhysicsVectorTests.cpp" />
     <ClCompile Include="PointTests.cpp" />

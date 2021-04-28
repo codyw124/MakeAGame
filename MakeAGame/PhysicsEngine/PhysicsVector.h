@@ -67,11 +67,11 @@ public:
 	size_t getNumberOfDimensions() const;
 	void addDimension(const double& newDimensionValue);
 
-private:
-	void deepCopy(const PhysicsVector& other);
-
+protected:
 	double* dimensionValues_;
 	size_t numberOfDimensions_;
+private:
+	void deepCopy(const PhysicsVector& other);
 };
 
 PHYSICSENGINE std::ostream& operator<<(std::ostream& os, const PhysicsVector & v);

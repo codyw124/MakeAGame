@@ -1738,5 +1738,10 @@ namespace PhysicsEngineTester
 
 			Assert::IsTrue(expected == a, L"multiplyMatrixShorthand");
 		}
+
+		TEST_METHOD(T_070_testPointCollisions) 
+		{
+			Assert::IsTrue(false, L"Test point collisions not implemented");
+		}
 	};
 }

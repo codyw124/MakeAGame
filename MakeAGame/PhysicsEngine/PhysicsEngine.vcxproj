@@ -123,18 +123,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Line2D.h" />
-    <ClInclude Include="Line3D.h" />
+    <ClInclude Include="Circle.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="OrientedRectangle.h" />
     <ClInclude Include="PhysicsHelper.h" />
     <ClInclude Include="PhysicsVector.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="Rectangle.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="OrientedRectangle.cpp" />
     <ClCompile Include="PhysicsHelper.cpp" />
     <ClCompile Include="PhysicsVector.cpp" />
+    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
