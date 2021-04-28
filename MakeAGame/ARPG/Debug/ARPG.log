@@ -1,6 +1,0 @@
-﻿  main.cpp
-C:\Users\CodysTower5\Documents\GitHub\MakeAGame\MakeAGame\ARPG\UI.h(59,55): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
-C:\Users\CodysTower5\Documents\GitHub\MakeAGame\MakeAGame\ARPG\UI.h(59,55): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\CodysTower5\Documents\GitHub\MakeAGame\MakeAGame\ARPG\UI.h(60,58): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
-C:\Users\CodysTower5\Documents\GitHub\MakeAGame\MakeAGame\ARPG\UI.h(60,58): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  ARPG.vcxproj -> C:\Users\CodysTower5\Documents\GitHub\MakeAGame\MakeAGame\Debug\ARPG.exe
