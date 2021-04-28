@@ -1,4 +1,4 @@
 
 *.ipch
-MakeAGame\.vs
-MakeAGame\.vshistory
+*\.vs
+*\.vshistory
